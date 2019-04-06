@@ -59,5 +59,9 @@ public class TowerAnimation {
     public void setY(float y){
         sprite.setY(y);
     }
+
+    public Sprite getSprite() {
+        return sprite;
+    }
 }
 

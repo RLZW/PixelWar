@@ -12,7 +12,7 @@ public class CastleActor extends Actor {
     public CastleActor(Texture castillo){
         setSize(castillo.getWidth(), castillo.getHeight());
         this.castillo = castillo;
-        this.hp = 100;
+        this.hp = 500;
         this.isAlive = true;
 
     }
