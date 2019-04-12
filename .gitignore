@@ -1,5 +1,7 @@
 ## Java
 
+##Custom
+*.jks
 *.class
 *.war
 *.ear
@@ -61,6 +63,7 @@ com_crashlytics_export_strings.xml
 /ios/nbproject/private/
 /ios-moe/nbproject/private/
 
+
 /build/
 /android/build/
 /core/build/
@@ -109,8 +112,12 @@ gradle-app.setting
 /ios/build/
 /ios-moe/build/
 
+##Custom
+/core/src/build.gradle
+
 ## OS Specific
 .DS_Store
+
 Thumbs.db
 
 ## iOS
