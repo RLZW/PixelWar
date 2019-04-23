@@ -5,6 +5,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -67,6 +69,8 @@ public class GameScreen implements Screen {
     private ImageButton btnWarrior;
     private ImageButton btnMiner;
     private float timeToMove = 0;
+
+
 
 
     //Textures & TRDA
@@ -200,12 +204,13 @@ public class GameScreen implements Screen {
 
 
 
+
+
         Gdx.input.setInputProcessor(stage);
         Gdx.input.setCatchBackKey(true);
 
 
     }
-
 
 
 

@@ -2,6 +2,8 @@ package com.itesm.pixelwars.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -26,6 +28,9 @@ public class MenuScreen implements Screen {
     private TitleActor titleActor;
     private TitleAnimation titleAnimation;
 
+    // Music
+    private Music musicaFondo;
+
 
 
     public MenuScreen(PixelWars game){
@@ -46,6 +51,18 @@ public class MenuScreen implements Screen {
         createTitle(PixelWars.ANCHO/2-136/2,PixelWars.ALTO/2-20);
         Gdx.input.setInputProcessor(menuHud.stage);
         Gdx.input.setCatchBackKey(false);
+
+        // MUSICA
+        cargarMusica();
+
+    }
+
+    private void cargarMusica() {
+        AssetManager manager = new AssetManager();
+        manager.load("MenuMusic.mp3", Music.class);
+        manager.finishLoading();    // síncrono
+        musicaFondo = manager.get("MenuMusic.mp3");
+        musicaFondo.play();
 
     }
 

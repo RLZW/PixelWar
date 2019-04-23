@@ -3,7 +3,7 @@ android {
         config {
             keyAlias 'android'
             keyPassword 'android'
-            storeFile file('C:/Users/rulaz/Desktop/Escritorio/PixelWar/keys.jks')
+            storeFile file('Desktop/PixelWar/keys.jks')
             storePassword 'android'
         }
     }
