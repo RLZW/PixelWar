@@ -27,7 +27,7 @@ public class SettingsHud implements Disposable {
         table = new Table();
 
         //Buttons & Textures
-        //Button 1 Player
+        //Button Back
         Texture texturetback = new Texture("back.png");
         //Texture texturebtnbackp = new Texture("btn1P_Pressed.png");
 
@@ -38,19 +38,50 @@ public class SettingsHud implements Disposable {
         stage.addActor(btnBack);
         btnBack.setPosition(PixelWars.ANCHO-btnBack.getWidth()-1,PixelWars.ALTO-btnBack.getHeight()-1);
 
+        //Button Volume
+        Texture texturebtnVol = new Texture("btnVol.png");
+        Texture texturebtnVolp = new Texture("btnVol_Pressed.png");
+
+        TextureRegionDrawable trdVol = new TextureRegionDrawable(texturebtnVol);
+        final TextureRegionDrawable trdVolp = new TextureRegionDrawable(texturebtnVolp);
+
+        ImageButton btnVol = new ImageButton(trdVol);
+        stage.addActor(btnVol);
+        btnVol.setPosition(PixelWars.ANCHO/2-100,PixelWars.ALTO/2);
+
+
 
         //Listeneres
 
-        //List 1 Player
+        //List 1 Back
         btnBack.addListener(new ClickListener() {
                                 @Override
                                 public void clicked(InputEvent event, float x, float y) {
                                     super.clicked(event, x, y);
                                     //Responder al evento del boton
                                     game.setScreen(new MenuScreen(game));
+
                                 }
                             }
         );
+
+        //List 2 Vol
+        btnVol.addListener(new ClickListener() {
+                                @Override
+                                public void clicked(InputEvent event, float x, float y) {
+                                    super.clicked(event, x, y);
+                                    //Responder al evento del boton
+                                    game.pausarMusica();
+                                    final ImageButton clicked=new ImageButton(trdVolp);
+                                    stage.addActor(clicked);
+                                    clicked.setPosition(PixelWars.ANCHO/2-100,PixelWars.ALTO/2);
+                                }
+                            }
+        );
+
+
+
+
 
 
 

@@ -28,8 +28,7 @@ public class MenuScreen implements Screen {
     private TitleActor titleActor;
     private TitleAnimation titleAnimation;
 
-    // Music
-    private Music musicaFondo;
+
 
 
 
@@ -52,19 +51,10 @@ public class MenuScreen implements Screen {
         Gdx.input.setInputProcessor(menuHud.stage);
         Gdx.input.setCatchBackKey(false);
 
-        // MUSICA
-        cargarMusica();
+
 
     }
 
-    private void cargarMusica() {
-        AssetManager manager = new AssetManager();
-        manager.load("MenuMusic.mp3", Music.class);
-        manager.finishLoading();    // síncrono
-        musicaFondo = manager.get("MenuMusic.mp3");
-        musicaFondo.play();
-
-    }
 
     private void createTitle(float x, float y) {
         titleText = new Texture("title3.png");
