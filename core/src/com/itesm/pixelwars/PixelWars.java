@@ -1,5 +1,7 @@
 package com.itesm.pixelwars;
 
+// FALTA AGREGAR TODOS LOS RECUROS
+// ESPERAR A TERLOS NUEVOS Y ACOMODARLOS EN CARPETAS
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
