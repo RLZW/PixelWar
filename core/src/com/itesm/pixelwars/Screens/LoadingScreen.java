@@ -2,6 +2,7 @@ package com.itesm.pixelwars.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -20,8 +21,16 @@ public class LoadingScreen implements Screen {
     //Tiempo
     private float timeCounter = 0;
 
-    public LoadingScreen(PixelWars game) {
+    // AssetManager
+    private AssetManager manager;
+
+    private Screens nextScreen;
+    private int avance; // % de Carga
+
+
+    public LoadingScreen(PixelWars game, Screens nextScreen) {
         this.game = game;
+        this.nextScreen = nextScreen;
     }
 
     @Override
@@ -30,9 +39,47 @@ public class LoadingScreen implements Screen {
         gamecam.position.set(PixelWars.ANCHO/2,PixelWars.ALTO/2,0);
         gamePort = new StretchViewport(PixelWars.ANCHO,PixelWars.ALTO,gamecam);
 
-        //Texutre
+        // LETRERO DE LOADING //////
         loadingTexture = new Texture("loading.png");
+        ///////////////
 
+        loadResourcesNextScreen();
+
+    }
+
+    // Carga los recursos de la siguiente pantalla
+    private void loadResourcesNextScreen() {
+        manager = game.getAssetManager();
+        avance = 0;
+        switch (nextScreen){
+            case MenuScreen:
+                loadMenuResources();
+                break;
+            case AboutScreen:
+                loadAboutResources();
+                break;
+            case SettingsScreen:
+                loadSettingsResources();
+                break;
+            case GameScreen:
+                loadGameResources();
+                break;
+        }
+    }
+
+    private void loadGameResources() {
+
+    }
+
+    private void loadSettingsResources() {
+
+    }
+
+    private void loadAboutResources() {
+
+    }
+
+    private void loadMenuResources() {
 
     }
 
@@ -53,7 +100,26 @@ public class LoadingScreen implements Screen {
             game.setScreen(new MenuScreen(game));
         }
 
+        // ACTUALIZAR CARGA
+        updateResourcesLoad();
 
+
+    }
+
+    private void updateResourcesLoad() {
+        if (manager.update()){ // TERMINÓ ????
+            switch (nextScreen){
+                case MenuScreen:
+                    game.setScreen(new MenuScreen(game)); // 100% DE CARGA
+                case AboutScreen:
+                    game.setScreen(new AboutScreen(game)); // 100% DE CARGA
+                case SettingsScreen:
+                    game.setScreen(new SettingsScreen(game));
+                case GameScreen:
+                    game.setScreen(new GameScreen(game));
+            }
+        }
+        avance = (int)(manager.getProgress()*100);
     }
 
 

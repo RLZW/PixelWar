@@ -21,6 +21,14 @@ public class PixelWars extends Game {
 	// Music
 	private Music musicaFondo;
 
+	// Hay un SOLO assetManager para el juego
+	private final AssetManager assetManager;
+
+	public PixelWars(){
+		assetManager = new AssetManager();
+	}
+
+
 
 	@Override
 	public void create () {
@@ -51,13 +59,21 @@ public class PixelWars extends Game {
 	    musicaFondo.pause();
     }
 
-
+	// Para que las otras pantallas usen el assetManager
+	public AssetManager getAssetManager() {
+		return assetManager;
+	}
 
 
 	@Override
 	public void render () {
 		super.render();
 	}
-	
+
+	@Override
+	public void dispose() {
+		super.dispose();
+		assetManager.clear();
+	}
 
 }
