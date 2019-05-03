@@ -96,7 +96,7 @@ public class LoadingScreen implements Screen {
 
 
         timeCounter+= delta;
-        if (timeCounter >= 2){
+        if (timeCounter >= 5){
             game.setScreen(new MenuScreen(game));
         }
 

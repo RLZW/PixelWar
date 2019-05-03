@@ -52,31 +52,31 @@ public class AboutHud implements Disposable {
         label1.setAlignment(Align.center);
         stage.addActor(label1);
 
-        label2 = new Label("Sonia Leilani",slabelStyle);
+        label2 = new Label("Sonia Leilani - ISC",slabelStyle);
         label2.setSize(PixelWars.ANCHO/2,row_height);
         label2.setPosition(-5,PixelWars.ALTO-row_height*6);
         label2.setAlignment(Align.center);
         stage.addActor(label2);
 
-        label3 = new Label("Raul Fuentes",slabelStyle);
+        label3 = new Label("Raul Fuentes - ISC",slabelStyle);
         label3.setSize(PixelWars.ANCHO/2+1+label2.getWidth(),row_height);
         label3.setPosition(5,PixelWars.ALTO-row_height*6);
         label3.setAlignment(Align.center);
         stage.addActor(label3);
 
-        label4 = new Label("Marlon Velasco",slabelStyle);
+        label4 = new Label("Marlon Velasco - ISC",slabelStyle);
         label4.setSize(PixelWars.ANCHO/2+1+label3.getWidth()+4,row_height);
         label4.setPosition(15,PixelWars.ALTO-row_height*6);
         label4.setAlignment(Align.center);
         stage.addActor(label4);
 
-        label5 = new Label("Pedro Cortes",slabelStyle);
+        label5 = new Label("Pedro Cortes - ISC",slabelStyle);
         label5.setSize(PixelWars.ANCHO/2,row_height);
         label5.setPosition(30,PixelWars.ALTO-row_height*8);
         label5.setAlignment(Align.center);
         stage.addActor(label5);
 
-        label6 = new Label("Oswaldo Morales",slabelStyle);
+        label6 = new Label("Oswaldo Morales - ISC",slabelStyle);
         label6.setSize(PixelWars.ANCHO/2+label5.getWidth(),row_height);
         label6.setPosition(50,PixelWars.ALTO-row_height*8);
         label6.setAlignment(Align.center);

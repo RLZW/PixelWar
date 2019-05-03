@@ -49,6 +49,9 @@ public class SettingsHud implements Disposable {
         stage.addActor(btnVol);
         btnVol.setPosition(PixelWars.ANCHO/2-100,PixelWars.ALTO/2);
 
+        ImageButton btnVolp = new ImageButton(trdVolp);
+        stage.addActor(btnVolp);
+        btnVolp.setPosition(PixelWars.ANCHO/2-75,PixelWars.ALTO/2);
 
 
         //Listeneres
@@ -71,12 +74,22 @@ public class SettingsHud implements Disposable {
                                 public void clicked(InputEvent event, float x, float y) {
                                     super.clicked(event, x, y);
                                     //Responder al evento del boton
-                                    game.pausarMusica();
-                                    final ImageButton clicked=new ImageButton(trdVolp);
-                                    stage.addActor(clicked);
-                                    clicked.setPosition(PixelWars.ANCHO/2-100,PixelWars.ALTO/2);
+                                    game.iniciarMusica();
+
                                 }
                             }
+        );
+
+        //List 3 Vol off
+        btnVolp.addListener(new ClickListener() {
+                               @Override
+                               public void clicked(InputEvent event, float x, float y) {
+                                   super.clicked(event, x, y);
+                                   //Responder al evento del boton
+                                   game.pausarMusica();
+
+                               }
+                           }
         );
 
 
