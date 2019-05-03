@@ -1,12 +1,17 @@
 package com.itesm.pixelwars.Scenes;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -18,6 +23,10 @@ public class SettingsHud implements Disposable {
     private Table table;
     private PixelWars game;
     private Viewport viewport;
+    private Label.LabelStyle labelStyle,slabelStyle;
+    private BitmapFont bitmapFont,sbitmapFont;
+    private Label label1;
+
 
 
     public SettingsHud(final PixelWars game){
@@ -25,6 +34,24 @@ public class SettingsHud implements Disposable {
         viewport = new StretchViewport(game.ANCHO,game.ALTO, game.gamecam);
         stage = new Stage(viewport,game.batch);
         table = new Table();
+
+        //Text
+        labelStyle = new Label.LabelStyle();
+        bitmapFont = new BitmapFont(Gdx.files.internal("pixel.fnt"));
+        labelStyle.font = bitmapFont;
+        labelStyle.fontColor = Color.WHITE;
+
+        slabelStyle = new Label.LabelStyle();
+        sbitmapFont = new BitmapFont(Gdx.files.internal("spixel.fnt"));
+        slabelStyle.font = sbitmapFont;
+        slabelStyle.fontColor = Color.WHITE;
+
+        float row_height = PixelWars.ALTO/16;
+        label1 = new Label("Music",labelStyle);
+        label1.setSize(30,30);
+        label1.setPosition(PixelWars.ANCHO/2-80,PixelWars.ALTO/2+25);
+        label1.setAlignment(Align.center);
+        stage.addActor(label1);
 
         //Buttons & Textures
         //Button Back
