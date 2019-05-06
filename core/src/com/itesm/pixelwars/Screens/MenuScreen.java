@@ -2,8 +2,6 @@ package com.itesm.pixelwars.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -30,8 +28,6 @@ public class MenuScreen implements Screen {
 
 
 
-
-
     public MenuScreen(PixelWars game){
         this.game = game;
         gamePort = new StretchViewport(PixelWars.ANCHO,PixelWars.ALTO,game.gamecam);
@@ -51,10 +47,7 @@ public class MenuScreen implements Screen {
         Gdx.input.setInputProcessor(menuHud.stage);
         Gdx.input.setCatchBackKey(false);
 
-
-
     }
-
 
     private void createTitle(float x, float y) {
         titleText = new Texture("title3.png");

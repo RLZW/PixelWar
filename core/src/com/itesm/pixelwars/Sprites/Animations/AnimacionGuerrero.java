@@ -17,6 +17,7 @@ public class AnimacionGuerrero {
 
 
     private Sprite sprite;
+    private Sprite spriteAtacando;
     private Animation animacionCaminando;
     private Animation animacionParado;
     private Animation animacionAtacando;
@@ -24,57 +25,54 @@ public class AnimacionGuerrero {
     private Texture texturaCaminando;
     private Texture texturaParado;
     private Texture texturaAtacando;
+
     private EstadoGuerrero estado;
     private TextureRegion[][] texturaGuerreroCaminando;
     private TextureRegion[][] texturaGuerreroParado;
     private TextureRegion[][] texturaGuerreroAtacando;
-    private static final float TIEMPO_BASE = 0.5f;
-    private float tiempoAtaque = 0;
+
+
+
 
 
 
     private int hp;
-    private int ataque = 10;
+    private int ataque;
 
-    public AnimacionGuerrero(float x, float y, String bando){
-        if (bando == "aliado"){
-            // Cargar textura
-            texturaCaminando = new Texture("guerreroAzulCaminando.png");  // 174x44 = tamaño de la imagen
-            texturaParado = new Texture("guerreroAzulParado.png");  // 116x44 = tamaño de la imagen
-            texturaAtacando = new Texture("guerreroAzulAtacando.png");  // 236x42 = tamaño de la imagen
-        }
-        if (bando == "enemigo"){
-            // Cargar textura
-            texturaCaminando = new Texture("guerreroRojoCaminando.png");  // 174x44 = tamaño de la imagen
-            texturaParado = new Texture("guerreroRojoParado.png");  // 116x44 = tamaño de la imagen
-            texturaAtacando = new Texture("guerreroRojoAtacando.png");  // 236x42 = tamaño de la imagen
-        }
+    public AnimacionGuerrero(float x, float y, Texture guerreroCaminando, Texture guerreroParado, Texture guerreroAtacando, int caminandoWidth, int caminandoHeight,int paradoWidth, int paradoHeight, int atacandoWidth, int atacandoHeight, int hp, int ataque){
+        this.texturaCaminando = guerreroCaminando;
+        this.texturaAtacando = guerreroAtacando;
+        this.texturaParado = guerreroParado;
+        this.hp= hp;
+        this.ataque = ataque;
+
         // Crea una region Caminando
         TextureRegion regionCaminando = new TextureRegion(texturaCaminando);
         // Divide la región en frames de 29x44
-        texturaGuerreroCaminando = regionCaminando.split(29,44);
+        texturaGuerreroCaminando = regionCaminando.split(caminandoWidth,caminandoHeight);
         animacionCaminando = new Animation(0.15f,texturaGuerreroCaminando[0][5],texturaGuerreroCaminando[0][4],texturaGuerreroCaminando[0][3],texturaGuerreroCaminando[0][2],texturaGuerreroCaminando[0][1],texturaGuerreroCaminando[0][0]);
         animacionCaminando.setPlayMode(Animation.PlayMode.LOOP);
 
         // Crea una region Parado
         TextureRegion regionParado = new TextureRegion(texturaParado);
         // Divide la región en frames de 29x44
-        texturaGuerreroParado = regionParado.split(29,44);
+        texturaGuerreroParado = regionParado.split(paradoWidth,paradoHeight);
         animacionParado = new Animation(0.15f,texturaGuerreroParado[0][3],texturaGuerreroParado[0][2],texturaGuerreroParado[0][1],texturaGuerreroParado[0][0]);
         animacionParado.setPlayMode(Animation.PlayMode.LOOP);
 
         // Crea una region Atacando
         TextureRegion regionAtacando = new TextureRegion(texturaAtacando);
         // Divide la región en frames de 59x42
-        texturaGuerreroAtacando = regionAtacando.split(59,42);
+        texturaGuerreroAtacando = regionAtacando.split(atacandoWidth,atacandoHeight);
         animacionAtacando = new Animation(0.15f,texturaGuerreroAtacando[0][3],texturaGuerreroAtacando[0][2],texturaGuerreroAtacando[0][1],texturaGuerreroAtacando[0][0]);
         animacionAtacando.setPlayMode(Animation.PlayMode.LOOP);
 
         // Quieto
         sprite = new Sprite(texturaGuerreroCaminando[0][0]);
-        sprite.setPosition(x,y);
+        spriteAtacando = new Sprite(texturaGuerreroAtacando[0][0]);
 
-        hp = 100;
+        sprite.setPosition(x,y);
+        spriteAtacando.setPosition(x,y);
         timerAnimacion = 0;
 
         estado = CAMINANDO;
@@ -93,8 +91,9 @@ public class AnimacionGuerrero {
                 batch.draw(regionCaminando, sprite.getX(), sprite.getY());
                 break;
             case ATACANDO:
+                spriteAtacando.setPosition(sprite.getX(), sprite.getY());
                 TextureRegion regionAtacando = (TextureRegion) animacionAtacando.getKeyFrame(timerAnimacion);
-                batch.draw(regionAtacando, sprite.getX(), sprite.getY());
+                batch.draw(regionAtacando, spriteAtacando.getX(), spriteAtacando.getY());
                 break;
             case MUERTO:
                 sprite.setColor(1,0,0,1);
@@ -145,6 +144,10 @@ public class AnimacionGuerrero {
         return sprite;
     }
 
+    public Sprite getSpriteAtacando(){
+        return spriteAtacando;
+    }
+
     public int getHp() {
         return hp;
     }
@@ -153,14 +156,10 @@ public class AnimacionGuerrero {
         this.hp = hp;
     }
 
-    public int Espadazo(int HP){
-        tiempoAtaque+=Gdx.graphics.getDeltaTime();
-        if (tiempoAtaque>=TIEMPO_BASE){
-            HP-=ataque;
-            tiempoAtaque = 0;
-        }
-        return HP;
-    }
+
+
+
+
 
 }
 
