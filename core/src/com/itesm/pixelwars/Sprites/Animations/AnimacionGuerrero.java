@@ -107,6 +107,8 @@ public class AnimacionGuerrero {
 
     }
 
+
+
     public void render(SpriteBatch batch){
         timerAnimacion += Gdx.graphics.getDeltaTime();
         switch (estado){
