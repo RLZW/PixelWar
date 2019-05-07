@@ -2,6 +2,7 @@ package com.itesm.pixelwars.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -43,6 +44,8 @@ public class MenuScreen implements Screen {
         terrainHud = new ParallaxTerrain(game);
         menuHud = new MenuHud(game);
         stage = new Stage(gamePort,game.batch);
+
+
 
         createTitle(PixelWars.ANCHO/2-136/2,PixelWars.ALTO/2-20);
         Gdx.input.setInputProcessor(menuHud.stage);

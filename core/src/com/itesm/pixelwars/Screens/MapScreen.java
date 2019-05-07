@@ -2,6 +2,7 @@ package com.itesm.pixelwars.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -12,13 +13,15 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.itesm.pixelwars.PixelWars;
 import com.itesm.pixelwars.Sprites.Actors.TitleActor;
 
+import java.util.logging.SocketHandler;
+
 public class MapScreen implements Screen {
     private PixelWars game;
     private Stage stage;
     private Texture map;
     private TitleActor mapActor;
     private Viewport gamePort;
-
+    private Sound warsong;
     public MapScreen(PixelWars game){
         this.game = game;
         gamePort = new StretchViewport(PixelWars.ANCHO,PixelWars.ALTO,game.gamecam);
@@ -35,6 +38,10 @@ public class MapScreen implements Screen {
         stage.addActor(mapActor);
         Gdx.input.setInputProcessor(stage);
         Gdx.input.setCatchBackKey(false);
+        if(game.SOUND){
+            warsong = Gdx.audio.newSound(Gdx.files.internal("heroic.mp3"));
+            warsong.play();
+        }
 
         stage.addListener(new ClickListener() {
                               @Override

@@ -32,6 +32,8 @@ public class MenuHud implements Disposable {
     public Stage stage;
     private PixelWars game;
     private Viewport viewport;
+    private Sound background;
+
 
 
     public MenuHud(final PixelWars game){
@@ -40,7 +42,10 @@ public class MenuHud implements Disposable {
         stage = new Stage(viewport,game.batch);
 
 
-
+        if(game.SOUND){
+            background = Gdx.audio.newSound(Gdx.files.internal("medieval_back.mp3"));
+            background.play(.6f);
+        }
 
 
 
@@ -105,6 +110,7 @@ public class MenuHud implements Disposable {
                                     //Responder al evento del boton
                                     Sound sound =  Gdx.audio.newSound(Gdx.files.internal("start.wav"));
                                     sound.play(1.0f);
+                                    background.stop();
                                     game.setScreen(new MapScreen(game));
 
                                 }
