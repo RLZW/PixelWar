@@ -237,10 +237,7 @@ public class GameScreen implements Screen {
 
         //Stage Add Units buttons
         stage.addActor(btnWarrior);
-        //stage.addActor(btnMiner);
-        //stage.addActor(btnArcher);
-        //stage.addActor(btnMonk);
-        //stage.addActor(btnDragon);
+
 
         //Stage Add Elements buttons
         stage.addActor(btnPause);
@@ -532,10 +529,6 @@ public class GameScreen implements Screen {
                                              btnRestart.remove();
                                              stage.addActor(btnPause);
                                              stage.addActor(btnWarrior);
-                                             //stage.addActor(btnArcher);
-                                             //stage.addActor(btnDragon);
-                                             //stage.addActor(btnMiner);
-                                             //stage.addActor(btnMonk);
                                              stage.addActor(label1);
                                              stage.addActor(label2);
                                              stage.addActor(label3);
@@ -800,7 +793,6 @@ public class GameScreen implements Screen {
     //Screen Movement
     public void handleIsTouched(float deltaTime){
         float aument =200;
-        //Buttons Movement Behavior
         if (Gdx.input.isTouched() && !isFinish) {
             if (Gdx.input.getX()>Gdx.graphics.getWidth()/2 && gamePort.getCamera().position.x < PixelWars.ANCHO*1.4&&Gdx.input.getY()>50){
                 aument *= deltaTime;
