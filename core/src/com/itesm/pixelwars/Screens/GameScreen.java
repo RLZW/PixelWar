@@ -120,7 +120,10 @@ public class GameScreen implements Screen {
         stage.addActor(myCastle);
         myCastle.setPosition(x, y );
         Texture texturaCastilloAnimado = new Texture("torreAzul.png");
-        animatedCastle = new TowerAnimation(x,y,texturaCastilloAnimado);
+        Texture texturaCastilloAnimadoDaño1 = new Texture("torreAzulDaño1.png");
+        Texture texturaCastilloAnimadoDaño2 = new Texture("torreAzulDaño2.png");
+        Texture texturaCastilloAnimadoDaño3 = new Texture("torreAzulDaño3.png");
+        animatedCastle = new TowerAnimation(x,y,texturaCastilloAnimado, texturaCastilloAnimadoDaño1, texturaCastilloAnimadoDaño2, texturaCastilloAnimadoDaño3);
     }
 
     private void createEnemyCastle(float x, float y) {
@@ -129,7 +132,10 @@ public class GameScreen implements Screen {
         stage.addActor(enemyCastle);
         enemyCastle.setPosition(x, y );
         Texture texturaCastilloAnimado = new Texture("torreRoja.png");
-        animatedEnemyCastle = new TowerAnimation(x,y,texturaCastilloAnimado);
+        Texture texturaCastilloAnimadoDaño1 = new Texture("torreRojaDaño1.png");
+        Texture texturaCastilloAnimadoDaño2 = new Texture("torreRojaDaño2.png");
+        Texture texturaCastilloAnimadoDaño3 = new Texture("torreRojaDaño3.png");
+        animatedEnemyCastle = new TowerAnimation(x,y,texturaCastilloAnimado, texturaCastilloAnimadoDaño1, texturaCastilloAnimadoDaño2, texturaCastilloAnimadoDaño3);
 
     }
 
