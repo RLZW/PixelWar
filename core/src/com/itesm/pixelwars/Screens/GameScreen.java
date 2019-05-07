@@ -852,12 +852,13 @@ public class GameScreen implements Screen {
 
     @Override
     public void hide() {
-
+        dispose();
 
     }
 
     @Override
     public void dispose() {
+
         stage.dispose();
         textEnemyCastle.dispose();
         textCastle.dispose();

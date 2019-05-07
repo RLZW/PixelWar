@@ -860,6 +860,7 @@ public class level2 implements Screen {
 
     @Override
     public void hide() {
+        dispose();
 
     }
 
