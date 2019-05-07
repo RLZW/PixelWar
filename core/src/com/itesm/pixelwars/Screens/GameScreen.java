@@ -60,6 +60,7 @@ public class GameScreen implements Screen {
     private float xArcher = 65;
     private float xMonk = 90;
     private float xDragon = 115;
+    private float xPause = 300;
 
 
 
@@ -80,11 +81,16 @@ public class GameScreen implements Screen {
     private ImageButton btnArcher;
     private ImageButton btnMonk;
     private ImageButton btnDragon;
+
+    private ImageButton btnPause;
+    private ImageButton btnContinue;
+    private ImageButton btnExit;
+    private ImageButton btnRestart;
+
     private float timeToMove = 0;
 
 
     //Textures & TRDA
-
 
     private Texture textCastle, textEnemyCastle;
     private Texture skytext,bgrass,bmountains,bclouds;
@@ -95,6 +101,9 @@ public class GameScreen implements Screen {
     private float timeToMine = 0.5F;
     private int gold = 200;
 
+
+    //Pause
+    private boolean isPaused = false;
 
     public GameScreen(PixelWars game){
         this.game = game;
@@ -198,25 +207,44 @@ public class GameScreen implements Screen {
         trd_continue_buttonp = new TextureRegionDrawable(pause_buttonp);
 
 
-        //ImageButtons
+        //ImageButtons Units
         btnWarrior = new ImageButton(trd_warrior_button,trd_warrior_buttonp);
         btnMiner = new ImageButton(trd_miner_button,trd_miner_buttonp);
         btnArcher = new ImageButton(trd_archer_button,trd_archer_buttonp);
         btnMonk = new ImageButton(trd_monk_button,trd_monk_buttonp);
         btnDragon = new ImageButton(trd_dragon_button, trd_dragon_buttonp);
 
+        //ImageButtons Elements
+        btnPause = new ImageButton(trd_pause_button,trd_pause_buttonp);
+        btnContinue = new ImageButton(trd_continue_button, trd_continue_buttonp);
+        btnRestart = new ImageButton(trd_restart_button, trd_restart_buttonp);
+        btnExit = new ImageButton(trd_exit_button, trd_exit_buttonp);
+
+        //Stage Add Units buttons
         stage.addActor(btnWarrior);
         stage.addActor(btnMiner);
         stage.addActor(btnArcher);
         stage.addActor(btnMonk);
         stage.addActor(btnDragon);
 
+        //Stage Add Elements buttons
+        stage.addActor(btnPause);
+
+
+        /**
+        stage.addActor(btnContinue);
+        stage.addActor(btnRestart);
+        stage.addActor(btnExit);**/
+
+        //Units Buttons Position
         btnWarrior.setPosition(xWarr,PixelWars.ALTO-btnWarrior.getHeight()-1);
         btnMiner.setPosition(xMiner,PixelWars.ALTO-btnMiner.getHeight()-1);
         btnArcher.setPosition(xArcher, PixelWars.ALTO-btnArcher.getHeight()-1);
         btnMonk.setPosition(xMonk, PixelWars.ALTO-btnMonk.getHeight()-1);
         btnDragon.setPosition(xDragon, PixelWars.ALTO-btnDragon.getHeight()-1);
 
+        //Units Buttons Position
+        btnPause.setPosition(xPause,PixelWars.ALTO-btnPause.getHeight()+3);
 
         btnMiner.addListener(new ClickListener() {
                                            @Override
@@ -318,13 +346,13 @@ public class GameScreen implements Screen {
 
         label2 = new Label(String.valueOf(unidades)+"/20",slabelStyle);
         label2.setSize(PixelWars.ANCHO/2-label2.getWidth(),row_height);
-        label2.setPosition(bgrass.getWidth()/2-label2.getWidth()/2-20,PixelWars.ALTO-row_height*1-4);
+        label2.setPosition(bgrass.getWidth()/2-label2.getWidth()/2-40,PixelWars.ALTO-row_height*1-4);
         label2.setAlignment(Align.center);
         stage.addActor(label2);
 
         label3 = new Label(String.valueOf(gold),mlabelStyle);
         label3.setSize(PixelWars.ANCHO/2-label3.getWidth(),row_height);
-        label3.setPosition(bgrass.getWidth()/2-label3.getWidth(),PixelWars.ALTO-row_height*1-4);
+        label3.setPosition(bgrass.getWidth()/2-label3.getWidth()-10,PixelWars.ALTO-row_height*1-4);
         label3.setAlignment(Align.center);
         stage.addActor(label3);
 
@@ -349,111 +377,111 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
 
-        timer += delta;
-        if (timer >= seconds){
-            timer = 0;
-            Guerrero warrior = new Guerrero(PixelWars.ANCHO*1.66F, enemyCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("guerreroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44, 29,44, 59, 42, 100, 10);
+        if(!isPaused) {
 
-            enemyWarriorsQ.addLast(warrior);
+            timer += delta;
+            if (timer >= seconds) {
+                timer = 0;
+                Guerrero warrior = new Guerrero(PixelWars.ANCHO * 1.66F, enemyCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("guerreroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44, 29, 44, 59, 42, 100, 10);
 
-        }
-
-        Gdx.gl.glClearColor(1,1,1,1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        game.batch.setProjectionMatrix(game.gamecam.combined);
-        srcX += SPEED_DIFERENCCE*delta;
-
-        game.batch.begin();
-        game.batch.draw(skytext,0,0);
-        game.batch.draw(skytext,skytext.getWidth(),0);
-        game.batch.draw(bclouds,0,bgrass.getHeight(),0, 0, bclouds.getWidth(), bclouds.getHeight(),1,1,0,(int)srcX,0,bclouds.getWidth(),bclouds.getHeight(),false,false);
-        game.batch.draw(bmountains,0,bgrass.getHeight()-3);
-        game.batch.draw(bgrass,0,0);
-        if (myCastle.isAlive()){
-            animatedCastle.render(game.batch);
-            myCastle.remove();
-
-        }
-        if (enemyCastle.isAlive()){
-            animatedEnemyCastle.render(game.batch);
-            enemyCastle.remove();
-        }
-        game.batch.draw(actionbar,xBar,PixelWars.ALTO-actionbar.getHeight());
-
-        if (!myWarriorsQ.isEmpty()) {
-            for (AnimacionGuerrero warrior : myWarriorsQ) {
-                warrior.render(game.batch);
+                enemyWarriorsQ.addLast(warrior);
             }
-            ColisionConEnemigo(myWarriorsQ.first());
-            formarUnidades();
 
-        }
-        if (!enemyWarriorsQ.isEmpty()) {
-            for (AnimacionGuerrero enemy : enemyWarriorsQ) {
-                enemy.render(game.batch);
+
+            Gdx.gl.glClearColor(1, 1, 1, 1);
+            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+            game.batch.setProjectionMatrix(game.gamecam.combined);
+            srcX += SPEED_DIFERENCCE * delta;
+
+            game.batch.begin();
+            game.batch.draw(skytext, 0, 0);
+            game.batch.draw(skytext, skytext.getWidth(), 0);
+            game.batch.draw(bclouds, 0, bgrass.getHeight(), 0, 0, bclouds.getWidth(), bclouds.getHeight(), 1, 1, 0, (int) srcX, 0, bclouds.getWidth(), bclouds.getHeight(), false, false);
+            game.batch.draw(bmountains, 0, bgrass.getHeight() - 3);
+            game.batch.draw(bgrass, 0, 0);
+            if (myCastle.isAlive()) {
+                animatedCastle.render(game.batch);
+                myCastle.remove();
+
             }
-            ColisionAliado(enemyWarriorsQ.first());
-            formarEnemigos();
-        }
+            if (enemyCastle.isAlive()) {
+                animatedEnemyCastle.render(game.batch);
+                enemyCastle.remove();
+            }
+            game.batch.draw(actionbar, xBar, PixelWars.ALTO - actionbar.getHeight());
 
-        if (!myCastle.isAlive()){
-            labelStyle = new Label.LabelStyle();
-            bitmapFont = new BitmapFont(Gdx.files.internal("pixel.fnt"));
-            labelStyle.font = bitmapFont;
-            labelStyle.fontColor = Color.RED;
-            label7 = new Label("YOU LOOSE!",labelStyle);
-            isFinish= true;
-            label7.setSize(PixelWars.ANCHO/2,row_height);
-            label7.setPosition(gamePort.getCamera().position.x-label7.getWidth()/2,PixelWars.ALTO/2);
-            label7.setAlignment(Align.center);
-            stage.addActor(label7);
-            enemyWarriorsQ.clear();
-            myWarriorsQ.clear();
-            stage.addListener(new ClickListener() {
-                                  @Override
-                                  public void clicked(InputEvent event, float x, float y) {
-                                      super.clicked(event, x, y);
-                                      game.setScreen(new MenuScreen(game));
+            if (!myWarriorsQ.isEmpty()) {
+                for (AnimacionGuerrero warrior : myWarriorsQ) {
+                    warrior.render(game.batch);
+                }
+                ColisionConEnemigo(myWarriorsQ.first());
+                formarUnidades();
+
+            }
+            if (!enemyWarriorsQ.isEmpty()) {
+                for (AnimacionGuerrero enemy : enemyWarriorsQ) {
+                    enemy.render(game.batch);
+                }
+                ColisionAliado(enemyWarriorsQ.first());
+                formarEnemigos();
+            }
+
+            if (!myCastle.isAlive()) {
+                labelStyle = new Label.LabelStyle();
+                bitmapFont = new BitmapFont(Gdx.files.internal("pixel.fnt"));
+                labelStyle.font = bitmapFont;
+                labelStyle.fontColor = Color.RED;
+                label7 = new Label("YOU LOOSE!", labelStyle);
+                isFinish = true;
+                label7.setSize(PixelWars.ANCHO / 2, row_height);
+                label7.setPosition(gamePort.getCamera().position.x - label7.getWidth() / 2, PixelWars.ALTO / 2);
+                label7.setAlignment(Align.center);
+                stage.addActor(label7);
+                enemyWarriorsQ.clear();
+                myWarriorsQ.clear();
+                stage.addListener(new ClickListener() {
+                                      @Override
+                                      public void clicked(InputEvent event, float x, float y) {
+                                          super.clicked(event, x, y);
+                                          game.setScreen(new MenuScreen(game));
+                                      }
                                   }
-                              }
-            );
-        }
+                );
+            }
 
-        if (!enemyCastle.isAlive()){
-            labelStyle = new Label.LabelStyle();
-            bitmapFont = new BitmapFont(Gdx.files.internal("pixel.fnt"));
-            labelStyle.font = bitmapFont;
-            labelStyle.fontColor = Color.GREEN;
+            if (!enemyCastle.isAlive()) {
+                labelStyle = new Label.LabelStyle();
+                bitmapFont = new BitmapFont(Gdx.files.internal("pixel.fnt"));
+                labelStyle.font = bitmapFont;
+                labelStyle.fontColor = Color.GREEN;
 
-            isFinish= true;
-            label6 = new Label("YOU WIN!",labelStyle);
-            label6.setSize(PixelWars.ANCHO/2-label6.getWidth(),row_height);
-            label6.setPosition(gamePort.getCamera().position.x-label6.getWidth(),PixelWars.ALTO/2);
-            label6.setAlignment(Align.center);
-            stage.addActor(label6);
-            enemyWarriorsQ.clear();
-            myWarriorsQ.clear();
-            stage.addListener(new ClickListener() {
-                                  @Override
-                                  public void clicked(InputEvent event, float x, float y) {
-                                      super.clicked(event, x, y);
-                                      game.setScreen(new MenuScreen(game));
+                isFinish = true;
+                label6 = new Label("YOU WIN!", labelStyle);
+                label6.setSize(PixelWars.ANCHO / 2 - label6.getWidth(), row_height);
+                label6.setPosition(gamePort.getCamera().position.x - label6.getWidth(), PixelWars.ALTO / 2);
+                label6.setAlignment(Align.center);
+                stage.addActor(label6);
+                enemyWarriorsQ.clear();
+                myWarriorsQ.clear();
+                stage.addListener(new ClickListener() {
+                                      @Override
+                                      public void clicked(InputEvent event, float x, float y) {
+                                          super.clicked(event, x, y);
+                                          game.setScreen(new MenuScreen(game));
+                                      }
                                   }
-                              }
-            );
+                );
+            }
+
+
+            game.batch.end();
+            stage.draw();
+            stage.act();
+
+            update(delta);
+            gamePort.getCamera().update();
+
         }
-
-
-
-
-        game.batch.end();
-        stage.draw();
-        stage.act();
-
-        update(delta);
-        gamePort.getCamera().update();
-
-
     }
 
     private void ArquerosDisparando(AnimacionGuerrero warrior){
@@ -633,7 +661,7 @@ public class GameScreen implements Screen {
     //Screen Movement
     public void handleIsTouched(float deltaTime){
         float aument =200;
-        float pos = 0;
+        //Buttons Movement Behavior
         if (Gdx.input.isTouched() && !isFinish) {
             if (Gdx.input.getX()>Gdx.graphics.getWidth()/2 && gamePort.getCamera().position.x < PixelWars.ANCHO*1.4&&Gdx.input.getY()>50){
                 aument *= deltaTime;
@@ -647,6 +675,7 @@ public class GameScreen implements Screen {
                 btnArcher.setPosition(xArcher+=aument, PixelWars.ALTO-btnArcher.getHeight()-1);
                 btnMonk.setPosition(xMonk+=aument, PixelWars.ALTO-btnMonk.getHeight()-1);
                 btnDragon.setPosition(xDragon+=aument, PixelWars.ALTO-btnDragon.getHeight()-1);
+                btnPause.setPosition(xPause+=aument,PixelWars.ALTO-btnPause.getHeight()+3);
                 gamePort.getCamera().position.x+=aument;
             }
             else if (Gdx.input.getX()<=Gdx.graphics.getWidth()/2 && gamePort.getCamera().position.x > 4 +PixelWars.ANCHO/2&&Gdx.input.getY()>50){
@@ -661,6 +690,7 @@ public class GameScreen implements Screen {
                 btnArcher.setPosition(xArcher-=aument, PixelWars.ALTO-btnArcher.getHeight()-1);
                 btnMonk.setPosition(xMonk-=aument, PixelWars.ALTO-btnMonk.getHeight()-1);
                 btnDragon.setPosition(xDragon-=aument, PixelWars.ALTO-btnDragon.getHeight()-1);
+                btnPause.setPosition(xPause-=aument,PixelWars.ALTO-btnPause.getHeight()+3);
                 gamePort.getCamera().position.x-=aument;
             }
 
