@@ -1,4 +1,87 @@
 package com.itesm.pixelwars.Screens;
 
-public class MapScreen {
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
+import com.itesm.pixelwars.PixelWars;
+import com.itesm.pixelwars.Sprites.Actors.TitleActor;
+
+public class MapScreen implements Screen {
+    private PixelWars game;
+    private Stage stage;
+    private Texture map;
+    private TitleActor mapActor;
+    private Viewport gamePort;
+
+    public MapScreen(PixelWars game){
+        this.game = game;
+        gamePort = new StretchViewport(PixelWars.ANCHO,PixelWars.ALTO,game.gamecam);
+    };
+
+
+
+
+    @Override
+    public void show() {
+        map = new Texture("map.png");
+        mapActor = new TitleActor(map);
+        stage = new Stage(gamePort,game.batch);
+        stage.addActor(mapActor);
+        Gdx.input.setInputProcessor(stage);
+        Gdx.input.setCatchBackKey(false);
+
+        stage.addListener(new ClickListener() {
+                              @Override
+                              public void clicked(InputEvent event, float x, float y) {
+                                  super.clicked(event, x, y);
+                                  game.setScreen(new GameScreen(game));
+                              }
+                          }
+        );
+
+    }
+
+    @Override
+    public void render(float delta) {
+
+        Gdx.gl.glClearColor(1,1,1,1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        game.batch.setProjectionMatrix(stage.getCamera().combined);
+        stage.draw();
+
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        gamePort.update(width,height);
+    }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void resume() {
+
+    }
+
+    @Override
+    public void hide() {
+
+    }
+
+    @Override
+    public void dispose() {
+        stage.dispose();
+        map.dispose();
+
+    }
 }
