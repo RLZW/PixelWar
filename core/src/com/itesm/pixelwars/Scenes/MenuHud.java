@@ -112,7 +112,7 @@ public class MenuHud implements Disposable {
                                     //Responder al evento del boton
                                     Sound sound =  Gdx.audio.newSound(Gdx.files.internal("start.wav"));
                                     sound.play(1.0f);
-                                    game.pauseMusic();
+                                    //game.pauseMusic();
                                     game.setScreen(new MapScreen(game));
 
                                 }
