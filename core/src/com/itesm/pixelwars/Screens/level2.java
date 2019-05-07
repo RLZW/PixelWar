@@ -26,6 +26,7 @@ import com.itesm.pixelwars.Sprites.Actors.CastleActor;
 import com.itesm.pixelwars.Sprites.Actors.TitleActor;
 import com.itesm.pixelwars.Sprites.Animations.Arquero;
 import com.itesm.pixelwars.Sprites.Animations.Cura;
+import com.itesm.pixelwars.Sprites.Animations.EstadoTorre;
 import com.itesm.pixelwars.Sprites.Animations.Guerrero;
 import com.itesm.pixelwars.Sprites.Animations.TowerAnimation;
 import com.itesm.pixelwars.Sprites.Animations.AnimacionGuerrero;
@@ -685,6 +686,19 @@ public class level2 implements Screen {
         }else{
             myWarriorsQ.first().setEstado(EstadoGuerrero.CAMINANDO);
             myWarriorsQ.first().moverX(1);
+        }
+        if(enemyCastle.getHp()>350){
+            animatedEnemyCastle.setEstado(EstadoTorre.SINDAÑO);
+        }else {
+            if(enemyCastle.getHp()<=350 && enemyCastle.getHp()>225){
+                animatedEnemyCastle.setEstado(EstadoTorre.DAÑO1);
+            }else{
+                if(enemyCastle.getHp()<=225 && enemyCastle.getHp()>100){
+                    animatedEnemyCastle.setEstado(EstadoTorre.DAÑO2);
+                }else {
+                    animatedEnemyCastle.setEstado(EstadoTorre.DAÑO3);
+                }
+            }
         }
     }
 
