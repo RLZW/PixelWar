@@ -1,11 +1,11 @@
 android {
     signingConfigs {
         config {
-            keyAlias 'android'
-            keyPassword 'android'
-            storeFile file('C:/Users/omora/Desktop/Proyectos android studio/PixelWars Chiquetere/PixelWars Chiquetere/keys.jks')
+            keyAlias 'key0'
+            keyPassword '123456'
+            storeFile file('C:\\Users\\rulaz\\Documents\\GitHub\\PixelWar\\keyss.jks')
 
-            storePassword 'android'
+            storePassword '123456'
         }
     }
     buildToolsVersion "28.0.3"

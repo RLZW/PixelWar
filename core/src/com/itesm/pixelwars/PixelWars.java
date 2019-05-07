@@ -17,6 +17,9 @@ public class PixelWars extends Game {
 	public static final int ANCHO = 320;
 	public static final int ALTO = 180;
 
+	//Sound
+	public static final boolean SOUND = true;
+
 
 	@Override
 	public void create () {
