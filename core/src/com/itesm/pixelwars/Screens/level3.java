@@ -115,7 +115,10 @@ public class level3 implements Screen {
         stage.addActor(myCastle);
         myCastle.setPosition(x, y );
         Texture texturaCastilloAnimado = new Texture("torreAzul.png");
-        animatedCastle = new TowerAnimation(x,y,texturaCastilloAnimado);
+        Texture texturaCastilloAnimadoDaño1 = new Texture("torreAzulDaño1.png");
+        Texture texturaCastilloAnimadoDaño2 = new Texture("torreAzulDaño2.png");
+        Texture texturaCastilloAnimadoDaño3 = new Texture("torreAzulDaño3.png");
+        animatedCastle = new TowerAnimation(x,y,texturaCastilloAnimado, texturaCastilloAnimadoDaño1, texturaCastilloAnimadoDaño2, texturaCastilloAnimadoDaño3);
     }
 
     private void createEnemyCastle(float x, float y) {

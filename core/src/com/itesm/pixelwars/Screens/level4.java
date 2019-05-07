@@ -115,7 +115,10 @@ public class level4 implements Screen {
         stage.addActor(myCastle);
         myCastle.setPosition(x, y );
         Texture texturaCastilloAnimado = new Texture("torreAzul.png");
-        animatedCastle = new TowerAnimation(x,y,texturaCastilloAnimado);
+        Texture texturaCastilloAnimadoDaño1 = new Texture("torreAzulDaño1.png");
+        Texture texturaCastilloAnimadoDaño2 = new Texture("torreAzulDaño2.png");
+        Texture texturaCastilloAnimadoDaño3 = new Texture("torreAzulDaño3.png");
+        animatedCastle = new TowerAnimation(x,y,texturaCastilloAnimado, texturaCastilloAnimadoDaño1, texturaCastilloAnimadoDaño2, texturaCastilloAnimadoDaño3);
     }
 
     private void createEnemyCastle(float x, float y) {
@@ -583,6 +586,19 @@ public class level4 implements Screen {
         }else{
             enemyWarriorsQ.first().setEstado(EstadoGuerrero.CAMINANDO);
             enemyWarriorsQ.first().moverX(-1);
+        }
+        if(myCastle.getHp()>350){
+            animatedCastle.setEstado(EstadoTorre.SINDAÑO);
+        }else {
+            if(myCastle.getHp()<=350 && myCastle.getHp()>225){
+                animatedCastle.setEstado(EstadoTorre.DAÑO1);
+            }else{
+                if(myCastle.getHp()<=225 && myCastle.getHp()>100){
+                    animatedCastle.setEstado(EstadoTorre.DAÑO2);
+                }else {
+                    animatedCastle.setEstado(EstadoTorre.DAÑO3);
+                }
+            }
         }
     }
     private void ColisionConEnemigo(AnimacionGuerrero first) {
