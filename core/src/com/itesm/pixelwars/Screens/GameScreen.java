@@ -260,7 +260,7 @@ public class GameScreen implements Screen {
                                            @Override
                                            public void clicked(InputEvent event, float x, float y) {
                                                if (gold>= 50 && unidades<20){
-                                                   minero miner = new minero(myCastle.getX()+myCastle.getWidth(), animatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("guerreroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44,29, 44, 59, 42, 25, 10, true, 'g');
+                                                   minero miner = new minero(myCastle.getX()+myCastle.getWidth(), animatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("mineroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44,29, 44, 59, 42, 25, 10, true, 'g');
                                                    myWarriorsQ.addLast(miner);
                                                    unidades+=1;
                                                    gold-=50;
@@ -324,7 +324,7 @@ public class GameScreen implements Screen {
                                    @Override
                                    public void clicked(InputEvent event, float x, float y) {
                                        if (gold>=1500 && unidades < 20){
-                                           Guerrero warrior = new Guerrero(myCastle.getX()+myCastle.getWidth(), animatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("guerreroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44,29, 44, 59, 42, 150, 30 ,true, 'd');
+                                           Guerrero warrior = new Guerrero(myCastle.getX()+myCastle.getWidth(), animatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("dragonAzulParado.png"), new Texture("dragonAzulAtacando.png"), 29, 43,29, 47, 43, 47, 150, 30 ,true, 'd');
                                            myWarriorsQ.addLast(warrior);
                                            unidades +=1;
                                            gold-=1500;
@@ -701,10 +701,29 @@ public class GameScreen implements Screen {
 
     private void ColisionCatilloEnemigo(TowerAnimation castle) {
         if (myWarriorsQ.first().getSprite().getBoundingRectangle().overlaps(castle.getSprite().getBoundingRectangle())){
-            myWarriorsQ.first().setEstado(EstadoGuerrero.ATACANDO);
-            Guerrero warrior = (Guerrero) myWarriorsQ.first();
-            enemyCastle.setHp(warrior.Espadazo(enemyCastle.getHp()));
-            isCastleAlive(enemyCastle);
+            if (myWarriorsQ.first().getClass() == Guerrero.class) {
+                Guerrero warrior = (Guerrero) myWarriorsQ.first();
+                warrior.setEstado(EstadoGuerrero.ATACANDO);
+                enemyCastle.setHp(warrior.Espadazo(enemyCastle.getHp()));
+                isCastleAlive(enemyCastle);
+            }else if (myWarriorsQ.first().getClass() == Arquero.class){
+                Arquero warrior = (Arquero) myWarriorsQ.first();
+                warrior.setEstado(EstadoGuerrero.ATACANDO);
+                enemyCastle.setHp(warrior.Flechazo(enemyCastle.getHp()));
+                isCastleAlive(enemyCastle);
+            }else if (myWarriorsQ.first().getClass() == minero.class){
+                minero warrior = (minero) myWarriorsQ.first();
+                warrior.setEstado(EstadoGuerrero.ATACANDO);
+                enemyCastle.setHp(warrior.picar(enemyCastle.getHp()));
+                timerToMine += Gdx.graphics.getDeltaTime();
+                if (timerToMine>= timeToMine){
+                    gold += 10;
+                    label3.setText(gold);
+                    timerToMine = 0;
+                }
+                isCastleAlive(enemyCastle);
+            }
+
         }else{
             myWarriorsQ.first().setEstado(EstadoGuerrero.CAMINANDO);
             myWarriorsQ.first().moverX(1);
