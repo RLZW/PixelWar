@@ -70,10 +70,10 @@ public class GameScreen implements Screen {
 
 
     private Texture actionbar;
-    private Texture warrior_button,miner_button, archer_button, monk_button, dragon_button, pause_button;
-    private TextureRegionDrawable trd_warrior_button,trd_miner_button, trd_archer_button, trd_monk_button, trd_dragon_button, trd_pause_button;
-    private Texture warrior_buttonp,miner_buttonp, archer_buttonp, monk_buttonp, dragon_buttonp, pause_buttonp;
-    private TextureRegionDrawable trd_warrior_buttonp,trd_miner_buttonp, trd_archer_buttonp, trd_monk_buttonp, trd_dragon_buttonp, trd_pause_buttonp;
+    private Texture warrior_button,miner_button, archer_button, monk_button, dragon_button, pause_button, continue_button, exit_button, restart_button;
+    private TextureRegionDrawable trd_warrior_button,trd_miner_button, trd_archer_button, trd_monk_button, trd_dragon_button, trd_pause_button,trd_continue_button, trd_exit_button, trd_restart_button;
+    private Texture warrior_buttonp,miner_buttonp, archer_buttonp, monk_buttonp, dragon_buttonp, pause_buttonp,continue_buttonp,exit_buttonp,restart_buttonp;
+    private TextureRegionDrawable trd_warrior_buttonp,trd_miner_buttonp, trd_archer_buttonp, trd_monk_buttonp, trd_dragon_buttonp, trd_pause_buttonp,trd_continue_buttonp,trd_exit_buttonp,trd_restart_buttonp;
 
     private ImageButton btnWarrior;
     private ImageButton btnMiner;
@@ -152,27 +152,59 @@ public class GameScreen implements Screen {
 
         //Faltan
         monk_button = new Texture("monk.png");
-        monk_button = new Texture("monk.png");
+        monk_buttonp = new Texture("monk.png");
 
         dragon_button = new Texture("dragon.png");
-        dragon_button = new Texture("dragon.png");
+        dragon_buttonp = new Texture("dragon.png");
 
         //Elements Buttons
         pause_button = new Texture("btnPause.png");
         pause_buttonp = new Texture("btnPause_Pressed.png");
+        restart_button = new Texture("pauseRestart.png");
+        restart_buttonp = new Texture("pauseRestart_Pressed.png");
+        exit_button = new Texture("pauseExit.png");
+        exit_buttonp = new Texture("pauseExit_Pressed.png");
+        continue_button = new Texture("pauseContinue.png");
+        continue_buttonp = new Texture("pauseContinue_Pressed.png");
 
+
+        //Units Regions
         trd_warrior_button = new TextureRegionDrawable(warrior_button);
-        trd_miner_button = new TextureRegionDrawable(miner_button);
-        trd_archer_button = new TextureRegionDrawable(archer_button);
-        trd_monk_button = new TextureRegionDrawable(monk_button);
-        trd_dragon_button = new TextureRegionDrawable(dragon_button);
-        trd_pause_button = new TextureRegionDrawable(pause_button);
+        trd_warrior_buttonp = new TextureRegionDrawable(warrior_buttonp);
 
-        btnWarrior = new ImageButton(trd_warrior_button);
-        btnMiner = new ImageButton(trd_miner_button);
-        btnArcher = new ImageButton(trd_archer_button);
-        btnMonk = new ImageButton(trd_monk_button);
-        btnDragon = new ImageButton(trd_dragon_button);
+        trd_miner_button = new TextureRegionDrawable(miner_button);
+        trd_miner_buttonp = new TextureRegionDrawable(miner_buttonp);
+
+        trd_archer_button = new TextureRegionDrawable(archer_button);
+        trd_archer_buttonp = new TextureRegionDrawable(archer_buttonp);
+
+        trd_monk_button = new TextureRegionDrawable(monk_button);
+        trd_monk_buttonp = new TextureRegionDrawable(monk_buttonp);
+
+        trd_dragon_button = new TextureRegionDrawable(dragon_button);
+        trd_dragon_buttonp = new TextureRegionDrawable(dragon_buttonp);
+
+        //Elements Regions
+        trd_pause_button = new TextureRegionDrawable(pause_button);
+        trd_pause_buttonp = new TextureRegionDrawable(pause_buttonp);
+
+        trd_restart_button = new TextureRegionDrawable(restart_button);
+        trd_restart_buttonp = new TextureRegionDrawable(restart_buttonp);
+
+        trd_exit_button = new TextureRegionDrawable(exit_button);
+        trd_exit_buttonp = new TextureRegionDrawable(exit_buttonp);
+
+        trd_continue_button = new TextureRegionDrawable(pause_button);
+        trd_continue_buttonp = new TextureRegionDrawable(pause_buttonp);
+
+
+        //ImageButtons
+        btnWarrior = new ImageButton(trd_warrior_button,trd_warrior_buttonp);
+        btnMiner = new ImageButton(trd_miner_button,trd_miner_buttonp);
+        btnArcher = new ImageButton(trd_archer_button,trd_archer_buttonp);
+        btnMonk = new ImageButton(trd_monk_button,trd_monk_buttonp);
+        btnDragon = new ImageButton(trd_dragon_button, trd_dragon_buttonp);
+
         stage.addActor(btnWarrior);
         stage.addActor(btnMiner);
         stage.addActor(btnArcher);
