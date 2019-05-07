@@ -70,8 +70,11 @@ public class GameScreen implements Screen {
 
 
     private Texture actionbar;
-    private Texture warrior_button,miner_button, archer_button, monk_button, dragon_button;
-    private TextureRegionDrawable trd_warrior_button,trd_miner_button, trd_archer_button, trd_monk_button, trd_dragon_button;
+    private Texture warrior_button,miner_button, archer_button, monk_button, dragon_button, pause_button;
+    private TextureRegionDrawable trd_warrior_button,trd_miner_button, trd_archer_button, trd_monk_button, trd_dragon_button, trd_pause_button;
+    private Texture warrior_buttonp,miner_buttonp, archer_buttonp, monk_buttonp, dragon_buttonp, pause_buttonp;
+    private TextureRegionDrawable trd_warrior_buttonp,trd_miner_buttonp, trd_archer_buttonp, trd_monk_buttonp, trd_dragon_buttonp, trd_pause_buttonp;
+
     private ImageButton btnWarrior;
     private ImageButton btnMiner;
     private ImageButton btnArcher;
@@ -137,20 +140,34 @@ public class GameScreen implements Screen {
         //Action Bar
         actionbar = new Texture("topBar.png");
 
+        //Units Buttons
         warrior_button = new Texture("btnSword.png");
+        warrior_buttonp = new Texture("btnSword_Pressed.png");
 
         miner_button = new Texture("btnDinero.png");
+        miner_buttonp = new Texture("btnDinero_Pressed.png");
+
         archer_button = new Texture("btnBow.png");
+        archer_buttonp = new Texture("BtnBow_Pressed.png");
 
         //Faltan
         monk_button = new Texture("monk.png");
+        monk_button = new Texture("monk.png");
+
         dragon_button = new Texture("dragon.png");
+        dragon_button = new Texture("dragon.png");
+
+        //Elements Buttons
+        pause_button = new Texture("btnPause.png");
+        pause_buttonp = new Texture("btnPause_Pressed.png");
 
         trd_warrior_button = new TextureRegionDrawable(warrior_button);
         trd_miner_button = new TextureRegionDrawable(miner_button);
         trd_archer_button = new TextureRegionDrawable(archer_button);
         trd_monk_button = new TextureRegionDrawable(monk_button);
         trd_dragon_button = new TextureRegionDrawable(dragon_button);
+        trd_pause_button = new TextureRegionDrawable(pause_button);
+
         btnWarrior = new ImageButton(trd_warrior_button);
         btnMiner = new ImageButton(trd_miner_button);
         btnArcher = new ImageButton(trd_archer_button);
