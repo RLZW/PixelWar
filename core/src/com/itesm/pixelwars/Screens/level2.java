@@ -103,6 +103,10 @@ public class level2 implements Screen {
     private float timeToMine = 0.5F;
     private int gold = 600;
 
+    //Win & Lose
+    private Texture youwin;
+    private Texture youlose;
+
 
     //Pause
     private boolean isPaused = false;
@@ -156,6 +160,11 @@ public class level2 implements Screen {
 
         //Pause
         pause_menu = new Texture("pause_bg.png");
+
+        //Win & Lose
+        youwin = new Texture("youWIN.png");
+        youlose = new Texture("youLOSE.png");
+
 
         //Action Bar
         actionbar = new Texture("topBar.png");
@@ -461,7 +470,7 @@ public class level2 implements Screen {
             if (!myCastle.isAlive()) {
                 labelStyle = new Label.LabelStyle();
                 bitmapFont = new BitmapFont(Gdx.files.internal("pixel.fnt"));
-                Texture youlose = new Texture("youLOSE.png");
+
                 game.batch.draw(youlose,(gamePort.getCamera().position.x)-youlose.getWidth()/2,(PixelWars.ALTO / 2)-youlose.getHeight()/2);
                 isFinish = true;
                 enemyWarriorsQ.clear();
@@ -482,7 +491,6 @@ public class level2 implements Screen {
                 labelStyle.font = bitmapFont;
                 labelStyle.fontColor = Color.GREEN;
                 isFinish = true;
-                Texture youwin = new Texture("youWIN.png");
                 game.batch.draw(youwin,(gamePort.getCamera().position.x)-youwin.getWidth()/2,(PixelWars.ALTO / 2)-youwin.getHeight()/2);
                 enemyWarriorsQ.clear();
                 myWarriorsQ.clear();
