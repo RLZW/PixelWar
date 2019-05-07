@@ -1,9 +1,13 @@
 package com.itesm.pixelwars.Scenes;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -18,6 +22,10 @@ public class SettingsHud implements Disposable {
     private Table table;
     private PixelWars game;
     private Viewport viewport;
+    private Label.LabelStyle labelStyle,slabelStyle;
+    private BitmapFont bitmapFont,sbitmapFont;
+    private Label label1;
+
 
 
     public SettingsHud(final PixelWars game){
@@ -25,6 +33,7 @@ public class SettingsHud implements Disposable {
         viewport = new StretchViewport(game.ANCHO,game.ALTO, game.gamecam);
         stage = new Stage(viewport,game.batch);
         table = new Table();
+
 
         //Buttons & Textures
         //Button 1 Player
@@ -78,6 +87,31 @@ public class SettingsHud implements Disposable {
         );
 
 
+        //List 2 Vol
+        btnVol.addListener(new ClickListener() {
+                               @Override
+                               public void clicked(InputEvent event, float x, float y) {
+                                   super.clicked(event, x, y);
+                                   //Responder al evento del boton
+                                    game.startMusic();
+
+
+                               }
+                           }
+        );
+
+        //List 3 Vol off
+        btnVolOff.addListener(new ClickListener() {
+                                @Override
+                                public void clicked(InputEvent event, float x, float y) {
+                                    super.clicked(event, x, y);
+                                    //Responder al evento del boton
+                                    game.pauseMusic();
+
+
+                                }
+                            }
+        );
 
         //Layout
 
