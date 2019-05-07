@@ -559,7 +559,7 @@ public class level3 implements Screen {
                                     public void clicked(InputEvent event, float x, float y) {
                                         Gdx.gl.glClearColor(1, 1, 1, 1);
                                         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-                                        game.setScreen(new MenuScreen(game));
+                                        game.setScreen(new LoadingScreen(game));
                                     }
                                 }
             );
