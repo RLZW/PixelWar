@@ -21,6 +21,7 @@ import com.itesm.pixelwars.PixelWars;
 import com.itesm.pixelwars.Screens.AboutScreen;
 import com.itesm.pixelwars.Screens.GameScreen;
 import com.itesm.pixelwars.Screens.LoadingScreen;
+import com.itesm.pixelwars.Screens.MapScreen;
 import com.itesm.pixelwars.Screens.MenuScreen;
 import com.itesm.pixelwars.Screens.SettingsScreen;
 import com.itesm.pixelwars.Sprites.Actors.TitleActor;
@@ -101,7 +102,7 @@ public class MenuHud implements Disposable {
                                 public void clicked(InputEvent event, float x, float y) {
                                     super.clicked(event, x, y);
                                     //Responder al evento del boton
-                                    game.setScreen(new GameScreen(game));
+                                    game.setScreen(new MapScreen(game));
 
                                 }
                             }

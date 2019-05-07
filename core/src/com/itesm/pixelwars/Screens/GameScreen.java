@@ -23,6 +23,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.itesm.pixelwars.PixelWars;
 import com.itesm.pixelwars.Sprites.Actors.CastleActor;
+import com.itesm.pixelwars.Sprites.Actors.TitleActor;
 import com.itesm.pixelwars.Sprites.Animations.Arquero;
 import com.itesm.pixelwars.Sprites.Animations.Cura;
 import com.itesm.pixelwars.Sprites.Animations.Guerrero;
@@ -99,7 +100,7 @@ public class GameScreen implements Screen {
     private int unidades;
     private float timerToMine = 0;
     private float timeToMine = 0.5F;
-    private int gold = 200;
+    private int gold = 600;
 
 
     //Pause
@@ -163,11 +164,11 @@ public class GameScreen implements Screen {
         archer_buttonp = new Texture("BtnBow_Pressed.png");
 
         //Faltan
-        monk_button = new Texture("monk.png");
-        monk_buttonp = new Texture("monk.png");
+        monk_button = new Texture("btnMage.png");
+        monk_buttonp = new Texture("btnMage_Pressed.png");
 
-        dragon_button = new Texture("dragon.png");
-        dragon_buttonp = new Texture("dragon.png");
+        dragon_button = new Texture("btnDragon.png");
+        dragon_buttonp = new Texture("btnDragon_Pressed.png");
 
         //Elements Buttons
         pause_button = new Texture("btnPause.png");
@@ -402,7 +403,6 @@ public class GameScreen implements Screen {
 
         if(!isPaused) {
 
-            System.out.println(gamePort.getCamera().position.x);
             timer += delta;
             if (timer >= seconds) {
                 timer = 0;
@@ -453,14 +453,9 @@ public class GameScreen implements Screen {
             if (!myCastle.isAlive()) {
                 labelStyle = new Label.LabelStyle();
                 bitmapFont = new BitmapFont(Gdx.files.internal("pixel.fnt"));
-                labelStyle.font = bitmapFont;
-                labelStyle.fontColor = Color.RED;
-                label7 = new Label("YOU LOOSE!", labelStyle);
+                Texture youlose = new Texture("youLOSE.png");
+                game.batch.draw(youlose,(gamePort.getCamera().position.x)-youlose.getWidth()/2,(PixelWars.ALTO / 2)-youlose.getHeight()/2);
                 isFinish = true;
-                label7.setSize(PixelWars.ANCHO / 2, row_height);
-                label7.setPosition(gamePort.getCamera().position.x - label7.getWidth() / 2, PixelWars.ALTO / 2);
-                label7.setAlignment(Align.center);
-                stage.addActor(label7);
                 enemyWarriorsQ.clear();
                 myWarriorsQ.clear();
                 stage.addListener(new ClickListener() {
@@ -478,13 +473,9 @@ public class GameScreen implements Screen {
                 bitmapFont = new BitmapFont(Gdx.files.internal("pixel.fnt"));
                 labelStyle.font = bitmapFont;
                 labelStyle.fontColor = Color.GREEN;
-
                 isFinish = true;
-                label6 = new Label("YOU WIN!", labelStyle);
-                label6.setSize(PixelWars.ANCHO / 2 - label6.getWidth(), row_height);
-                label6.setPosition(gamePort.getCamera().position.x - label6.getWidth(), PixelWars.ALTO / 2);
-                label6.setAlignment(Align.center);
-                stage.addActor(label6);
+                Texture youwin = new Texture("youWIN.png");
+                game.batch.draw(youwin,(gamePort.getCamera().position.x)-youwin.getWidth()/2,(PixelWars.ALTO / 2)-youwin.getHeight()/2);
                 enemyWarriorsQ.clear();
                 myWarriorsQ.clear();
                 stage.addListener(new ClickListener() {
@@ -545,6 +536,27 @@ public class GameScreen implements Screen {
 
                                      }
                                  }
+            );
+            btnRestart.addListener(new ClickListener() {
+                                        @Override
+                                        public void clicked(InputEvent event, float x, float y) {
+                                            Gdx.gl.glClearColor(1, 1, 1, 1);
+                                            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+                                            game.setScreen(new GameScreen(game));
+                                            }
+
+                                        }
+
+            );
+
+            btnExit.addListener(new ClickListener() {
+                                        @Override
+                                        public void clicked(InputEvent event, float x, float y) {
+                                            Gdx.gl.glClearColor(1, 1, 1, 1);
+                                            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+                                            game.setScreen(new MenuScreen(game));
+                                        }
+                                    }
             );
             game.batch.end();
             stage.draw();
