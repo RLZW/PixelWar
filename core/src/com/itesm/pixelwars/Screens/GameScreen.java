@@ -26,6 +26,7 @@ import com.itesm.pixelwars.Sprites.Actors.CastleActor;
 import com.itesm.pixelwars.Sprites.Actors.TitleActor;
 import com.itesm.pixelwars.Sprites.Animations.Arquero;
 import com.itesm.pixelwars.Sprites.Animations.Cura;
+import com.itesm.pixelwars.Sprites.Animations.EstadoTorre;
 import com.itesm.pixelwars.Sprites.Animations.Guerrero;
 import com.itesm.pixelwars.Sprites.Animations.TowerAnimation;
 import com.itesm.pixelwars.Sprites.Animations.AnimacionGuerrero;
@@ -105,6 +106,8 @@ public class GameScreen implements Screen {
 
     //Pause
     private boolean isPaused = false;
+    private TowerAnimation myCastleAnimation;
+    private TowerAnimation enemyCastleAnimation;
 
     public GameScreen(PixelWars game){
         this.game = game;
@@ -388,8 +391,9 @@ public class GameScreen implements Screen {
 
 
         //Towers
-        createCastle(10,bgrass.getHeight()/4);
+        createCastle(10, bgrass.getHeight() / 4);
         createEnemyCastle(PixelWars.ANCHO*1.66F,bgrass.getHeight()/4);
+
 
 
 
@@ -595,6 +599,19 @@ public class GameScreen implements Screen {
             enemyWarriorsQ.first().setEstado(EstadoGuerrero.CAMINANDO);
             enemyWarriorsQ.first().moverX(-1);
         }
+        if(myCastle.getHp()>350){
+            animatedCastle.setEstado(EstadoTorre.SINDAÑO);
+        }else {
+            if(myCastle.getHp()<=350 && myCastle.getHp()>225){
+                animatedCastle.setEstado(EstadoTorre.DAÑO1);
+            }else{
+                if(myCastle.getHp()<=225 && myCastle.getHp()>100){
+                    animatedCastle.setEstado(EstadoTorre.DAÑO2);
+                }else {
+                    animatedCastle.setEstado(EstadoTorre.DAÑO3);
+                }
+            }
+        }
     }
     private void ColisionConEnemigo(AnimacionGuerrero first) {
         if (!enemyWarriorsQ.isEmpty()){
@@ -691,6 +708,20 @@ public class GameScreen implements Screen {
         }else{
             myWarriorsQ.first().setEstado(EstadoGuerrero.CAMINANDO);
             myWarriorsQ.first().moverX(1);
+        }
+
+        if(enemyCastle.getHp()>350){
+            animatedEnemyCastle.setEstado(EstadoTorre.SINDAÑO);
+        }else {
+            if(enemyCastle.getHp()<=350 && enemyCastle.getHp()>225){
+                animatedEnemyCastle.setEstado(EstadoTorre.DAÑO1);
+            }else{
+                if(enemyCastle.getHp()<=225 && enemyCastle.getHp()>100){
+                    animatedEnemyCastle.setEstado(EstadoTorre.DAÑO2);
+                }else {
+                    animatedEnemyCastle.setEstado(EstadoTorre.DAÑO3);
+                }
+            }
         }
     }
 
@@ -820,61 +851,7 @@ public class GameScreen implements Screen {
         bclouds.dispose();
 
     }
-    /**
 
-    private class ProcesadorEntrada implements InputProcessor{
-         int unidades = 0;
-
-        @Override
-        public boolean keyDown(int keycode) {
-            if (keycode == Input.Keys.SPACE){
-                AnimacionGuerrero warrior = new AnimacionGuerrero(myCastle.getX()+myCastle.getWidth(), animatedCastle.getY(), "aliado");
-                arrWarriors.add(warrior);
-                unidades += 1;
-            }
-            else if (keycode == Input.Keys.E){
-                AnimacionGuerrero warrior = new AnimacionGuerrero(PixelWars.ANCHO*1.66F, enemyCastle.getY(), "enemigo");
-                arrEnemyWarriors.add(warrior);
-            }
-            return true;
-        }
-
-        @Override
-        public boolean keyUp(int keycode) {
-            return false;
-        }
-
-        @Override
-        public boolean keyTyped(char character) {
-            return false;
-        }
-
-        @Override
-        public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-            return false;
-        }
-
-        @Override
-        public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-            return false;
-        }
-
-        @Override
-        public boolean touchDragged(int screenX, int screenY, int pointer) {
-            return false;
-        }
-
-        @Override
-        public boolean mouseMoved(int screenX, int screenY) {
-            return false;
-        }
-
-        @Override
-        public boolean scrolled(int amount) {
-            return false;
-        }
-    }
-        **/
 
 }
 

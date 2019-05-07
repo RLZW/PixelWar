@@ -90,6 +90,10 @@ public class TowerAnimation {
     }
 
 
+    public void setEstado(EstadoTorre estadoTorre) {
+        this.estadoTorre = estadoTorre;
+    }
+
     public float getX() {
         return sprite.getX();
     }
