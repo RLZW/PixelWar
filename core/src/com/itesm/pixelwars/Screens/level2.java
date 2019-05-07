@@ -258,7 +258,7 @@ public class level2 implements Screen {
                                  @Override
                                  public void clicked(InputEvent event, float x, float y) {
                                      if (gold>= 50 && unidades<20){
-                                         minero miner = new minero(myCastle.getX()+myCastle.getWidth(), animatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("guerreroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44,29, 44, 59, 42, 50, 10);
+                                         minero miner = new minero(myCastle.getX()+myCastle.getWidth(), animatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("guerreroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44,29, 44, 59, 42, 25, 10, true, 'g');
                                          myWarriorsQ.addLast(miner);
                                          unidades+=1;
                                          gold-=50;
@@ -273,7 +273,7 @@ public class level2 implements Screen {
                                    @Override
                                    public void clicked(InputEvent event, float x, float y) {
                                        if (gold>=100 && unidades < 20){
-                                           Guerrero warrior = new Guerrero(myCastle.getX()+myCastle.getWidth(), animatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("guerreroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44,29, 44, 59, 42, 100, 20);
+                                           Guerrero warrior = new Guerrero(myCastle.getX()+myCastle.getWidth(), animatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("guerreroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44,29, 44, 59, 42, 100, 20, true, 'g');
                                            myWarriorsQ.addLast(warrior);
                                            unidades +=1;
                                            gold-=100;
@@ -290,7 +290,7 @@ public class level2 implements Screen {
                                   @Override
                                   public void clicked(InputEvent event, float x, float y) {
                                       if (gold>=100 && unidades < 20){
-                                          Arquero warrior = new Arquero(myCastle.getX()+myCastle.getWidth(), animatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("arqueroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44, 36,37,59, 42, 100, 10);
+                                          Arquero warrior = new Arquero(myCastle.getX()+myCastle.getWidth(), animatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("arqueroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44, 36,37,59, 42, 100, 10, true, 'a');
                                           myWarriorsQ.addLast(warrior);
                                           unidades +=1;
                                           gold-=100;
@@ -307,7 +307,7 @@ public class level2 implements Screen {
                                 @Override
                                 public void clicked(InputEvent event, float x, float y) {
                                     if (gold>=500 && unidades <20){
-                                        Cura monk = new Cura(myCastle.getX()+myCastle.getWidth(), animatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("arqueroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44, 36,37,59, 42, 50, 20);
+                                        Cura monk = new Cura(myCastle.getX()+myCastle.getWidth(), animatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("arqueroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44, 36,37,59, 42, 50, 20, true, 'm');
                                         myWarriorsQ.addLast(monk);
                                         unidades +=1;
                                         gold-=500;
@@ -322,7 +322,7 @@ public class level2 implements Screen {
                                   @Override
                                   public void clicked(InputEvent event, float x, float y) {
                                       if (gold>=1500 && unidades < 20){
-                                          Guerrero warrior = new Guerrero(myCastle.getX()+myCastle.getWidth(), animatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("guerreroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44,29, 44, 59, 42, 150, 30);
+                                          Guerrero warrior = new Guerrero(myCastle.getX()+myCastle.getWidth(), animatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("guerreroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44,29, 44, 59, 42, 150, 30 ,true, 'd');
                                           myWarriorsQ.addLast(warrior);
                                           unidades +=1;
                                           gold-=1500;
@@ -356,6 +356,7 @@ public class level2 implements Screen {
                                  }
                              }
         );
+
 
         slabelStyle = new Label.LabelStyle();
         mlabelStyle = new Label.LabelStyle();
@@ -413,7 +414,7 @@ public class level2 implements Screen {
             timer += delta;
             if (timer >= seconds) {
                 timer = 0;
-                Guerrero warrior = new Guerrero(PixelWars.ANCHO * 1.66F, enemyCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("guerreroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44, 29, 44, 59, 42, 100, 10);
+                Guerrero warrior = new Guerrero(PixelWars.ANCHO * 1.66F, enemyCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("guerreroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44, 29, 44, 59, 42, 100, 10, false, 'g');
 
                 enemyWarriorsQ.addLast(warrior);
             }
