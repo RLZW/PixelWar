@@ -590,6 +590,19 @@ public class level2 implements Screen {
             enemyWarriorsQ.first().setEstado(EstadoGuerrero.CAMINANDO);
             enemyWarriorsQ.first().moverX(-1);
         }
+        if(myCastle.getHp()>350){
+            animatedCastle.setEstado(EstadoTorre.SINDAÑO);
+        }else {
+            if(myCastle.getHp()<=350 && myCastle.getHp()>225){
+                animatedCastle.setEstado(EstadoTorre.DAÑO1);
+            }else{
+                if(myCastle.getHp()<=225 && myCastle.getHp()>100){
+                    animatedCastle.setEstado(EstadoTorre.DAÑO2);
+                }else {
+                    animatedCastle.setEstado(EstadoTorre.DAÑO3);
+                }
+            }
+        }
     }
     private void ColisionConEnemigo(AnimacionGuerrero first) {
         if (!enemyWarriorsQ.isEmpty()){
