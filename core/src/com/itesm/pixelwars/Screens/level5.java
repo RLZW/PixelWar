@@ -814,7 +814,6 @@ public class level5 implements Screen {
                 xBar -= aument;
                 label2.setPosition(label2.getX()-aument,PixelWars.ALTO-row_height*1-4);
                 label3.setPosition(label3.getX()-aument,PixelWars.ALTO-row_height*1-4);
-                label3.setText(gold);
                 label2.setText(unidades+"/20");
                 btnWarrior.setPosition(xWarr-=aument,PixelWars.ALTO-btnWarrior.getHeight()-1);
                 btnMiner.setPosition(xMiner-=aument,PixelWars.ALTO-btnMiner.getHeight()-1);
