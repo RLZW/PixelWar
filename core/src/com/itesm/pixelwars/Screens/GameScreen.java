@@ -94,7 +94,7 @@ public class GameScreen implements Screen {
 
     private Texture textCastle, textEnemyCastle;
     private Texture skytext,bgrass,bmountains,bclouds;
-
+    private Texture pause_menu;
     //Stadistics
     private int unidades;
     private float timerToMine = 0;
@@ -146,6 +146,9 @@ public class GameScreen implements Screen {
         bmountains = new Texture("bMtns.png");
         bclouds.setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
 
+        //Pause
+        pause_menu = new Texture("pause_bg.png");
+
         //Action Bar
         actionbar = new Texture("topBar.png");
 
@@ -177,6 +180,8 @@ public class GameScreen implements Screen {
         continue_buttonp = new Texture("pauseContinue_Pressed.png");
 
 
+
+
         //Units Regions
         trd_warrior_button = new TextureRegionDrawable(warrior_button);
         trd_warrior_buttonp = new TextureRegionDrawable(warrior_buttonp);
@@ -203,8 +208,8 @@ public class GameScreen implements Screen {
         trd_exit_button = new TextureRegionDrawable(exit_button);
         trd_exit_buttonp = new TextureRegionDrawable(exit_buttonp);
 
-        trd_continue_button = new TextureRegionDrawable(pause_button);
-        trd_continue_buttonp = new TextureRegionDrawable(pause_buttonp);
+        trd_continue_button = new TextureRegionDrawable(continue_button);
+        trd_continue_buttonp = new TextureRegionDrawable(continue_buttonp);
 
 
         //ImageButtons Units
@@ -230,11 +235,6 @@ public class GameScreen implements Screen {
         //Stage Add Elements buttons
         stage.addActor(btnPause);
 
-
-        /**
-        stage.addActor(btnContinue);
-        stage.addActor(btnRestart);
-        stage.addActor(btnExit);**/
 
         //Units Buttons Position
         btnWarrior.setPosition(xWarr,PixelWars.ALTO-btnWarrior.getHeight()-1);
@@ -326,6 +326,29 @@ public class GameScreen implements Screen {
                                    }
                                }
         );
+        btnPause.addListener(new ClickListener() {
+                                 @Override
+                                 public void clicked(InputEvent event, float x, float y) {
+                                     Gdx.gl.glClearColor(1, 1, 1, 1);
+                                     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+                                     if(!isPaused){
+                                         isPaused = true;
+                                         btnPause.remove();
+                                         btnWarrior.remove();
+                                         btnArcher.remove();
+                                         btnDragon.remove();
+                                         btnMiner.remove();
+                                         btnMonk.remove();
+                                         label1.remove();
+                                         label2.remove();
+                                         label3.remove();
+
+                                     }
+
+                                 }
+                             }
+        );
+
         slabelStyle = new Label.LabelStyle();
         mlabelStyle = new Label.LabelStyle();
         sbitmapFont = new BitmapFont(Gdx.files.internal("spixel.fnt"));
@@ -379,6 +402,7 @@ public class GameScreen implements Screen {
 
         if(!isPaused) {
 
+            System.out.println(gamePort.getCamera().position.x);
             timer += delta;
             if (timer >= seconds) {
                 timer = 0;
@@ -480,6 +504,51 @@ public class GameScreen implements Screen {
 
             update(delta);
             gamePort.getCamera().update();
+
+        }
+        else{
+
+            Gdx.gl.glClearColor(1, 1, 1, 1);
+            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+            game.batch.begin();
+            game.batch.draw(pause_menu,gamePort.getCamera().position.x-pause_menu.getWidth()/2,0);
+            stage.addActor(btnContinue);
+            stage.addActor(btnRestart);
+            stage.addActor(btnExit);
+
+            btnContinue.setPosition(gamePort.getCamera().position.x-btnContinue.getWidth()/2,PixelWars.ALTO/2+btnContinue.getHeight()/2);
+            btnRestart.setPosition(gamePort.getCamera().position.x-btnRestart.getWidth()/2,PixelWars.ALTO/2-btnContinue.getHeight()/2);
+            btnExit.setPosition(gamePort.getCamera().position.x-btnExit.getWidth()/2,PixelWars.ALTO/2-btnContinue.getHeight()*1.5f);
+            btnContinue.addListener(new ClickListener() {
+                                     @Override
+                                     public void clicked(InputEvent event, float x, float y) {
+                                         Gdx.gl.glClearColor(1, 1, 1, 1);
+                                         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+                                         if(isPaused){
+                                             btnContinue.remove();
+                                             btnExit.remove();
+                                             btnRestart.remove();
+                                             stage.addActor(btnPause);
+                                             stage.addActor(btnWarrior);
+                                             stage.addActor(btnArcher);
+                                             stage.addActor(btnDragon);
+                                             stage.addActor(btnMiner);
+                                             stage.addActor(btnMonk);
+                                             stage.addActor(label1);
+                                             stage.addActor(label2);
+                                             stage.addActor(label3);
+
+                                             isPaused = false;
+                                             System.out.println(isPaused);
+                                         }
+
+                                     }
+                                 }
+            );
+            game.batch.end();
+            stage.draw();
+            stage.act();
 
         }
     }
@@ -654,7 +723,9 @@ public class GameScreen implements Screen {
     }
 
     public void update(float deltaTime) {
-        handleIsTouched(deltaTime);
+        if(!isPaused){
+            handleIsTouched(deltaTime);
+        }
     }
 
 
