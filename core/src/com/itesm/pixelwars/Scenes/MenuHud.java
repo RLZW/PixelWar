@@ -1,6 +1,7 @@
 package com.itesm.pixelwars.Scenes;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -102,6 +103,8 @@ public class MenuHud implements Disposable {
                                 public void clicked(InputEvent event, float x, float y) {
                                     super.clicked(event, x, y);
                                     //Responder al evento del boton
+                                    Sound sound =  Gdx.audio.newSound(Gdx.files.internal("start.wav"));
+                                    sound.play(1.0f);
                                     game.setScreen(new MapScreen(game));
 
                                 }
