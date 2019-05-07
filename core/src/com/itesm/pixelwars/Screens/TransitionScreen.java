@@ -36,16 +36,13 @@ public class TransitionScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         logoTexture = new Texture(Gdx.files.internal("fobutec.png"));
-
-
         Image logo = new Image(logoTexture);
-
 
         stage.addActor(logo);
 
         logo.getColor().a = 0f;
-        
-        logo.addAction(sequence(delay(4), fadeIn(2),delay(2), fadeOut(2), run(new Runnable() {
+
+        logo.addAction(sequence(delay(0.2f), fadeIn(2),delay(2), fadeOut(1), run(new Runnable() {
             @Override
             public void run() {
                 game.setScreen(new MenuScreen(game));
@@ -63,7 +60,6 @@ public class TransitionScreen implements Screen {
 
         stage.act(delta);
         stage.draw();
-
     }
 
     @Override
@@ -91,7 +87,6 @@ public class TransitionScreen implements Screen {
     @Override
     public void dispose() {
         logoTexture.dispose();
-        backgroundTexture.dispose();
         stage.dispose();
 
     }
