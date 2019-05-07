@@ -100,6 +100,8 @@ public class level4 implements Screen {
 
     //Pause
     private boolean isPaused = false;
+    private Texture youwin;
+    private Texture youlose;
 
     public level4(PixelWars game){
         this.game = game;
@@ -181,6 +183,9 @@ public class level4 implements Screen {
         continue_button = new Texture("pauseContinue.png");
         continue_buttonp = new Texture("pauseContinue_Pressed.png");
 
+        //Win & Lose
+        youwin = new Texture("youWIN.png");
+        youlose = new Texture("youLOSE.png");
 
 
 
@@ -454,7 +459,6 @@ public class level4 implements Screen {
             if (!myCastle.isAlive()) {
                 labelStyle = new Label.LabelStyle();
                 bitmapFont = new BitmapFont(Gdx.files.internal("pixel.fnt"));
-                Texture youlose = new Texture("youLOSE.png");
                 game.batch.draw(youlose,(gamePort.getCamera().position.x)-youlose.getWidth()/2,(PixelWars.ALTO / 2)-youlose.getHeight()/2);
                 isFinish = true;
                 enemyWarriorsQ.clear();
@@ -475,7 +479,6 @@ public class level4 implements Screen {
                 labelStyle.font = bitmapFont;
                 labelStyle.fontColor = Color.GREEN;
                 isFinish = true;
-                Texture youwin = new Texture("youWIN.png");
                 game.batch.draw(youwin,(gamePort.getCamera().position.x)-youwin.getWidth()/2,(PixelWars.ALTO / 2)-youwin.getHeight()/2);
                 enemyWarriorsQ.clear();
                 myWarriorsQ.clear();

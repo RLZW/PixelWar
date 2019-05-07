@@ -64,6 +64,9 @@ public class GameScreen implements Screen {
     private float xDragon = 115;
     private float xPause = 300;
 
+    //Win & Lose
+    private Texture youwin;
+    private Texture youlose;
 
 
     private BitmapFont bitmapFont,sbitmapFont;
@@ -189,8 +192,9 @@ public class GameScreen implements Screen {
         continue_button = new Texture("pauseContinue.png");
         continue_buttonp = new Texture("pauseContinue_Pressed.png");
 
-
-
+        //Win & Lose
+        youwin = new Texture("youWIN.png");
+        youlose = new Texture("youLOSE.png");
 
         //Units Regions
         trd_warrior_button = new TextureRegionDrawable(warrior_button);

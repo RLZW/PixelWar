@@ -2,6 +2,8 @@ package com.itesm.pixelwars;
 
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.itesm.pixelwars.Screens.GameScreen;
@@ -23,6 +25,17 @@ public class PixelWars extends Game {
 	//Sound
 	public static final boolean SOUND = true;
 
+	// Music
+	private Music musicBack;
+
+	// Hay un SOLO assetManager para el juego
+	private final AssetManager assetManager;
+
+	public PixelWars(){
+		assetManager = new AssetManager();
+	}
+
+
 
 	@Override
 	public void create () {
@@ -30,6 +43,25 @@ public class PixelWars extends Game {
 		gamecam = new OrthographicCamera(ANCHO,ALTO);
 		gamecam.position.set(ANCHO/2,ALTO/2,0);
 		setScreen(new TransitionScreen(this));
+		loadMusic();
+		startMusic();
+	}
+
+	// MUSICA
+	public void loadMusic() {
+		AssetManager manager = new AssetManager();
+		manager.load("medieval_back.mp3", Music.class);
+		manager.finishLoading();    // síncrono
+		musicBack = manager.get("medieval_back.mp3");
+
+	}
+
+	public void startMusic(){
+		musicBack.play();
+	}
+
+	public void pauseMusic(){
+		musicBack.stop();
 	}
 
 	@Override

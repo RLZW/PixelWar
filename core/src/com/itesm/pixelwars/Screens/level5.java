@@ -100,6 +100,8 @@ public class level5 implements Screen {
 
     //Pause
     private boolean isPaused = false;
+    private Texture youlose;
+    private Texture youwin;
 
     public level5(PixelWars game){
         this.game = game;
@@ -182,6 +184,9 @@ public class level5 implements Screen {
         continue_buttonp = new Texture("pauseContinue_Pressed.png");
 
 
+        //Win & Lose
+        youwin = new Texture("youWIN.png");
+        youlose = new Texture("youLOSE.png");
 
 
         //Units Regions
@@ -454,7 +459,6 @@ public class level5 implements Screen {
             if (!myCastle.isAlive()) {
                 labelStyle = new Label.LabelStyle();
                 bitmapFont = new BitmapFont(Gdx.files.internal("pixel.fnt"));
-                Texture youlose = new Texture("youLOSE.png");
                 game.batch.draw(youlose,(gamePort.getCamera().position.x)-youlose.getWidth()/2,(PixelWars.ALTO / 2)-youlose.getHeight()/2);
                 isFinish = true;
                 enemyWarriorsQ.clear();
@@ -475,7 +479,6 @@ public class level5 implements Screen {
                 labelStyle.font = bitmapFont;
                 labelStyle.fontColor = Color.GREEN;
                 isFinish = true;
-                Texture youwin = new Texture("youWIN.png");
                 game.batch.draw(youwin,(gamePort.getCamera().position.x)-youwin.getWidth()/2,(PixelWars.ALTO / 2)-youwin.getHeight()/2);
                 enemyWarriorsQ.clear();
                 myWarriorsQ.clear();
@@ -811,7 +814,6 @@ public class level5 implements Screen {
                 xBar -= aument;
                 label2.setPosition(label2.getX()-aument,PixelWars.ALTO-row_height*1-4);
                 label3.setPosition(label3.getX()-aument,PixelWars.ALTO-row_height*1-4);
-                label3.setText(gold);
                 label2.setText(unidades+"/20");
                 btnWarrior.setPosition(xWarr-=aument,PixelWars.ALTO-btnWarrior.getHeight()-1);
                 btnMiner.setPosition(xMiner-=aument,PixelWars.ALTO-btnMiner.getHeight()-1);
