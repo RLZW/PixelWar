@@ -82,6 +82,7 @@ public class MapScreen implements Screen {
 
     @Override
     public void hide() {
+        dispose();
 
     }
 

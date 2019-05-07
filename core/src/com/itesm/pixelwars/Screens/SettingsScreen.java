@@ -71,7 +71,7 @@ public class SettingsScreen implements Screen {
 
     @Override
     public void hide() {
-
+        dispose();
     }
 
     @Override
