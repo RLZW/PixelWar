@@ -2,8 +2,9 @@ package com.itesm.pixelwars.Sprites.Animations;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 
-public class Arquero extends Guerrero {
+public class Arquero extends AnimacionGuerrero {
     private int ataque;
     private static final float TIEMPO_BASE = 0.5f;
     private float tiempoAtaque = 0;

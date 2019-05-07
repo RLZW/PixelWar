@@ -7,6 +7,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.itesm.pixelwars.Screens.GameScreen;
 import com.itesm.pixelwars.Screens.MapScreen;
 import com.itesm.pixelwars.Screens.TransitionScreen;
+import com.itesm.pixelwars.Screens.level3;
+import com.itesm.pixelwars.Screens.level4;
+import com.itesm.pixelwars.Screens.level5;
 
 public class PixelWars extends Game {
 	public SpriteBatch batch;
