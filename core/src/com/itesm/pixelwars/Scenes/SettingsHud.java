@@ -39,6 +39,31 @@ public class SettingsHud implements Disposable {
         btnBack.setPosition(PixelWars.ANCHO-btnBack.getWidth()-1,PixelWars.ALTO-btnBack.getHeight()-1);
 
 
+        //Button Volume ON
+        Texture texturebtnVol = new Texture("btnSoundOn.png");
+        Texture texturebtnVolp = new Texture("btnSoundOn_Pressed.png");
+
+        TextureRegionDrawable trdVol = new TextureRegionDrawable(texturebtnVol);
+        TextureRegionDrawable trdVolp = new TextureRegionDrawable(texturebtnVolp);
+
+        ImageButton btnVol = new ImageButton(trdVol,trdVolp);
+        stage.addActor(btnVol);
+        btnVol.setPosition(PixelWars.ANCHO/2-20,PixelWars.ALTO/2);
+
+        //Button Volume OFF
+        Texture texturebtnVolOff = new Texture("btnSoundOff.png");
+        Texture texturebtnVolpOff = new Texture("btnSoundOff_Pressed.png");
+
+        TextureRegionDrawable trdVolOff = new TextureRegionDrawable(texturebtnVolOff);
+        TextureRegionDrawable trdVolpOff = new TextureRegionDrawable(texturebtnVolpOff);
+
+        ImageButton btnVolOff = new ImageButton(trdVolOff,trdVolpOff);
+        stage.addActor(btnVolOff);
+        btnVolOff.setPosition(PixelWars.ANCHO/2+20,PixelWars.ALTO/2);
+
+        
+
+
         //Listeneres
 
         //List 1 Player
