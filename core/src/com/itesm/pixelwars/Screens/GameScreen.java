@@ -135,12 +135,17 @@ public class GameScreen implements Screen {
         bclouds.setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
 
         //Action Bar
-        actionbar = new Texture("bar.png");
-        warrior_button = new Texture("sword.png");
-        miner_button = new Texture("money.png");
-        archer_button = new Texture("bow.png");
+        actionbar = new Texture("topBar.png");
+
+        warrior_button = new Texture("btnSword.png");
+
+        miner_button = new Texture("btnDinero.png");
+        archer_button = new Texture("btnBow.png");
+
+        //Faltan
         monk_button = new Texture("monk.png");
         dragon_button = new Texture("dragon.png");
+
         trd_warrior_button = new TextureRegionDrawable(warrior_button);
         trd_miner_button = new TextureRegionDrawable(miner_button);
         trd_archer_button = new TextureRegionDrawable(archer_button);
@@ -324,7 +329,7 @@ public class GameScreen implements Screen {
             animatedEnemyCastle.render(game.batch);
             enemyCastle.remove();
         }
-        game.batch.draw(actionbar,xBar,PixelWars.ALTO-actionbar.getHeight()+10);
+        game.batch.draw(actionbar,xBar,PixelWars.ALTO-actionbar.getHeight());
 
         if (!myWarriorsQ.isEmpty()) {
             for (AnimacionGuerrero warrior : myWarriorsQ) {
