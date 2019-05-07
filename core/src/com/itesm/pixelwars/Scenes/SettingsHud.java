@@ -87,7 +87,7 @@ public class SettingsHud implements Disposable {
         );
 
 
-        //List 2 Vol
+        //List 2 Back Music Vol
         btnVol.addListener(new ClickListener() {
                                @Override
                                public void clicked(InputEvent event, float x, float y) {
@@ -100,7 +100,7 @@ public class SettingsHud implements Disposable {
                            }
         );
 
-        //List 3 Vol off
+        //List 3 Back Music off
         btnVolOff.addListener(new ClickListener() {
                                 @Override
                                 public void clicked(InputEvent event, float x, float y) {
