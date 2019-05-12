@@ -479,7 +479,8 @@ public class level2 implements Screen {
                                       @Override
                                       public void clicked(InputEvent event, float x, float y) {
                                           super.clicked(event, x, y);
-                                          game.setScreen(new MenuScreen(game));
+                                          //game.setScreen(new MenuScreen(game));
+                                          game.setScreen(new LoadingScreen(game,Screens.MenuScreen));
                                       }
                                   }
                 );
@@ -498,7 +499,8 @@ public class level2 implements Screen {
                                       @Override
                                       public void clicked(InputEvent event, float x, float y) {
                                           super.clicked(event, x, y);
-                                          game.setScreen(new level3(game));
+                                          //game.setScreen(new level3(game));
+                                          game.setScreen(new LoadingScreen(game,Screens.level3));
                                       }
                                   }
                 );
@@ -558,7 +560,8 @@ public class level2 implements Screen {
                                        public void clicked(InputEvent event, float x, float y) {
                                            Gdx.gl.glClearColor(1, 1, 1, 1);
                                            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-                                           game.setScreen(new GameScreen(game));
+                                          // game.setScreen(new GameScreen(game));
+                                           game.setScreen(new LoadingScreen(game,Screens.GameScreen));
                                        }
 
                                    }
@@ -570,7 +573,8 @@ public class level2 implements Screen {
                                     public void clicked(InputEvent event, float x, float y) {
                                         Gdx.gl.glClearColor(1, 1, 1, 1);
                                         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-                                        game.setScreen(new LoadingScreen(game));
+                                       // game.setScreen(new LoadingScreen(game));
+                                        game.setScreen(new LoadingScreen(game,Screens.MenuScreen));
                                     }
                                 }
             );

@@ -64,10 +64,21 @@ public class PixelWars extends Game {
 		musicBack.stop();
 	}
 
+	// Para que las otras pantallas usen el assetManager
+	public AssetManager getAssetManager() {
+		return assetManager;
+	}
+
 	@Override
 	public void render () {
 		super.render();
 	}
-	
+
+	@Override
+	public void dispose() {
+		super.dispose();
+		assetManager.clear();
+	}
+
 
 }

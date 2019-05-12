@@ -4,6 +4,11 @@ public enum Screens {
     MenuScreen,
     AboutScreen,
     SettingsScreen,
-    GameScreen
+    GameScreen,
+    MapScreen,
+    level2,
+    level3,
+    level4,
+    level5
 }
-//Esto es un comentario
+

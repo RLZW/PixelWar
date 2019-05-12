@@ -15,7 +15,9 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.itesm.pixelwars.PixelWars;
+import com.itesm.pixelwars.Screens.LoadingScreen;
 import com.itesm.pixelwars.Screens.MenuScreen;
+import com.itesm.pixelwars.Screens.Screens;
 
 public class SettingsHud implements Disposable {
     public Stage stage;
@@ -81,7 +83,8 @@ public class SettingsHud implements Disposable {
                                 public void clicked(InputEvent event, float x, float y) {
                                     super.clicked(event, x, y);
                                     //Responder al evento del boton
-                                    game.setScreen(new MenuScreen(game));
+                                    //game.setScreen(new MenuScreen(game));
+                                    game.setScreen(new LoadingScreen(game,Screens.MenuScreen));
                                 }
                             }
         );

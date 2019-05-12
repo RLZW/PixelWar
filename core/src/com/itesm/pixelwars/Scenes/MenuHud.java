@@ -24,6 +24,7 @@ import com.itesm.pixelwars.Screens.GameScreen;
 import com.itesm.pixelwars.Screens.LoadingScreen;
 import com.itesm.pixelwars.Screens.MapScreen;
 import com.itesm.pixelwars.Screens.MenuScreen;
+import com.itesm.pixelwars.Screens.Screens;
 import com.itesm.pixelwars.Screens.SettingsScreen;
 import com.itesm.pixelwars.Sprites.Actors.TitleActor;
 import com.itesm.pixelwars.Sprites.Animations.TitleAnimation;
@@ -113,7 +114,8 @@ public class MenuHud implements Disposable {
                                     Sound sound =  Gdx.audio.newSound(Gdx.files.internal("start.wav"));
                                     sound.play(1.0f);
                                     //game.pauseMusic();
-                                    game.setScreen(new MapScreen(game));
+                                    //game.setScreen(new MapScreen(game));
+                                    game.setScreen(new LoadingScreen(game,Screens.MapScreen));
 
                                 }
                             }
@@ -125,7 +127,8 @@ public class MenuHud implements Disposable {
                                    public void clicked(InputEvent event, float x, float y) {
                                        super.clicked(event, x, y);
                                        //Responder al evento del boton
-                                       game.setScreen(new SettingsScreen(game));
+                                       //game.setScreen(new SettingsScreen(game));
+                                       game.setScreen(new LoadingScreen(game,Screens.SettingsScreen));
 
                                    }
                                }
@@ -138,8 +141,9 @@ public class MenuHud implements Disposable {
                                      public void clicked(InputEvent event, float x, float y) {
                                          super.clicked(event, x, y);
                                          //Responder al evento del boton
-
-                                         game.setScreen(new LoadingScreen(game));
+                                         //game.setScreen(new LoadingScreen(game));
+                                         // MANDA A MAP POR QUE NO ESTA IMPLEMENTADO AUN
+                                         game.setScreen(new LoadingScreen(game,Screens.MapScreen));
 
                                      }
                                  }
@@ -151,7 +155,8 @@ public class MenuHud implements Disposable {
                                     public void clicked(InputEvent event, float x, float y) {
                                         super.clicked(event, x, y);
                                         //Responder al evento del boton
-                                        game.setScreen(new AboutScreen(game));
+                                        //game.setScreen(new AboutScreen(game));
+                                        game.setScreen(new LoadingScreen(game,Screens.AboutScreen));
 
                                     }
                                 }
