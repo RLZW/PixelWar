@@ -43,22 +43,22 @@ public class AnimacionTorre {
         //Primer Daño
         TextureRegion regionDaño1 = new TextureRegion(torreDaño1);
         // Divide la región en frames de 32x64
-        texturaTorreDaño1 = region.split(69,124);
-        animacionDaño1 = new Animation(0.15f,texturaTorreDaño1[0][5],texturaTorreDaño1[0][4],texturaTorreDaño1[0][3],texturaTorreDaño1[0][2],texturaTorreDaño1[0][1],texturaTorreDaño1[0][0]);
+        texturaTorreDaño1 = regionDaño1.split(69,124);
+        animacionDaño1 = new Animation(0.15f,texturaTorreDaño1[0][5],texturaTorreDaño1[0][4],texturaTorreDaño1[0][3],texturaTorreDaño1[0][2],texturaTorreDaño1[0][1]);
         animacionDaño1.setPlayMode(Animation.PlayMode.LOOP);
 
         //Segundo Daño
         TextureRegion regionDaño2 = new TextureRegion(torreDaño2);
         // Divide la región en frames de 32x64
-        texturaTorreDaño2 = region.split(69,124);
-        animacionDaño2 = new Animation(0.4f,texturaTorreDaño2[0][1],texturaTorreDaño2[0][0]);
+        texturaTorreDaño2 = regionDaño2.split(69,124);
+        animacionDaño2 = new Animation(0f,texturaTorreDaño2[0][1]);
         animacionDaño2.setPlayMode(Animation.PlayMode.LOOP);
 
         //Segundo Tercer Daño
         TextureRegion regionDaño3 = new TextureRegion(torreDaño3);
         // Divide la región en frames de 32x64
-        texturaTorreDaño3 = region.split(69,124);
-        animacionDaño3 = new Animation(0.4f,texturaTorreDaño3[0][1],texturaTorreDaño3[0][0]);
+        texturaTorreDaño3 = regionDaño3.split(69,124);
+        animacionDaño3 = new Animation(0f,texturaTorreDaño3[0][1]);
         animacionDaño3.setPlayMode(Animation.PlayMode.LOOP);
 
 
@@ -74,7 +74,7 @@ public class AnimacionTorre {
 
     public void render(SpriteBatch batch){
         timerAnimacion += Gdx.graphics.getDeltaTime();
-        if(getHp()>350){
+        /**if(getHp()>350){
             sprite.setRegion(texturaTorreDaño1[0][0]);
             TextureRegion region = (TextureRegion) animacion.getKeyFrame(timerAnimacion);
             batch.draw(region, sprite.getX(), sprite.getY());
@@ -94,9 +94,9 @@ public class AnimacionTorre {
                     batch.draw(regionDaño3, sprite.getX(), sprite.getY());
                 }
             }
-        }
+        }**/
 
-        /**switch (estadoTorre){
+        switch (estadoTorre){
             case SINDAÑO:
                 sprite.setRegion(texturaTorre[0][0]);
                 TextureRegion region = (TextureRegion) animacion.getKeyFrame(timerAnimacion);
@@ -117,7 +117,7 @@ public class AnimacionTorre {
                 TextureRegion regionDaño3 = (TextureRegion) animacionDaño3.getKeyFrame(timerAnimacion);
                 batch.draw(regionDaño3, sprite.getX(), sprite.getY());
                 break;
-        }**/
+        }
     }
 
 
