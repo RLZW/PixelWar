@@ -38,8 +38,10 @@ public class level3 implements Screen {
     private Queue<AnimacionGuerrero> enemyWarriorsQ = new Queue<AnimacionGuerrero>();
     private float row_height;
     private float timer = 0f;
-    private float seconds = 5f;
+    private float seconds = 3f;
     private boolean isFinish = false;
+    //private int archers = 0;
+    private int warriors = 0;
 
 
 
@@ -402,10 +404,30 @@ public class level3 implements Screen {
             timer += delta;
             if (timer >= seconds) {
                 timer = 0;
-                Guerrero warrior = new Guerrero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("guerreroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44, 29, 44, 59, 42, 100, 10, false, 'g');
-
-                enemyWarriorsQ.addLast(warrior);
+                if (warriors == 1){
+                    minero miner = new minero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("mineroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44,29, 44, 59, 42, 25, 10, false , 'g');
+                    enemyWarriorsQ.addLast(miner);
+                    warriors += 1;
+                }else if (warriors == 2){
+                    Arquero archer = new Arquero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("arqueroRojoCaminando.png"), new Texture("arqueroRojoParado.png"), new Texture("arqueroRojoAtacando.png"), 29, 44, 37,43,43, 42, 100, 10, false, 'a');
+                    enemyWarriorsQ.addLast(archer);
+                    warriors = 0;
+                }else {
+                    Guerrero warrior = new Guerrero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("guerreroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44, 29, 44, 59, 42, 100, 10, false, 'g');
+                    enemyWarriorsQ.addLast(warrior);
+                    warriors += 1;
+                }
             }
+
+            /**if (warriors > 3 && archers <3){
+                Arquero archer = new Arquero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("arqueroAzulCaminando.png"), new Texture("arqueroAzulParado.png"), new Texture("arqueroAzulAtacando.png"), 29, 44, 37,43,43, 42, 100, 10, true, 'a');
+
+                enemyWarriorsQ.addLast(archer);
+                archers = +1;
+            }else{
+                archers = 0;
+                warriors = 0;
+            }**/
 
 
             Gdx.gl.glClearColor(1, 1, 1, 1);
@@ -574,12 +596,44 @@ public class level3 implements Screen {
         }
     }
 
+    private void EnemigosArquerosDisparando(AnimacionGuerrero warrior){
+        if (enemyWarriorsQ.indexOf(warrior, false)-enemyWarriorsQ.indexOf(enemyWarriorsQ.first(),false)<=3 && enemyWarriorsQ.first().getEstado() == EstadoGuerrero.ATACANDO && !myWarriorsQ.isEmpty()){
+            warrior.setEstado(EstadoGuerrero.ATACANDO);
+            Arquero archer = (Arquero) warrior;
+            myWarriorsQ.first().setHp(archer.Flechazo(myWarriorsQ.first().getHp()));
+        }else if (enemyWarriorsQ.indexOf(warrior, false)-enemyWarriorsQ.indexOf(enemyWarriorsQ.first(),false)<=3 && enemyWarriorsQ.first().getEstado() == EstadoGuerrero.ATACANDO && myWarriorsQ.isEmpty()){
+            warrior.setEstado(EstadoGuerrero.ATACANDO);
+            Arquero archer = (Arquero) warrior;
+            myAnimatedCastle.setHp(archer.Flechazo(myAnimatedCastle.getHp()));
+        }else{
+            warrior.setEstado(EstadoGuerrero.QUIETO);
+        }
+    }
+
     private void ColisionCastilloAliado(AnimacionTorre castle) {
         if (enemyWarriorsQ.first().getSprite().getBoundingRectangle().overlaps(castle.getSprite().getBoundingRectangle())){
-            enemyWarriorsQ.first().setEstado(EstadoGuerrero.ATACANDO);
-            Guerrero warrior = (Guerrero) enemyWarriorsQ.first();
-            myAnimatedCastle.setHp(warrior.Espadazo(myAnimatedCastle.getHp()));
-            isCastleAlive(myAnimatedCastle);
+            if (enemyWarriorsQ.first().getClass() == Guerrero.class) {
+                Guerrero warrior = (Guerrero) enemyWarriorsQ.first();
+                warrior.setEstado(EstadoGuerrero.ATACANDO);
+                myAnimatedCastle.setHp(warrior.Espadazo(myAnimatedCastle.getHp()));
+                isCastleAlive(myAnimatedCastle);
+            }else if (enemyWarriorsQ.first().getClass() == Arquero.class){
+                Arquero warrior = (Arquero) enemyWarriorsQ.first();
+                warrior.setEstado(EstadoGuerrero.ATACANDO);
+                myAnimatedCastle.setHp(warrior.Flechazo(myAnimatedCastle.getHp()));
+                isCastleAlive(myAnimatedCastle);
+            }else if (enemyWarriorsQ.first().getClass() == minero.class){
+                minero warrior = (minero) enemyWarriorsQ.first();
+                warrior.setEstado(EstadoGuerrero.ATACANDO);
+                myAnimatedCastle.setHp(warrior.picar(myAnimatedCastle.getHp()));
+                timerToMine += Gdx.graphics.getDeltaTime();
+                if (timerToMine>= timeToMine){
+                    gold -= 10;
+                    label3.setText(gold);
+                    timerToMine = 0;
+                }
+                isCastleAlive(myAnimatedCastle);
+            }
         }else{
             enemyWarriorsQ.first().setEstado(EstadoGuerrero.CAMINANDO);
             enemyWarriorsQ.first().moverX(-1);
@@ -646,16 +700,37 @@ public class level3 implements Screen {
     private void ColisionAliado(AnimacionGuerrero first) {
         if (!myWarriorsQ.isEmpty()){
             if (first.getSprite().getBoundingRectangle().overlaps(myWarriorsQ.first().getSprite().getBoundingRectangle())){
-                first.setEstado(EstadoGuerrero.ATACANDO);
-                Guerrero warrior = (Guerrero) first;
-                myWarriorsQ.first().setHp(warrior.Espadazo(myWarriorsQ.first().getHp()));
-                comprobarVivoAliado();
+                if (first.getClass() == Guerrero.class) {
+                    Guerrero warrior = (Guerrero) first;
+                    first.setEstado(EstadoGuerrero.ATACANDO);
+                    myWarriorsQ.first().setHp(warrior.Espadazo(myWarriorsQ.first().getHp()));
+                    comprobarVivoAliado();
+                }else if (first.getClass() == Arquero.class){
+                    Arquero warrior = (Arquero) first;
+                    first.setEstado(EstadoGuerrero.ATACANDO);
+                    myWarriorsQ.first().setHp(warrior.Flechazo(myWarriorsQ.first().getHp()));
+                    comprobarVivoAliado();
+                }else if (first.getClass() == minero.class){
+                    minero miner = (minero) first;
+                    first.setEstado(EstadoGuerrero.ATACANDO);
+                    timerToMine += Gdx.graphics.getDeltaTime();
+                    if (timerToMine>= timeToMine){
+                        gold += 10;
+                        label3.setText(gold);
+                        timerToMine = 0;
+                    }
+                    myWarriorsQ.first().setHp(miner.picar(myWarriorsQ.first().getHp()));
+                    comprobarVivoAliado();
+                }
             }else {
                 first.setEstado(EstadoGuerrero.CAMINANDO);
                 first.moverX(-1);
             }
+
+
         }else{
             ColisionCastilloAliado(myAnimatedCastle);
+
         }
 
     }
@@ -672,16 +747,23 @@ public class level3 implements Screen {
 
     private void formarEnemigos() {
         for (int i = 0; i < enemyWarriorsQ.size; i++){
-            AnimacionGuerrero enemy = enemyWarriorsQ.get(i);
-            if (!enemy.equals(enemyWarriorsQ.first())){
-                if (enemy.getSprite().getBoundingRectangle().overlaps(enemyWarriorsQ.get(i-1).getSprite().getBoundingRectangle())){
-                    enemy.setEstado(EstadoGuerrero.QUIETO);
+            AnimacionGuerrero warrior = enemyWarriorsQ.get(i);
+            if (!warrior.equals(enemyWarriorsQ.first())){
+                if (warrior.getSprite().getBoundingRectangle().overlaps(enemyWarriorsQ.get(i-1).getSprite().getBoundingRectangle())){
+                    if (warrior.getClass()==Arquero.class)
+                        EnemigosArquerosDisparando(warrior);
+                    else if(warrior.getClass() == Cura.class)
+                        enemigoCuracion(warrior);
+                    else {
+                        warrior.setEstado(EstadoGuerrero.QUIETO);
+                    }
                 }else{
-                    enemy.setEstado(EstadoGuerrero.CAMINANDO);
-                    enemy.moverX(-1);
+                    warrior.setEstado(EstadoGuerrero.CAMINANDO);
+                    warrior.moverX(-1);
                 }
             }
         }
+
     }
 
     private void ColisionCatilloEnemigo(AnimacionTorre castle) {
@@ -756,10 +838,21 @@ public class level3 implements Screen {
     }
 
     private void Curacion(AnimacionGuerrero warrior) {
-        if (myWarriorsQ.indexOf(warrior, false)-myWarriorsQ.indexOf(myWarriorsQ.first(),false)<=1 && myWarriorsQ.first().getEstado() == EstadoGuerrero.ATACANDO && !enemyWarriorsQ.isEmpty()){
+        if (myWarriorsQ.indexOf(warrior, false)-myWarriorsQ.indexOf(myWarriorsQ.first(),false)<4 && myWarriorsQ.first().getEstado() == EstadoGuerrero.ATACANDO && !enemyWarriorsQ.isEmpty()){
             warrior.setEstado(EstadoGuerrero.ATACANDO);
             Cura Monje = (Cura) warrior;
-            enemyWarriorsQ.first().setHp(Monje.Curacion(myWarriorsQ.first().getHp()));
+            myWarriorsQ.first().setHp(Monje.Curacion(myWarriorsQ.first().getHp()));
+        }else{
+            warrior.setEstado(EstadoGuerrero.QUIETO);
+        }
+    }
+
+    public void enemigoCuracion(AnimacionGuerrero warrior){
+        if (enemyWarriorsQ.indexOf(warrior, false)-enemyWarriorsQ.indexOf(enemyWarriorsQ.first(),false)<4 && enemyWarriorsQ.first().getEstado() == EstadoGuerrero.ATACANDO && !myWarriorsQ.isEmpty()){
+
+            warrior.setEstado(EstadoGuerrero.ATACANDO);
+            Cura Monje = (Cura) warrior;
+            enemyWarriorsQ.first().setHp(Monje.Curacion(enemyWarriorsQ.first().getHp()));
         }else{
             warrior.setEstado(EstadoGuerrero.QUIETO);
         }
@@ -805,7 +898,6 @@ public class level3 implements Screen {
                 xBar -= aument;
                 label2.setPosition(label2.getX()-aument,PixelWars.ALTO-row_height*1-4);
                 label3.setPosition(label3.getX()-aument,PixelWars.ALTO-row_height*1-4);
-                label3.setText(gold);
                 label2.setText(unidades+"/20");
                 btnWarrior.setPosition(xWarr-=aument,PixelWars.ALTO-btnWarrior.getHeight()-1);
                 btnMiner.setPosition(xMiner-=aument,PixelWars.ALTO-btnMiner.getHeight()-1);

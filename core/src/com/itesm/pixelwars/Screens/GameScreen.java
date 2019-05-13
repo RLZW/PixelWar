@@ -574,12 +574,44 @@ public class GameScreen implements Screen {
         }
     }
 
+    private void EnemigosArquerosDisparando(AnimacionGuerrero warrior){
+        if (enemyWarriorsQ.indexOf(warrior, false)-enemyWarriorsQ.indexOf(enemyWarriorsQ.first(),false)<=3 && enemyWarriorsQ.first().getEstado() == EstadoGuerrero.ATACANDO && !myWarriorsQ.isEmpty()){
+            warrior.setEstado(EstadoGuerrero.ATACANDO);
+            Arquero archer = (Arquero) warrior;
+            myWarriorsQ.first().setHp(archer.Flechazo(myWarriorsQ.first().getHp()));
+        }else if (enemyWarriorsQ.indexOf(warrior, false)-enemyWarriorsQ.indexOf(enemyWarriorsQ.first(),false)<=3 && enemyWarriorsQ.first().getEstado() == EstadoGuerrero.ATACANDO && myWarriorsQ.isEmpty()){
+            warrior.setEstado(EstadoGuerrero.ATACANDO);
+            Arquero archer = (Arquero) warrior;
+            myAnimatedCastle.setHp(archer.Flechazo(myAnimatedCastle.getHp()));
+        }else{
+            warrior.setEstado(EstadoGuerrero.QUIETO);
+        }
+    }
+
     private void ColisionCastilloAliado(AnimacionTorre castle) {
         if (enemyWarriorsQ.first().getSprite().getBoundingRectangle().overlaps(castle.getSprite().getBoundingRectangle())){
-            enemyWarriorsQ.first().setEstado(EstadoGuerrero.ATACANDO);
-            Guerrero warrior = (Guerrero) enemyWarriorsQ.first();
-            myAnimatedCastle.setHp(warrior.Espadazo(myAnimatedCastle.getHp()));
-            isCastleAlive(myAnimatedCastle);
+            if (enemyWarriorsQ.first().getClass() == Guerrero.class) {
+                Guerrero warrior = (Guerrero) enemyWarriorsQ.first();
+                warrior.setEstado(EstadoGuerrero.ATACANDO);
+                myAnimatedCastle.setHp(warrior.Espadazo(myAnimatedCastle.getHp()));
+                isCastleAlive(myAnimatedCastle);
+            }else if (enemyWarriorsQ.first().getClass() == Arquero.class){
+                Arquero warrior = (Arquero) enemyWarriorsQ.first();
+                warrior.setEstado(EstadoGuerrero.ATACANDO);
+                myAnimatedCastle.setHp(warrior.Flechazo(myAnimatedCastle.getHp()));
+                isCastleAlive(myAnimatedCastle);
+            }else if (enemyWarriorsQ.first().getClass() == minero.class){
+                minero warrior = (minero) enemyWarriorsQ.first();
+                warrior.setEstado(EstadoGuerrero.ATACANDO);
+                myAnimatedCastle.setHp(warrior.picar(myAnimatedCastle.getHp()));
+                timerToMine += Gdx.graphics.getDeltaTime();
+                if (timerToMine>= timeToMine){
+                    gold -= 10;
+                    label3.setText(gold);
+                    timerToMine = 0;
+                }
+                isCastleAlive(myAnimatedCastle);
+            }
         }else{
             enemyWarriorsQ.first().setEstado(EstadoGuerrero.CAMINANDO);
             enemyWarriorsQ.first().moverX(-1);
@@ -646,42 +678,70 @@ public class GameScreen implements Screen {
     private void ColisionAliado(AnimacionGuerrero first) {
         if (!myWarriorsQ.isEmpty()){
             if (first.getSprite().getBoundingRectangle().overlaps(myWarriorsQ.first().getSprite().getBoundingRectangle())){
-                first.setEstado(EstadoGuerrero.ATACANDO);
-                Guerrero warrior = (Guerrero) first;
-                myWarriorsQ.first().setHp(warrior.Espadazo(myWarriorsQ.first().getHp()));
-                comprobarVivoAliado();
+                if (first.getClass() == Guerrero.class) {
+                    Guerrero warrior = (Guerrero) first;
+                    first.setEstado(EstadoGuerrero.ATACANDO);
+                    myWarriorsQ.first().setHp(warrior.Espadazo(myWarriorsQ.first().getHp()));
+                    comprobarVivoAliado();
+                }else if (first.getClass() == Arquero.class){
+                    Arquero warrior = (Arquero) first;
+                    first.setEstado(EstadoGuerrero.ATACANDO);
+                    myWarriorsQ.first().setHp(warrior.Flechazo(myWarriorsQ.first().getHp()));
+                    comprobarVivoAliado();
+                }else if (first.getClass() == minero.class){
+                    minero miner = (minero) first;
+                    first.setEstado(EstadoGuerrero.ATACANDO);
+                    timerToMine += Gdx.graphics.getDeltaTime();
+                    if (timerToMine>= timeToMine){
+                        gold -= 10;
+                        label3.setText(gold);
+                        timerToMine = 0;
+                    }
+                    myWarriorsQ.first().setHp(miner.picar(myWarriorsQ.first().getHp()));
+                    comprobarVivoAliado();
+                }
             }else {
                 first.setEstado(EstadoGuerrero.CAMINANDO);
                 first.moverX(-1);
             }
+
+
         }else{
             ColisionCastilloAliado(myAnimatedCastle);
+
         }
 
     }
 
     private void comprobarVivoAliado() {
         if (myWarriorsQ.first().getHp()<= 0){
-                unidades -= 1;
-                label2.setText(unidades + "/20");
-                myWarriorsQ.removeFirst();
-            }
-
-
+            unidades -= 1;
+            label2.setText(unidades + "/20");
+            myWarriorsQ.removeFirst();
         }
+
+
+    }
 
     private void formarEnemigos() {
         for (int i = 0; i < enemyWarriorsQ.size; i++){
-            AnimacionGuerrero enemy = enemyWarriorsQ.get(i);
-            if (!enemy.equals(enemyWarriorsQ.first())){
-                if (enemy.getSprite().getBoundingRectangle().overlaps(enemyWarriorsQ.get(i-1).getSprite().getBoundingRectangle())){
-                    enemy.setEstado(EstadoGuerrero.QUIETO);
+            AnimacionGuerrero warrior = enemyWarriorsQ.get(i);
+            if (!warrior.equals(enemyWarriorsQ.first())){
+                if (warrior.getSprite().getBoundingRectangle().overlaps(enemyWarriorsQ.get(i-1).getSprite().getBoundingRectangle())){
+                    if (warrior.getClass()==Arquero.class)
+                        EnemigosArquerosDisparando(warrior);
+                    else if(warrior.getClass() == Cura.class)
+                        enemigoCuracion(warrior);
+                    else {
+                        warrior.setEstado(EstadoGuerrero.QUIETO);
+                    }
                 }else{
-                    enemy.setEstado(EstadoGuerrero.CAMINANDO);
-                    enemy.moverX(-1);
+                    warrior.setEstado(EstadoGuerrero.CAMINANDO);
+                    warrior.moverX(-1);
                 }
             }
         }
+
     }
 
     private void ColisionCatilloEnemigo(AnimacionTorre castle) {
@@ -708,12 +768,10 @@ public class GameScreen implements Screen {
                 }
                 isCastleAlive(enemyAnimatedCastle);
             }
-
         }else{
             myWarriorsQ.first().setEstado(EstadoGuerrero.CAMINANDO);
             myWarriorsQ.first().moverX(1);
         }
-
         if(enemyAnimatedCastle.getHp()>350){
             enemyAnimatedCastle.setEstado(EstadoTorre.SINDAÑO);
         }else {
@@ -758,10 +816,21 @@ public class GameScreen implements Screen {
     }
 
     private void Curacion(AnimacionGuerrero warrior) {
-        if (myWarriorsQ.indexOf(warrior, false)-myWarriorsQ.indexOf(myWarriorsQ.first(),false)<=1 && myWarriorsQ.first().getEstado() == EstadoGuerrero.ATACANDO && !enemyWarriorsQ.isEmpty()){
+        if (myWarriorsQ.indexOf(warrior, false)-myWarriorsQ.indexOf(myWarriorsQ.first(),false)<4 && myWarriorsQ.first().getEstado() == EstadoGuerrero.ATACANDO && !enemyWarriorsQ.isEmpty()){
             warrior.setEstado(EstadoGuerrero.ATACANDO);
             Cura Monje = (Cura) warrior;
-            enemyWarriorsQ.first().setHp(Monje.Curacion(myWarriorsQ.first().getHp()));
+            myWarriorsQ.first().setHp(Monje.Curacion(myWarriorsQ.first().getHp()));
+        }else{
+            warrior.setEstado(EstadoGuerrero.QUIETO);
+        }
+    }
+
+    public void enemigoCuracion(AnimacionGuerrero warrior){
+        if (enemyWarriorsQ.indexOf(warrior, false)-enemyWarriorsQ.indexOf(enemyWarriorsQ.first(),false)<4 && enemyWarriorsQ.first().getEstado() == EstadoGuerrero.ATACANDO && !myWarriorsQ.isEmpty()){
+
+            warrior.setEstado(EstadoGuerrero.ATACANDO);
+            Cura Monje = (Cura) warrior;
+            enemyWarriorsQ.first().setHp(Monje.Curacion(enemyWarriorsQ.first().getHp()));
         }else{
             warrior.setEstado(EstadoGuerrero.QUIETO);
         }
@@ -785,6 +854,7 @@ public class GameScreen implements Screen {
     //Screen Movement
     public void handleIsTouched(float deltaTime){
         float aument =200;
+        //Buttons Movement Behavior
         if (Gdx.input.isTouched() && !isFinish) {
             if (Gdx.input.getX()>Gdx.graphics.getWidth()/2 && gamePort.getCamera().position.x < PixelWars.ANCHO*1.4&&Gdx.input.getY()>50){
                 aument *= deltaTime;
@@ -806,7 +876,6 @@ public class GameScreen implements Screen {
                 xBar -= aument;
                 label2.setPosition(label2.getX()-aument,PixelWars.ALTO-row_height*1-4);
                 label3.setPosition(label3.getX()-aument,PixelWars.ALTO-row_height*1-4);
-                label3.setText(gold);
                 label2.setText(unidades+"/20");
                 btnWarrior.setPosition(xWarr-=aument,PixelWars.ALTO-btnWarrior.getHeight()-1);
                 btnMiner.setPosition(xMiner-=aument,PixelWars.ALTO-btnMiner.getHeight()-1);
@@ -846,7 +915,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-
         stage.dispose();
         skytext.dispose();
         bgrass.dispose();
