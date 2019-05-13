@@ -1,15 +1,11 @@
 package com.itesm.pixelwars.Screens;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -17,13 +13,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Queue;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.itesm.pixelwars.PixelWars;
-import com.itesm.pixelwars.Sprites.Actors.CastleActor;
-import com.itesm.pixelwars.Sprites.Actors.TitleActor;
+import com.itesm.pixelwars.Sprites.Animations.AnimacionTorre;
 import com.itesm.pixelwars.Sprites.Animations.Arquero;
 import com.itesm.pixelwars.Sprites.Animations.Cura;
 import com.itesm.pixelwars.Sprites.Animations.EstadoTorre;
@@ -38,10 +32,8 @@ public class level2 implements Screen {
     private Stage stage;
     private PixelWars game;
     private Viewport gamePort;
-    private CastleActor myCastle;
-    private CastleActor enemyCastle;
-    private TowerAnimation animatedCastle;
-    private TowerAnimation animatedEnemyCastle;
+    private AnimacionTorre myAnimatedCastle;
+    private AnimacionTorre enemyAnimatedCastle;
     private Queue<AnimacionGuerrero> myWarriorsQ = new Queue<AnimacionGuerrero>();
     private Queue<AnimacionGuerrero> enemyWarriorsQ = new Queue<AnimacionGuerrero>();
     private float row_height;
@@ -94,7 +86,7 @@ public class level2 implements Screen {
 
     //Textures & TRDA
 
-    private Texture textCastle, textEnemyCastle;
+
     private Texture skytext,bgrass,bmountains,bclouds;
     private Texture pause_menu;
     //Stadistics
@@ -120,27 +112,19 @@ public class level2 implements Screen {
 
     //Create a castle
     private void createCastle(float x, float y) {
-        textCastle = new Texture("torreInvisible.png");
-        myCastle = new CastleActor(textCastle);
-        stage.addActor(myCastle);
-        myCastle.setPosition(x, y );
         Texture texturaCastilloAnimado = new Texture("torreAzul.png");
         Texture texturaCastilloAnimadoDaño1 = new Texture("torreAzulDaño1.png");
         Texture texturaCastilloAnimadoDaño2 = new Texture("torreAzulDaño2.png");
         Texture texturaCastilloAnimadoDaño3 = new Texture("torreAzulDaño3.png");
-        animatedCastle = new TowerAnimation(x,y,texturaCastilloAnimado, texturaCastilloAnimadoDaño1, texturaCastilloAnimadoDaño2, texturaCastilloAnimadoDaño3);
+        myAnimatedCastle = new AnimacionTorre(x,y,texturaCastilloAnimado, texturaCastilloAnimadoDaño1, texturaCastilloAnimadoDaño2, texturaCastilloAnimadoDaño3);
     }
 
     private void createEnemyCastle(float x, float y) {
-        textEnemyCastle = new Texture("torreInvisible.png");
-        enemyCastle = new CastleActor(textEnemyCastle);
-        stage.addActor(enemyCastle);
-        enemyCastle.setPosition(x, y );
         Texture texturaCastilloAnimado = new Texture("torreRoja.png");
         Texture texturaCastilloAnimadoDaño1 = new Texture("torreRojaDaño1.png");
         Texture texturaCastilloAnimadoDaño2 = new Texture("torreRojaDaño2.png");
         Texture texturaCastilloAnimadoDaño3 = new Texture("torreRojaDaño3.png");
-        animatedEnemyCastle = new TowerAnimation(x,y,texturaCastilloAnimado, texturaCastilloAnimadoDaño1, texturaCastilloAnimadoDaño2, texturaCastilloAnimadoDaño3);
+        enemyAnimatedCastle = new AnimacionTorre(x,y,texturaCastilloAnimado, texturaCastilloAnimadoDaño1, texturaCastilloAnimadoDaño2, texturaCastilloAnimadoDaño3);
 
     }
 
@@ -267,7 +251,7 @@ public class level2 implements Screen {
                                  @Override
                                  public void clicked(InputEvent event, float x, float y) {
                                      if (gold>= 50 && unidades<20){
-                                         minero miner = new minero(myCastle.getX()+myCastle.getWidth(), animatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("mineroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44,29, 44, 59, 42, 25, 10, true, 'g');
+                                         minero miner = new minero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("mineroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44,29, 44, 59, 42, 25, 10, true, 'g');
                                          myWarriorsQ.addLast(miner);
                                          unidades+=1;
                                          gold-=50;
@@ -282,7 +266,7 @@ public class level2 implements Screen {
                                    @Override
                                    public void clicked(InputEvent event, float x, float y) {
                                        if (gold>=100 && unidades < 20){
-                                           Guerrero warrior = new Guerrero(myCastle.getX()+myCastle.getWidth(), animatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("guerreroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44,29, 44, 59, 42, 100, 20, true, 'g');
+                                           Guerrero warrior = new Guerrero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("guerreroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44,29, 44, 59, 42, 100, 20, true, 'g');
                                            myWarriorsQ.addLast(warrior);
                                            unidades +=1;
                                            gold-=100;
@@ -299,7 +283,7 @@ public class level2 implements Screen {
                                   @Override
                                   public void clicked(InputEvent event, float x, float y) {
                                       if (gold>=100 && unidades < 20){
-                                          Arquero warrior = new Arquero(myCastle.getX()+myCastle.getWidth(), animatedCastle.getY(), new Texture("arqueroAzulCaminando.png"), new Texture("arqueroAzulParado.png"), new Texture("arqueroAzulAtacando.png"), 29, 44, 43,37,43, 42, 100, 10, true, 'a');
+                                          Arquero warrior = new Arquero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("arqueroAzulCaminando.png"), new Texture("arqueroAzulParado.png"), new Texture("arqueroAzulAtacando.png"), 29, 44, 43,37,43, 42, 100, 10, true, 'a');
                                           myWarriorsQ.addLast(warrior);
                                           unidades +=1;
                                           gold-=100;
@@ -316,7 +300,7 @@ public class level2 implements Screen {
                                 @Override
                                 public void clicked(InputEvent event, float x, float y) {
                                     if (gold>=500 && unidades <20){
-                                        Cura monk = new Cura(myCastle.getX()+myCastle.getWidth(), animatedCastle.getY(), new Texture("mojeAzulCaminando.png"), new Texture("monjeAzulParado.png"), new Texture("monjeAzulAtacando.png"), 29, 44, 32,44,29, 44, 50, 20, true, 'm');
+                                        Cura monk = new Cura(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("mojeAzulCaminando.png"), new Texture("monjeAzulParado.png"), new Texture("monjeAzulAtacando.png"), 29, 44, 32,44,29, 44, 50, 20, true, 'm');
                                         myWarriorsQ.addLast(monk);
                                         unidades +=1;
                                         gold-=500;
@@ -331,7 +315,7 @@ public class level2 implements Screen {
                                   @Override
                                   public void clicked(InputEvent event, float x, float y) {
                                       if (gold>=1500 && unidades < 20){
-                                          Guerrero warrior = new Guerrero(myCastle.getX()+myCastle.getWidth(), animatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("dragonAzulParado.png"), new Texture("dragonAzulAtacando.png"), 29, 43,29, 47, 43, 47, 150, 30 ,true, 'd');
+                                          Guerrero warrior = new Guerrero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("dragonAzulParado.png"), new Texture("dragonAzulAtacando.png"), 29, 43,29, 47, 43, 47, 150, 30 ,true, 'd');
                                           myWarriorsQ.addLast(warrior);
                                           unidades +=1;
                                           gold-=1500;
@@ -423,7 +407,7 @@ public class level2 implements Screen {
             timer += delta;
             if (timer >= seconds) {
                 timer = 0;
-                Guerrero warrior = new Guerrero(PixelWars.ANCHO * 1.66F, enemyCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("guerreroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44, 29, 44, 59, 42, 100, 10, false, 'g');
+                Guerrero warrior = new Guerrero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("guerreroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44, 29, 44, 59, 42, 100, 10, false, 'g');
 
                 enemyWarriorsQ.addLast(warrior);
             }
@@ -440,14 +424,12 @@ public class level2 implements Screen {
             game.batch.draw(bclouds, 0, bgrass.getHeight(), 0, 0, bclouds.getWidth(), bclouds.getHeight(), 1, 1, 0, (int) srcX, 0, bclouds.getWidth(), bclouds.getHeight(), false, false);
             game.batch.draw(bmountains, 0, bgrass.getHeight() - 3);
             game.batch.draw(bgrass, 0, 0);
-            if (myCastle.isAlive()) {
-                animatedCastle.render(game.batch);
-                myCastle.remove();
+            if (myAnimatedCastle.isAlive()) {
+                myAnimatedCastle.render(game.batch);
 
             }
-            if (enemyCastle.isAlive()) {
-                animatedEnemyCastle.render(game.batch);
-                enemyCastle.remove();
+            if (enemyAnimatedCastle.isAlive()) {
+                enemyAnimatedCastle.render(game.batch);
             }
             game.batch.draw(actionbar, xBar, PixelWars.ALTO - actionbar.getHeight());
 
@@ -467,7 +449,7 @@ public class level2 implements Screen {
                 formarEnemigos();
             }
 
-            if (!myCastle.isAlive()) {
+            if (!myAnimatedCastle.isAlive()) {
                 labelStyle = new Label.LabelStyle();
                 bitmapFont = new BitmapFont(Gdx.files.internal("pixel.fnt"));
 
@@ -486,7 +468,7 @@ public class level2 implements Screen {
                 );
             }
 
-            if (!enemyCastle.isAlive()) {
+            if (!enemyAnimatedCastle.isAlive()) {
                 labelStyle = new Label.LabelStyle();
                 bitmapFont = new BitmapFont(Gdx.files.internal("pixel.fnt"));
                 labelStyle.font = bitmapFont;
@@ -593,32 +575,32 @@ public class level2 implements Screen {
         }else if (myWarriorsQ.indexOf(warrior, false)-myWarriorsQ.indexOf(myWarriorsQ.first(),false)<=3 && myWarriorsQ.first().getEstado() == EstadoGuerrero.ATACANDO && enemyWarriorsQ.isEmpty()){
             warrior.setEstado(EstadoGuerrero.ATACANDO);
             Arquero archer = (Arquero) warrior;
-            enemyCastle.setHp(archer.Flechazo(enemyCastle.getHp()));
+            enemyAnimatedCastle.setHp(archer.Flechazo(enemyAnimatedCastle.getHp()));
         }else{
             warrior.setEstado(EstadoGuerrero.QUIETO);
         }
     }
 
-    private void ColisionCastilloAliado(TowerAnimation castle) {
+    private void ColisionCastilloAliado(AnimacionTorre castle) {
         if (enemyWarriorsQ.first().getSprite().getBoundingRectangle().overlaps(castle.getSprite().getBoundingRectangle())){
             enemyWarriorsQ.first().setEstado(EstadoGuerrero.ATACANDO);
             Guerrero warrior = (Guerrero) enemyWarriorsQ.first();
-            myCastle.setHp(warrior.Espadazo(myCastle.getHp()));
-            isCastleAlive(myCastle);
+            myAnimatedCastle.setHp(warrior.Espadazo(myAnimatedCastle.getHp()));
+            isCastleAlive(myAnimatedCastle);
         }else{
             enemyWarriorsQ.first().setEstado(EstadoGuerrero.CAMINANDO);
             enemyWarriorsQ.first().moverX(-1);
         }
-        if(myCastle.getHp()>350){
-            animatedCastle.setEstado(EstadoTorre.SINDAÑO);
+        if(myAnimatedCastle.getHp()>350){
+            myAnimatedCastle.setEstado(EstadoTorre.SINDAÑO);
         }else {
-            if(myCastle.getHp()<=350 && myCastle.getHp()>225){
-                animatedCastle.setEstado(EstadoTorre.DAÑO1);
+            if(myAnimatedCastle.getHp()<=350 && myAnimatedCastle.getHp()>225){
+                myAnimatedCastle.setEstado(EstadoTorre.DAÑO1);
             }else{
-                if(myCastle.getHp()<=225 && myCastle.getHp()>100){
-                    animatedCastle.setEstado(EstadoTorre.DAÑO2);
+                if(myAnimatedCastle.getHp()<=225 && myAnimatedCastle.getHp()>100){
+                    myAnimatedCastle.setEstado(EstadoTorre.DAÑO2);
                 }else {
-                    animatedCastle.setEstado(EstadoTorre.DAÑO3);
+                    myAnimatedCastle.setEstado(EstadoTorre.DAÑO3);
                 }
             }
         }
@@ -654,7 +636,7 @@ public class level2 implements Screen {
 
 
         }else{
-            ColisionCatilloEnemigo(animatedEnemyCastle);
+            ColisionCatilloEnemigo(enemyAnimatedCastle);
 
         }
     }
@@ -680,7 +662,7 @@ public class level2 implements Screen {
                 first.moverX(-1);
             }
         }else{
-            ColisionCastilloAliado(animatedCastle);
+            ColisionCastilloAliado(myAnimatedCastle);
         }
 
     }
@@ -709,44 +691,44 @@ public class level2 implements Screen {
         }
     }
 
-    private void ColisionCatilloEnemigo(TowerAnimation castle) {
+    private void ColisionCatilloEnemigo(AnimacionTorre castle) {
         if (myWarriorsQ.first().getSprite().getBoundingRectangle().overlaps(castle.getSprite().getBoundingRectangle())){
             if (myWarriorsQ.first().getClass() == Guerrero.class) {
                 Guerrero warrior = (Guerrero) myWarriorsQ.first();
                 warrior.setEstado(EstadoGuerrero.ATACANDO);
-                enemyCastle.setHp(warrior.Espadazo(enemyCastle.getHp()));
-                isCastleAlive(enemyCastle);
+                enemyAnimatedCastle.setHp(warrior.Espadazo(enemyAnimatedCastle.getHp()));
+                isCastleAlive(enemyAnimatedCastle);
             }else if (myWarriorsQ.first().getClass() == Arquero.class){
                 Arquero warrior = (Arquero) myWarriorsQ.first();
                 warrior.setEstado(EstadoGuerrero.ATACANDO);
-                enemyCastle.setHp(warrior.Flechazo(enemyCastle.getHp()));
-                isCastleAlive(enemyCastle);
+                enemyAnimatedCastle.setHp(warrior.Flechazo(enemyAnimatedCastle.getHp()));
+                isCastleAlive(enemyAnimatedCastle);
             }else if (myWarriorsQ.first().getClass() == minero.class){
                 minero warrior = (minero) myWarriorsQ.first();
                 warrior.setEstado(EstadoGuerrero.ATACANDO);
-                enemyCastle.setHp(warrior.picar(enemyCastle.getHp()));
+                enemyAnimatedCastle.setHp(warrior.picar(enemyAnimatedCastle.getHp()));
                 timerToMine += Gdx.graphics.getDeltaTime();
                 if (timerToMine>= timeToMine){
                     gold += 10;
                     label3.setText(gold);
                     timerToMine = 0;
                 }
-                isCastleAlive(enemyCastle);
+                isCastleAlive(enemyAnimatedCastle);
             }
         }else{
             myWarriorsQ.first().setEstado(EstadoGuerrero.CAMINANDO);
             myWarriorsQ.first().moverX(1);
         }
-        if(enemyCastle.getHp()>350){
-            animatedEnemyCastle.setEstado(EstadoTorre.SINDAÑO);
+        if(enemyAnimatedCastle.getHp()>350){
+            enemyAnimatedCastle.setEstado(EstadoTorre.SINDAÑO);
         }else {
-            if(enemyCastle.getHp()<=350 && enemyCastle.getHp()>225){
-                animatedEnemyCastle.setEstado(EstadoTorre.DAÑO1);
+            if(enemyAnimatedCastle.getHp()<=350 && enemyAnimatedCastle.getHp()>225){
+                enemyAnimatedCastle.setEstado(EstadoTorre.DAÑO1);
             }else{
-                if(enemyCastle.getHp()<=225 && enemyCastle.getHp()>100){
-                    animatedEnemyCastle.setEstado(EstadoTorre.DAÑO2);
+                if(enemyAnimatedCastle.getHp()<=225 && enemyAnimatedCastle.getHp()>100){
+                    enemyAnimatedCastle.setEstado(EstadoTorre.DAÑO2);
                 }else {
-                    animatedEnemyCastle.setEstado(EstadoTorre.DAÑO3);
+                    enemyAnimatedCastle.setEstado(EstadoTorre.DAÑO3);
                 }
             }
         }
@@ -754,7 +736,7 @@ public class level2 implements Screen {
 
 
 
-    private void isCastleAlive(CastleActor Castle) {
+    private void isCastleAlive(AnimacionTorre Castle) {
         if (Castle.getHp()<= 0) {
             Castle.setAlive(false);
         }
@@ -871,68 +853,12 @@ public class level2 implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
-        textEnemyCastle.dispose();
-        textCastle.dispose();
         skytext.dispose();
         bgrass.dispose();
         bmountains.dispose();
         bclouds.dispose();
 
     }
-    /**
 
-     private class ProcesadorEntrada implements InputProcessor{
-     int unidades = 0;
-
-     @Override
-     public boolean keyDown(int keycode) {
-     if (keycode == Input.Keys.SPACE){
-     AnimacionGuerrero warrior = new AnimacionGuerrero(myCastle.getX()+myCastle.getWidth(), animatedCastle.getY(), "aliado");
-     arrWarriors.add(warrior);
-     unidades += 1;
-     }
-     else if (keycode == Input.Keys.E){
-     AnimacionGuerrero warrior = new AnimacionGuerrero(PixelWars.ANCHO*1.66F, enemyCastle.getY(), "enemigo");
-     arrEnemyWarriors.add(warrior);
-     }
-     return true;
-     }
-
-     @Override
-     public boolean keyUp(int keycode) {
-     return false;
-     }
-
-     @Override
-     public boolean keyTyped(char character) {
-     return false;
-     }
-
-     @Override
-     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-     return false;
-     }
-
-     @Override
-     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-     return false;
-     }
-
-     @Override
-     public boolean touchDragged(int screenX, int screenY, int pointer) {
-     return false;
-     }
-
-     @Override
-     public boolean mouseMoved(int screenX, int screenY) {
-     return false;
-     }
-
-     @Override
-     public boolean scrolled(int amount) {
-     return false;
-     }
-     }
-     **/
 
 }

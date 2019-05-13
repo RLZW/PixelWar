@@ -7,21 +7,28 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class TowerAnimation {
+public class AnimacionTorre {
 
+    private int hp;
+    private boolean isAlive;
+    private final Animation animacion;
     private final Animation animacionDaño1;
     private final Animation animacionDaño2;
     private final Animation animacionDaño3;
-    private Animation animacion;
     private Sprite sprite;
     private float timerAnimacion;
     private EstadoTorre estadoTorre;
-    private TextureRegion[][] texturaTorre;
-    private TextureRegion[][] texturaTorreDaño1;
-    private TextureRegion[][] texturaTorreDaño2;
-    private TextureRegion[][] texturaTorreDaño3;
+    private final TextureRegion[][] texturaTorre;
+    private final TextureRegion[][] texturaTorreDaño1;
+    private final TextureRegion[][] texturaTorreDaño2;
+    private final TextureRegion[][] texturaTorreDaño3;
 
-    public TowerAnimation(float x, float y, Texture torre, Texture torreDaño1, Texture torreDaño2, Texture torreDaño3){
+
+    public AnimacionTorre(float x, float y, Texture torre, Texture torreDaño1, Texture torreDaño2, Texture torreDaño3){
+        this.isAlive=true;
+        this.hp=500;
+
+
         // Cargar textura
         //Texture textura = new Texture("torreAzul");  // 400x66 = tamaño de la imagen
 
@@ -61,7 +68,9 @@ public class TowerAnimation {
         // Quieto
         sprite = new Sprite(texturaTorre[0][0]);
         sprite.setPosition(x,y);
+
     }
+
 
     public void render(SpriteBatch batch){
         timerAnimacion += Gdx.graphics.getDeltaTime();
@@ -89,6 +98,23 @@ public class TowerAnimation {
         }
     }
 
+
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setAlive(boolean alive) {
+        isAlive = alive;
+    }
+
+    public boolean isAlive() {
+        return isAlive;
+    }
 
     public void setEstado(EstadoTorre estadoTorre) {
         this.estadoTorre = estadoTorre;
@@ -121,5 +147,5 @@ public class TowerAnimation {
     public Sprite getSprite() {
         return sprite;
     }
-}
 
+}
