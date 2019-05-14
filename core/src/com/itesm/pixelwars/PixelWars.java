@@ -43,7 +43,7 @@ public class PixelWars extends Game {
 		batch = new SpriteBatch();
 		gamecam = new OrthographicCamera(ANCHO,ALTO);
 		gamecam.position.set(ANCHO/2,ALTO/2,0);
-		setScreen(new TransitionScreen(this));
+		setScreen(new level2(this));
 		loadMusic();
 		startMusic();
 	}

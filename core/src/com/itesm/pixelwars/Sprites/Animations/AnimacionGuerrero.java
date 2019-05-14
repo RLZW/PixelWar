@@ -190,7 +190,9 @@ public class AnimacionGuerrero {
         this.hp = hp;
     }
 
-
+    public char getUnidad(){
+        return unidad;
+    }
 
 
 

@@ -38,7 +38,8 @@ public class level2 implements Screen {
     private Queue<AnimacionGuerrero> enemyWarriorsQ = new Queue<AnimacionGuerrero>();
     private float row_height;
     private float timer = 0f;
-    private float seconds = 3f;
+    private float seconds = 5f;
+
     private boolean isFinish = false;
 
 
@@ -81,7 +82,9 @@ public class level2 implements Screen {
     private ImageButton btnExit;
     private ImageButton btnRestart;
 
+    //Decisions
     private int warriors = 0;
+    private int miners = 0;
 
 
     //Textures & TRDA
@@ -92,8 +95,8 @@ public class level2 implements Screen {
     //Stadistics
     private int unidades;
     private float timerToMine = 0;
-    private float timeToMine = 0.5F;
-    private int gold = 600;
+    private float timeToMine = 1F;
+    private int gold = 200;
 
     //Win & Lose
     private Texture youwin;
@@ -251,7 +254,7 @@ public class level2 implements Screen {
                                  @Override
                                  public void clicked(InputEvent event, float x, float y) {
                                      if (gold>= 50 && unidades<20){
-                                         minero miner = new minero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("mineroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44,29, 44, 59, 42, 25, 10, true, 'g');
+                                         minero miner = new minero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("mineroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44,29, 44, 59, 42, 50, 10, true, 'g');
                                          myWarriorsQ.addLast(miner);
                                          unidades+=1;
                                          gold-=50;
@@ -407,12 +410,16 @@ public class level2 implements Screen {
             timer += delta;
             if (timer >= seconds) {
                 timer = 0;
-                if (warriors > 0) {
-                    minero miner = new minero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("mineroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44,29, 44, 59, 42, 25, 10, false , 'g');
+                if (warriors > 3 && miners < 3) {
+                    minero miner = new minero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("mineroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44,29, 44, 59, 42, 50, 15, false , 'g');
                     enemyWarriorsQ.addLast(miner);
-                    warriors = 0;
+                    miners+=1;
+                    if (miners == 2) {
+                        warriors = 0;
+                        miners = 0;
+                    }
                 }else {
-                    Guerrero warrior = new Guerrero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("guerreroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44, 29, 44, 59, 42, 100, 10, false, 'g');
+                    Guerrero warrior = new Guerrero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("guerreroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44, 29, 44, 59, 42, 75, 20, false, 'g');
                     enemyWarriorsQ.addLast(warrior);
                     warriors += 1;
                 }
@@ -619,7 +626,7 @@ public class level2 implements Screen {
                 myAnimatedCastle.setHp(warrior.picar(myAnimatedCastle.getHp()));
                 timerToMine += Gdx.graphics.getDeltaTime();
                 if (timerToMine>= timeToMine){
-                    gold -= 10;
+                    gold -= 100;
                     label3.setText(gold);
                     timerToMine = 0;
                 }
@@ -661,7 +668,7 @@ public class level2 implements Screen {
                     first.setEstado(EstadoGuerrero.ATACANDO);
                     timerToMine += Gdx.graphics.getDeltaTime();
                     if (timerToMine>= timeToMine){
-                        gold += 10;
+                        gold += 50;
                         label3.setText(gold);
                         timerToMine = 0;
                     }
@@ -681,10 +688,23 @@ public class level2 implements Screen {
 
     private void comprobarVivoEnemigo() {
         if(enemyWarriorsQ.first().getHp()<=0){
+            if (enemyWarriorsQ.first().getClass() == Guerrero.class && enemyWarriorsQ.first().getUnidad() == 'g') {
+                gold += 125;
+                label3.setText(gold);
+            }else if (enemyWarriorsQ.first().getClass() == Arquero.class){
+                gold += 225;
+                label3.setText(gold);
+            }else if (enemyWarriorsQ.first().getClass() == Cura.class){
+                gold += 250;
+                label3.setText(gold);
+            }else if (enemyWarriorsQ.first().getClass() == minero.class){
+                gold += 55;
+                label3.setText(gold);
+            }else{
+                gold += 1250;
+                label3.setText(gold);
+            }
             enemyWarriorsQ.removeFirst();
-            gold+= 200;
-            label3.setText(gold);
-
         }
     }
 
@@ -706,7 +726,7 @@ public class level2 implements Screen {
                     first.setEstado(EstadoGuerrero.ATACANDO);
                     timerToMine += Gdx.graphics.getDeltaTime();
                     if (timerToMine>= timeToMine){
-                        gold -= 10;
+                        gold -= 50;
                         label3.setText(gold);
                         timerToMine = 0;
                     }
@@ -775,7 +795,7 @@ public class level2 implements Screen {
                 enemyAnimatedCastle.setHp(warrior.picar(enemyAnimatedCastle.getHp()));
                 timerToMine += Gdx.graphics.getDeltaTime();
                 if (timerToMine>= timeToMine){
-                    gold += 10;
+                    gold += 100;
                     label3.setText(gold);
                     timerToMine = 0;
                 }

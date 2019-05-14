@@ -687,9 +687,24 @@ public class level5 implements Screen {
 
     private void comprobarVivoEnemigo() {
         if(enemyWarriorsQ.first().getHp()<=0){
+
+            if (enemyWarriorsQ.first().getClass() == Guerrero.class && enemyWarriorsQ.first().getUnidad() == 'g') {
+                gold += 125;
+                label3.setText(gold);
+            }else if (enemyWarriorsQ.first().getClass() == Arquero.class){
+                gold += 225;
+                label3.setText(gold);
+            }else if (enemyWarriorsQ.first().getClass() == Cura.class){
+                gold += 250;
+                label3.setText(gold);
+            }else if (enemyWarriorsQ.first().getClass() == minero.class){
+                gold += 55;
+                label3.setText(gold);
+            }else{
+                gold += 1250;
+                label3.setText(gold);
+            }
             enemyWarriorsQ.removeFirst();
-            gold+= 200;
-            label3.setText(gold);
 
         }
     }
