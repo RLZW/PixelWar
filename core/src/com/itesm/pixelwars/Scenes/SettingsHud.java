@@ -99,7 +99,7 @@ public class SettingsHud implements Disposable {
 
         ImageButton btnVolOff = new ImageButton(trdVolOff,trdVolpOff);
         stage.addActor(btnVolOff);
-        btnVolOff.setPosition(PixelWars.ANCHO/2-20,PixelWars.ALTO/2-50);
+        btnVolOff.setPosition(PixelWars.ANCHO/2-20,PixelWars.ALTO/2-70);
 
         
 
