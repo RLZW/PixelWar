@@ -58,7 +58,7 @@ public class SettingsHud implements Disposable {
 
 
         label1 = new Label("music",labelStyle);
-        label1.setSize(PixelWars.ANCHO/2-label1.getWidth(),row_height);
+        label1.setSize(PixelWars.ANCHO/2-label1.getWidth(),40);
         label1.setPosition(PixelWars.ANCHO/2-50,PixelWars.ALTO/2);
         label1.setAlignment(Align.center);
         stage.addActor(label1);
@@ -99,7 +99,7 @@ public class SettingsHud implements Disposable {
 
         ImageButton btnVolOff = new ImageButton(trdVolOff,trdVolpOff);
         stage.addActor(btnVolOff);
-        btnVolOff.setPosition(PixelWars.ANCHO/2+20,PixelWars.ALTO/2-40);
+        btnVolOff.setPosition(PixelWars.ANCHO/2-20,PixelWars.ALTO/2-50);
 
         
 
