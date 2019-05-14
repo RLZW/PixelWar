@@ -28,7 +28,7 @@ public class SettingsHud implements Disposable {
     private Viewport viewport;
     private Label.LabelStyle labelStyle,slabelStyle;
     private BitmapFont bitmapFont,sbitmapFont;
-    private Label label1,label2;
+    private Label label1,label2,label3,label4;
 
 
 
@@ -57,11 +57,24 @@ public class SettingsHud implements Disposable {
         stage.addActor(label1);
 
 
-        label1 = new Label("music",labelStyle);
-        label1.setSize(PixelWars.ANCHO/2-label1.getWidth(),40);
-        label1.setPosition(PixelWars.ANCHO/2-50,PixelWars.ALTO/2);
-        label1.setAlignment(Align.center);
-        stage.addActor(label1);
+        label2 = new Label("music",labelStyle);
+        label2.setSize(PixelWars.ANCHO/2,row_height);
+        label2.setPosition(PixelWars.ANCHO/2-80,PixelWars.ALTO/2+20);
+        label2.setAlignment(Align.center);
+        stage.addActor(label2);
+
+        label3 = new Label("ON",labelStyle);
+        label3.setSize(PixelWars.ANCHO/2-label1.getWidth(),30);
+        label3.setPosition(PixelWars.ANCHO/2-140,PixelWars.ALTO/2-30);
+        label3.setAlignment(Align.center);
+        stage.addActor(label3);
+
+        label4 = new Label("OFF",labelStyle);
+        label4.setSize(PixelWars.ANCHO/2-label1.getWidth(),30);
+        label4.setPosition(PixelWars.ANCHO/2-150,PixelWars.ALTO/2-70);
+        label4.setAlignment(Align.center);
+        stage.addActor(label4);
+
 
 
 
@@ -88,7 +101,7 @@ public class SettingsHud implements Disposable {
 
         ImageButton btnVol = new ImageButton(trdVol,trdVolp);
         stage.addActor(btnVol);
-        btnVol.setPosition(PixelWars.ANCHO/2-20,PixelWars.ALTO/2-40);
+        btnVol.setPosition(PixelWars.ANCHO/2,PixelWars.ALTO/2-35);
 
         //Button Volume OFF
         Texture texturebtnVolOff = new Texture("btnSoundOff.png");
@@ -99,7 +112,7 @@ public class SettingsHud implements Disposable {
 
         ImageButton btnVolOff = new ImageButton(trdVolOff,trdVolpOff);
         stage.addActor(btnVolOff);
-        btnVolOff.setPosition(PixelWars.ANCHO/2-20,PixelWars.ALTO/2-70);
+        btnVolOff.setPosition(PixelWars.ANCHO/2,PixelWars.ALTO/2-70);
 
         
 
