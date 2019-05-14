@@ -41,6 +41,8 @@ public class MapScreen implements Screen {
         if(game.SOUND){
             warsong = Gdx.audio.newSound(Gdx.files.internal("heroic.mp3"));
             warsong.play();
+
+        game.pauseMusic();
         }
 
         stage.addListener(new ClickListener() {

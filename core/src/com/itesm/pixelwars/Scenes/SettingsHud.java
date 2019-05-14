@@ -2,6 +2,7 @@ package com.itesm.pixelwars.Scenes;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -26,7 +28,7 @@ public class SettingsHud implements Disposable {
     private Viewport viewport;
     private Label.LabelStyle labelStyle,slabelStyle;
     private BitmapFont bitmapFont,sbitmapFont;
-    private Label label1;
+    private Label label1,label2;
 
 
 
@@ -35,6 +37,33 @@ public class SettingsHud implements Disposable {
         viewport = new StretchViewport(game.ANCHO,game.ALTO, game.gamecam);
         stage = new Stage(viewport,game.batch);
         table = new Table();
+
+        //Text
+        labelStyle = new Label.LabelStyle();
+        bitmapFont = new BitmapFont(Gdx.files.internal("pixel.fnt"));
+        labelStyle.font = bitmapFont;
+        labelStyle.fontColor = Color.WHITE;
+
+        slabelStyle = new Label.LabelStyle();
+        sbitmapFont = new BitmapFont(Gdx.files.internal("spixel.fnt"));
+        slabelStyle.font = sbitmapFont;
+        slabelStyle.fontColor = Color.WHITE;
+
+        float row_height = PixelWars.ALTO/16;
+        label1 = new Label("Settings",labelStyle);
+        label1.setSize(PixelWars.ANCHO/2-label1.getWidth(),row_height);
+        label1.setPosition(PixelWars.ANCHO/2,PixelWars.ALTO/2+50);
+        label1.setAlignment(Align.center);
+        stage.addActor(label1);
+
+
+        label1 = new Label("music",labelStyle);
+        label1.setSize(PixelWars.ANCHO/2-label1.getWidth(),row_height);
+        label1.setPosition(PixelWars.ANCHO/2-50,PixelWars.ALTO/2);
+        label1.setAlignment(Align.center);
+        stage.addActor(label1);
+
+
 
 
         //Buttons & Textures
@@ -59,7 +88,7 @@ public class SettingsHud implements Disposable {
 
         ImageButton btnVol = new ImageButton(trdVol,trdVolp);
         stage.addActor(btnVol);
-        btnVol.setPosition(PixelWars.ANCHO/2-20,PixelWars.ALTO/2);
+        btnVol.setPosition(PixelWars.ANCHO/2-20,PixelWars.ALTO/2-40);
 
         //Button Volume OFF
         Texture texturebtnVolOff = new Texture("btnSoundOff.png");
@@ -70,7 +99,7 @@ public class SettingsHud implements Disposable {
 
         ImageButton btnVolOff = new ImageButton(trdVolOff,trdVolpOff);
         stage.addActor(btnVolOff);
-        btnVolOff.setPosition(PixelWars.ANCHO/2+20,PixelWars.ALTO/2);
+        btnVolOff.setPosition(PixelWars.ANCHO/2+20,PixelWars.ALTO/2-40);
 
         
 
