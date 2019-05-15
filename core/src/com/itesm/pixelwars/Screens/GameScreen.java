@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -26,6 +27,8 @@ import com.itesm.pixelwars.Sprites.Animations.TowerAnimation;
 import com.itesm.pixelwars.Sprites.Animations.AnimacionGuerrero;
 import com.itesm.pixelwars.Sprites.Animations.EstadoGuerrero;
 import com.itesm.pixelwars.Sprites.Animations.minero;
+
+import sun.rmi.runtime.Log;
 
 
 public class GameScreen implements Screen {
@@ -148,6 +151,7 @@ public class GameScreen implements Screen {
 
         //Action Bar
         actionbar = new Texture("topBar.png");
+
 
         //Units Buttons
         warrior_button = new Texture("btnSword.png");
@@ -853,10 +857,12 @@ public class GameScreen implements Screen {
 
     //Screen Movement
     public void handleIsTouched(float deltaTime){
-        float aument =200;
+        float aument =200.0f;
         //Buttons Movement Behavior
         if (Gdx.input.isTouched() && !isFinish) {
-            if (Gdx.input.getX()>Gdx.graphics.getWidth()/2 && gamePort.getCamera().position.x < PixelWars.ANCHO*1.4&&Gdx.input.getY()>50){
+            if (Gdx.input.getX()>Gdx.graphics.getWidth()/2 && gamePort.getCamera().position.x < PixelWars.ANCHO*1.4 && Gdx.input.getY() > actionbar.getHeight() ){
+
+
                 aument *= deltaTime;
                 xBar += aument;
                 label2.setPosition(label2.getX()+aument,PixelWars.ALTO-row_height*1-4);
@@ -871,7 +877,11 @@ public class GameScreen implements Screen {
                 btnPause.setPosition(xPause+=aument,PixelWars.ALTO-btnPause.getHeight()+3);
                 gamePort.getCamera().position.x+=aument;
             }
-            else if (Gdx.input.getX()<=Gdx.graphics.getWidth()/2 && gamePort.getCamera().position.x > 4 +PixelWars.ANCHO/2&&Gdx.input.getY()>50){
+            else if (Gdx.input.getX()<=Gdx.graphics.getWidth()/2 && gamePort.getCamera().position.x > 4 +PixelWars.ANCHO/2 && Gdx.input.getY() > actionbar.getHeight()){
+
+                System.out.println(Gdx.graphics.getHeight());
+                System.out.println(actionbar.getHeight());
+                System.out.println(Gdx.input.getY());
                 aument *= deltaTime;
                 xBar -= aument;
                 label2.setPosition(label2.getX()-aument,PixelWars.ALTO-row_height*1-4);
