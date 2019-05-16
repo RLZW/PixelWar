@@ -38,7 +38,7 @@ public class Level2 implements Screen {
     private Queue<AnimacionGuerrero> enemyWarriorsQ = new Queue<AnimacionGuerrero>();
     private float row_height;
     private float timer = 0f;
-    private float seconds = 5f;
+    private float seconds = 8f;
 
     private boolean isFinish = false;
 
@@ -412,18 +412,18 @@ public class Level2 implements Screen {
             timer += delta;
             if (timer >= seconds) {
                 timer = 0;
-                if (warriors > 3 && miners < 3) {
-                    minero miner = new minero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("mineroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44,29, 44, 59, 42, 50, 15, false , 'g');
-                    enemyWarriorsQ.addLast(miner);
-                    miners+=1;
-                    if (miners == 2) {
+                if (miners > 3 && warriors < 3) {
+                    Guerrero warrior = new Guerrero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("guerreroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44, 29, 44, 59, 42, 100, 20, false, 'g');
+                    enemyWarriorsQ.addLast(warrior);
+                    warriors+=1;
+                    if (warriors == 2) {
                         warriors = 0;
                         miners = 0;
                     }
                 }else {
-                    Guerrero warrior = new Guerrero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("guerreroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44, 29, 44, 59, 42, 75, 20, false, 'g');
-                    enemyWarriorsQ.addLast(warrior);
-                    warriors += 1;
+                    minero miner = new minero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("mineroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44,29, 44, 59, 42, 50, 15, false , 'g');
+                    enemyWarriorsQ.addLast(miner);
+                    miners += 1;
                 }
             }
 
