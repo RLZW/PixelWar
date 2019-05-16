@@ -667,6 +667,7 @@ public class Level2 implements Screen {
                         timerToMine = 0;
                     }
                     enemyWarriorsQ.first().setHp(miner.picar(enemyWarriorsQ.first().getHp()));
+                    comprobarVivoEnemigo();
                 }
             }else {
                 first.setEstado(EstadoGuerrero.CAMINANDO);

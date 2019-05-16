@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.itesm.pixelwars.Screens.Level2;
 import com.itesm.pixelwars.Screens.Level3;
+import com.itesm.pixelwars.Screens.Level4;
+import com.itesm.pixelwars.Screens.Level5;
 import com.itesm.pixelwars.Screens.TransitionScreen;
 
 public class PixelWars extends Game {

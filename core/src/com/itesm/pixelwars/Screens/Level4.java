@@ -94,8 +94,8 @@ public class Level4 implements Screen {
     //Stadistics
     private int unidades;
     private float timerToMine = 0;
-    private float timeToMine = 0.5F;
-    private int gold = 600;
+    private float timeToMine = 1F;
+    private int gold = 200;
 
 
     //Pause
@@ -249,7 +249,7 @@ public class Level4 implements Screen {
                                  @Override
                                  public void clicked(InputEvent event, float x, float y) {
                                      if (gold>= 50 && unidades<20){
-                                         minero miner = new minero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("mineroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44,29, 44, 59, 42, 25, 10, true, 'g');
+                                         minero miner = new minero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("mineroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44,29, 44, 59, 42, 50, 15, true, 'g');
                                          myWarriorsQ.addLast(miner);
                                          unidades+=1;
                                          gold-=50;
@@ -298,7 +298,7 @@ public class Level4 implements Screen {
                                 @Override
                                 public void clicked(InputEvent event, float x, float y) {
                                     if (gold>=500 && unidades <20){
-                                        Cura monk = new Cura(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("monjeAzulCaminando.png"), new Texture("monjeAzulParado.png"), new Texture("monjeAzulAtacando.png"), 32, 44, 29,44,29, 44, 50, 20, true, 'm');
+                                        Cura monk = new Cura(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("monjeAzulCaminando.png"), new Texture("monjeAzulParado.png"), new Texture("monjeAzulAtacando.png"), 32, 44, 29,44,29, 44, 50, 10, true, 'm');
                                         myWarriorsQ.addLast(monk);
                                         unidades +=1;
                                         gold-=500;
@@ -412,14 +412,19 @@ public class Level4 implements Screen {
                     Guerrero warrior = new Guerrero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("guerreroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44, 29, 44, 59, 42, 100, 20, false, 'g');
                     enemyWarriorsQ.addLast(warrior);
                     warriors+=1;
+                }else if(monks <1) {
+                    Cura monk = new Cura(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("monjeRojoCaminando.png"), new Texture("monjeRojoParado.png"), new Texture("monjeRojoAtacando.png"), 32, 44, 29,44,29, 44, 50, 10, true, 'm');
+                    enemyWarriorsQ.addLast(monk);
+                    monks += 1;
                 }else if (archers < 3){
-                    Arquero archer = new Arquero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("arqueroRojoCaminando.png"), new Texture("arqueroRojoParado.png"), new Texture("arqueroRojoAtacando.png"), 29, 44, 37,43,43, 42, 100, 10, false, 'a');
+                    Arquero archer = new Arquero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("arqueroRojoCaminando.png"), new Texture("arqueroRojoParado.png"), new Texture("arqueroRojoAtacando.png"), 29, 44, 37,43,43, 42, 40, 10, false, 'a');
                     enemyWarriorsQ.addLast(archer);
                     archers += 1;
                     if (archers == 2) {
                         miners = 0;
                         warriors = 0;
                         archers = 0;
+                        monks = 0;
                     }
                 }
 
@@ -618,7 +623,7 @@ public class Level4 implements Screen {
                 myAnimatedCastle.setHp(warrior.picar(myAnimatedCastle.getHp()));
                 timerToMine += Gdx.graphics.getDeltaTime();
                 if (timerToMine>= timeToMine){
-                    gold -= 10;
+                    gold -= 100;
                     label3.setText(gold);
                     timerToMine = 0;
                 }
@@ -660,11 +665,12 @@ public class Level4 implements Screen {
                     first.setEstado(EstadoGuerrero.ATACANDO);
                     timerToMine += Gdx.graphics.getDeltaTime();
                     if (timerToMine>= timeToMine){
-                        gold += 10;
+                        gold += 50;
                         label3.setText(gold);
                         timerToMine = 0;
                     }
                     enemyWarriorsQ.first().setHp(miner.picar(enemyWarriorsQ.first().getHp()));
+                    comprobarVivoEnemigo();
                 }
             }else {
                 first.setEstado(EstadoGuerrero.CAMINANDO);
@@ -720,7 +726,7 @@ public class Level4 implements Screen {
                     first.setEstado(EstadoGuerrero.ATACANDO);
                     timerToMine += Gdx.graphics.getDeltaTime();
                     if (timerToMine>= timeToMine){
-                        gold += 10;
+                        gold -= 50;
                         label3.setText(gold);
                         timerToMine = 0;
                     }
@@ -789,7 +795,7 @@ public class Level4 implements Screen {
                 enemyAnimatedCastle.setHp(warrior.picar(enemyAnimatedCastle.getHp()));
                 timerToMine += Gdx.graphics.getDeltaTime();
                 if (timerToMine>= timeToMine){
-                    gold += 10;
+                    gold += 100;
                     label3.setText(gold);
                     timerToMine = 0;
                 }

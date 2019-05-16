@@ -416,7 +416,7 @@ public class Level3 implements Screen {
                     enemyWarriorsQ.addLast(warrior);
                     warriors+=1;
                 }else if (archers < 3){
-                    Arquero archer = new Arquero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("arqueroRojoCaminando.png"), new Texture("arqueroRojoParado.png"), new Texture("arqueroRojoAtacando.png"), 29, 44, 37,43,43, 42, 100, 10, false, 'a');
+                    Arquero archer = new Arquero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("arqueroRojoCaminando.png"), new Texture("arqueroRojoParado.png"), new Texture("arqueroRojoAtacando.png"), 29, 44, 37,43,43, 42, 40, 10, false, 'a');
                     enemyWarriorsQ.addLast(archer);
                     archers += 1;
                     if (archers == 2) {
@@ -696,6 +696,7 @@ public class Level3 implements Screen {
                         timerToMine = 0;
                     }
                     enemyWarriorsQ.first().setHp(miner.picar(enemyWarriorsQ.first().getHp()));
+                    comprobarVivoEnemigo();
                 }
             }else {
                 first.setEstado(EstadoGuerrero.CAMINANDO);
