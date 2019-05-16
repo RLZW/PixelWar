@@ -35,10 +35,6 @@ public class MenuScreen implements Screen {
         gamePort = new StretchViewport(PixelWars.ANCHO,PixelWars.ALTO,game.gamecam);
     }
 
-
-
-
-
     @Override
     public void show() {
         terrainHud = new ParallaxTerrain(game);
@@ -101,9 +97,12 @@ public class MenuScreen implements Screen {
 
     @Override
     public void dispose() {
+        stage.dispose();
+        menuHud.stage.dispose();
+        terrainHud.stage.dispose();
         terrainHud.dispose();
         menuHud.dispose();
-
+        titleText.dispose();
 
     }
 }
