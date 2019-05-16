@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -23,12 +22,9 @@ import com.itesm.pixelwars.Sprites.Animations.Arquero;
 import com.itesm.pixelwars.Sprites.Animations.Cura;
 import com.itesm.pixelwars.Sprites.Animations.EstadoTorre;
 import com.itesm.pixelwars.Sprites.Animations.Guerrero;
-import com.itesm.pixelwars.Sprites.Animations.TowerAnimation;
 import com.itesm.pixelwars.Sprites.Animations.AnimacionGuerrero;
 import com.itesm.pixelwars.Sprites.Animations.EstadoGuerrero;
-import com.itesm.pixelwars.Sprites.Animations.minero;
-
-import sun.rmi.runtime.Log;
+import com.itesm.pixelwars.Sprites.Animations.Minero;
 
 
 public class Level1 implements Screen {
@@ -251,7 +247,7 @@ public class Level1 implements Screen {
                                            @Override
                                            public void clicked(InputEvent event, float x, float y) {
                                                if (gold>= 50 && unidades<20){
-                                                   minero miner = new minero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("mineroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44,29, 44, 59, 42, 25, 10, true, 'g');
+                                                   Minero miner = new Minero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("mineroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44,29, 44, 59, 42, 25, 10, true, 'g');
                                                    myWarriorsQ.addLast(miner);
                                                    unidades+=1;
                                                    gold-=50;
@@ -283,7 +279,7 @@ public class Level1 implements Screen {
                                    @Override
                                    public void clicked(InputEvent event, float x, float y) {
                                        if (gold>=100 && unidades < 20){
-                                           Arquero warrior = new Arquero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("arqueroAzulCaminando.png"), new Texture("arqueroAzulParado.png"), new Texture("arqueroAzulAtacando.png"), 29, 44, 43,37,43, 42, 100, 10, true, 'a');
+                                           Arquero warrior = new Arquero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("arqueroAzulCaminando.png"), new Texture("arqueroAzulParado.png"), new Texture("arqueroAzulAtacando.png"), 29, 44, 43,37,43, 42, 30, 10, true, 'a');
                                            myWarriorsQ.addLast(warrior);
                                            unidades +=1;
                                            gold-=100;
@@ -600,8 +596,8 @@ public class Level1 implements Screen {
                 warrior.setEstado(EstadoGuerrero.ATACANDO);
                 myAnimatedCastle.setHp(warrior.Flechazo(myAnimatedCastle.getHp()));
                 isCastleAlive(myAnimatedCastle);
-            }else if (enemyWarriorsQ.first().getClass() == minero.class){
-                minero warrior = (minero) enemyWarriorsQ.first();
+            }else if (enemyWarriorsQ.first().getClass() == Minero.class){
+                Minero warrior = (Minero) enemyWarriorsQ.first();
                 warrior.setEstado(EstadoGuerrero.ATACANDO);
                 myAnimatedCastle.setHp(warrior.picar(myAnimatedCastle.getHp()));
                 timerToMine += Gdx.graphics.getDeltaTime();
@@ -643,8 +639,8 @@ public class Level1 implements Screen {
                     first.setEstado(EstadoGuerrero.ATACANDO);
                     enemyWarriorsQ.first().setHp(warrior.Flechazo(enemyWarriorsQ.first().getHp()));
                     comprobarVivoEnemigo();
-                }else if (first.getClass() == minero.class){
-                    minero miner = (minero) first;
+                }else if (first.getClass() == Minero.class){
+                    Minero miner = (Minero) first;
                     first.setEstado(EstadoGuerrero.ATACANDO);
                     timerToMine += Gdx.graphics.getDeltaTime();
                     if (timerToMine>= timeToMine){
@@ -688,8 +684,8 @@ public class Level1 implements Screen {
                     first.setEstado(EstadoGuerrero.ATACANDO);
                     myWarriorsQ.first().setHp(warrior.Flechazo(myWarriorsQ.first().getHp()));
                     comprobarVivoAliado();
-                }else if (first.getClass() == minero.class){
-                    minero miner = (minero) first;
+                }else if (first.getClass() == Minero.class){
+                    Minero miner = (Minero) first;
                     first.setEstado(EstadoGuerrero.ATACANDO);
                     timerToMine += Gdx.graphics.getDeltaTime();
                     if (timerToMine>= timeToMine){
@@ -756,8 +752,8 @@ public class Level1 implements Screen {
                 warrior.setEstado(EstadoGuerrero.ATACANDO);
                 enemyAnimatedCastle.setHp(warrior.Flechazo(enemyAnimatedCastle.getHp()));
                 isCastleAlive(enemyAnimatedCastle);
-            }else if (myWarriorsQ.first().getClass() == minero.class){
-                minero warrior = (minero) myWarriorsQ.first();
+            }else if (myWarriorsQ.first().getClass() == Minero.class){
+                Minero warrior = (Minero) myWarriorsQ.first();
                 warrior.setEstado(EstadoGuerrero.ATACANDO);
                 enemyAnimatedCastle.setHp(warrior.picar(enemyAnimatedCastle.getHp()));
                 timerToMine += Gdx.graphics.getDeltaTime();
@@ -928,7 +924,6 @@ public class Level1 implements Screen {
         bclouds.dispose();
 
     }
-
 
 }
 

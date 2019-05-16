@@ -35,7 +35,6 @@ public class AnimacionGuerrero {
     private char unidad;
 
 
-
     private int hp;
     private int ataque;
 
@@ -106,7 +105,6 @@ public class AnimacionGuerrero {
         estado = CAMINANDO;
 
     }
-
 
 
     public void render(SpriteBatch batch){

@@ -17,7 +17,6 @@ import com.badlogic.gdx.utils.Queue;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.itesm.pixelwars.PixelWars;
-import com.itesm.pixelwars.Sprites.Actors.CastleActor;
 import com.itesm.pixelwars.Sprites.Animations.AnimacionGuerrero;
 import com.itesm.pixelwars.Sprites.Animations.AnimacionTorre;
 import com.itesm.pixelwars.Sprites.Animations.Arquero;
@@ -25,8 +24,7 @@ import com.itesm.pixelwars.Sprites.Animations.Cura;
 import com.itesm.pixelwars.Sprites.Animations.EstadoGuerrero;
 import com.itesm.pixelwars.Sprites.Animations.EstadoTorre;
 import com.itesm.pixelwars.Sprites.Animations.Guerrero;
-import com.itesm.pixelwars.Sprites.Animations.TowerAnimation;
-import com.itesm.pixelwars.Sprites.Animations.minero;
+import com.itesm.pixelwars.Sprites.Animations.Minero;
 
 
 public class Level5 implements Screen {
@@ -247,7 +245,7 @@ public class Level5 implements Screen {
                                  @Override
                                  public void clicked(InputEvent event, float x, float y) {
                                      if (gold>= 50 && unidades<20){
-                                         minero miner = new minero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("mineroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44,29, 44, 59, 42, 25, 10, true, 'g');
+                                         Minero miner = new Minero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("mineroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44,29, 44, 59, 42, 25, 10, true, 'g');
                                          myWarriorsQ.addLast(miner);
                                          unidades+=1;
                                          gold-=50;
@@ -279,7 +277,7 @@ public class Level5 implements Screen {
                                   @Override
                                   public void clicked(InputEvent event, float x, float y) {
                                       if (gold>=100 && unidades < 20){
-                                          Arquero warrior = new Arquero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("arqueroAzulCaminando.png"), new Texture("arqueroAzulParado.png"), new Texture("arqueroAzulAtacando.png"), 29, 44, 37,43,43, 42, 100, 10, true, 'a');
+                                          Arquero warrior = new Arquero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("arqueroAzulCaminando.png"), new Texture("arqueroAzulParado.png"), new Texture("arqueroAzulAtacando.png"), 29, 44, 37,43,43, 42, 40, 10, true, 'a');
                                           myWarriorsQ.addLast(warrior);
                                           unidades +=1;
                                           gold-=100;
@@ -403,7 +401,7 @@ public class Level5 implements Screen {
             if (timer >= seconds) {
                 timer = 0;
                 if (warriors == 1){
-                    minero miner = new minero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("mineroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44,29, 44, 59, 42, 25, 10, false , 'g');
+                    Minero miner = new Minero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("mineroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44,29, 44, 59, 42, 25, 10, false , 'g');
                     enemyWarriorsQ.addLast(miner);
                     warriors += 1;
                 }else if (warriors == 2){
@@ -488,7 +486,7 @@ public class Level5 implements Screen {
                                       public void clicked(InputEvent event, float x, float y) {
                                           super.clicked(event, x, y);
                                           //game.setScreen(new level3(game));
-                                          game.setScreen(new LoadingScreen(game,Screens.level3));
+                                          game.setScreen(new LoadingScreen(game,Screens.MenuScreen));
                                       }
                                   }
                 );
@@ -612,8 +610,8 @@ public class Level5 implements Screen {
                 warrior.setEstado(EstadoGuerrero.ATACANDO);
                 myAnimatedCastle.setHp(warrior.Flechazo(myAnimatedCastle.getHp()));
                 isCastleAlive(myAnimatedCastle);
-            }else if (enemyWarriorsQ.first().getClass() == minero.class){
-                minero warrior = (minero) enemyWarriorsQ.first();
+            }else if (enemyWarriorsQ.first().getClass() == Minero.class){
+                Minero warrior = (Minero) enemyWarriorsQ.first();
                 warrior.setEstado(EstadoGuerrero.ATACANDO);
                 myAnimatedCastle.setHp(warrior.picar(myAnimatedCastle.getHp()));
                 timerToMine += Gdx.graphics.getDeltaTime();
@@ -655,8 +653,8 @@ public class Level5 implements Screen {
                     first.setEstado(EstadoGuerrero.ATACANDO);
                     enemyWarriorsQ.first().setHp(warrior.Flechazo(enemyWarriorsQ.first().getHp()));
                     comprobarVivoEnemigo();
-                }else if (first.getClass() == minero.class){
-                    minero miner = (minero) first;
+                }else if (first.getClass() == Minero.class){
+                    Minero miner = (Minero) first;
                     first.setEstado(EstadoGuerrero.ATACANDO);
                     timerToMine += Gdx.graphics.getDeltaTime();
                     if (timerToMine>= timeToMine){
@@ -690,7 +688,7 @@ public class Level5 implements Screen {
             }else if (enemyWarriorsQ.first().getClass() == Cura.class){
                 gold += 250;
                 label3.setText(gold);
-            }else if (enemyWarriorsQ.first().getClass() == minero.class){
+            }else if (enemyWarriorsQ.first().getClass() == Minero.class){
                 gold += 55;
                 label3.setText(gold);
             }else{
@@ -715,8 +713,8 @@ public class Level5 implements Screen {
                     first.setEstado(EstadoGuerrero.ATACANDO);
                     myWarriorsQ.first().setHp(warrior.Flechazo(myWarriorsQ.first().getHp()));
                     comprobarVivoAliado();
-                }else if (first.getClass() == minero.class){
-                    minero miner = (minero) first;
+                }else if (first.getClass() == Minero.class){
+                    Minero miner = (Minero) first;
                     first.setEstado(EstadoGuerrero.ATACANDO);
                     timerToMine += Gdx.graphics.getDeltaTime();
                     if (timerToMine>= timeToMine){
@@ -783,8 +781,8 @@ public class Level5 implements Screen {
                 warrior.setEstado(EstadoGuerrero.ATACANDO);
                 enemyAnimatedCastle.setHp(warrior.Flechazo(enemyAnimatedCastle.getHp()));
                 isCastleAlive(enemyAnimatedCastle);
-            }else if (myWarriorsQ.first().getClass() == minero.class){
-                minero warrior = (minero) myWarriorsQ.first();
+            }else if (myWarriorsQ.first().getClass() == Minero.class){
+                Minero warrior = (Minero) myWarriorsQ.first();
                 warrior.setEstado(EstadoGuerrero.ATACANDO);
                 enemyAnimatedCastle.setHp(warrior.picar(enemyAnimatedCastle.getHp()));
                 timerToMine += Gdx.graphics.getDeltaTime();
