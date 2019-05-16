@@ -17,18 +17,18 @@ import com.badlogic.gdx.utils.Queue;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.itesm.pixelwars.PixelWars;
-import com.itesm.pixelwars.Sprites.Animations.AnimacionGuerrero;
 import com.itesm.pixelwars.Sprites.Animations.AnimacionTorre;
 import com.itesm.pixelwars.Sprites.Animations.Arquero;
 import com.itesm.pixelwars.Sprites.Animations.Cura;
-import com.itesm.pixelwars.Sprites.Animations.EstadoGuerrero;
 import com.itesm.pixelwars.Sprites.Animations.EstadoTorre;
 import com.itesm.pixelwars.Sprites.Animations.Guerrero;
 import com.itesm.pixelwars.Sprites.Animations.TowerAnimation;
+import com.itesm.pixelwars.Sprites.Animations.AnimacionGuerrero;
+import com.itesm.pixelwars.Sprites.Animations.EstadoGuerrero;
 import com.itesm.pixelwars.Sprites.Animations.minero;
 
 
-public class level3 implements Screen {
+public class Level2 implements Screen {
     private Stage stage;
     private PixelWars game;
     private Viewport gamePort;
@@ -38,10 +38,9 @@ public class level3 implements Screen {
     private Queue<AnimacionGuerrero> enemyWarriorsQ = new Queue<AnimacionGuerrero>();
     private float row_height;
     private float timer = 0f;
-    private float seconds = 3f;
+    private float seconds = 5f;
+
     private boolean isFinish = false;
-    //private int archers = 0;
-    private int warriors = 0;
 
 
 
@@ -83,26 +82,31 @@ public class level3 implements Screen {
     private ImageButton btnExit;
     private ImageButton btnRestart;
 
-    private float timeToMove = 0;
+    //Decisions
+    private int warriors = 0;
+    private int miners = 0;
 
 
     //Textures & TRDA
+
 
     private Texture skytext,bgrass,bmountains,bclouds;
     private Texture pause_menu;
     //Stadistics
     private int unidades;
     private float timerToMine = 0;
-    private float timeToMine = 0.5F;
-    private int gold = 600;
+    private float timeToMine = 1F;
+    private int gold = 200;
+
+    //Win & Lose
+    private Texture youwin;
+    private Texture youlose;
 
 
     //Pause
     private boolean isPaused = false;
-    private Texture youwin;
-    private Texture youlose;
 
-    public level3(PixelWars game){
+    public Level2(PixelWars game){
         this.game = game;
         gamePort = new StretchViewport(game.ANCHO,game.ALTO,game.gamecam);
     }
@@ -144,6 +148,11 @@ public class level3 implements Screen {
         //Pause
         pause_menu = new Texture("pause_bg.png");
 
+        //Win & Lose
+        youwin = new Texture("youWIN.png");
+        youlose = new Texture("youLOSE.png");
+
+
         //Action Bar
         actionbar = new Texture("topBar.png");
 
@@ -173,10 +182,6 @@ public class level3 implements Screen {
         exit_buttonp = new Texture("pauseExit_Pressed.png");
         continue_button = new Texture("pauseContinue.png");
         continue_buttonp = new Texture("pauseContinue_Pressed.png");
-
-        //Win & Lose
-        youwin = new Texture("youWIN.png");
-        youlose = new Texture("youLOSE.png");
 
 
 
@@ -227,7 +232,7 @@ public class level3 implements Screen {
         //Stage Add Units buttons
         stage.addActor(btnWarrior);
         stage.addActor(btnMiner);
-        stage.addActor(btnArcher);
+        //stage.addActor(btnArcher);
         //stage.addActor(btnMonk);
         //stage.addActor(btnDragon);
 
@@ -249,7 +254,7 @@ public class level3 implements Screen {
                                  @Override
                                  public void clicked(InputEvent event, float x, float y) {
                                      if (gold>= 50 && unidades<20){
-                                         minero miner = new minero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("mineroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44,29, 44, 59, 42, 25, 10, true, 'g');
+                                         minero miner = new minero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("mineroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44,29, 44, 59, 42, 50, 10, true, 'g');
                                          myWarriorsQ.addLast(miner);
                                          unidades+=1;
                                          gold-=50;
@@ -281,7 +286,7 @@ public class level3 implements Screen {
                                   @Override
                                   public void clicked(InputEvent event, float x, float y) {
                                       if (gold>=100 && unidades < 20){
-                                          Arquero warrior = new Arquero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("arqueroAzulCaminando.png"), new Texture("arqueroAzulParado.png"), new Texture("arqueroAzulAtacando.png"), 29, 44, 37,43,43, 42, 100, 10, true, 'a');
+                                          Arquero warrior = new Arquero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("arqueroAzulCaminando.png"), new Texture("arqueroAzulParado.png"), new Texture("arqueroAzulAtacando.png"), 29, 44, 43,37,43, 42, 100, 10, true, 'a');
                                           myWarriorsQ.addLast(warrior);
                                           unidades +=1;
                                           gold-=100;
@@ -348,6 +353,7 @@ public class level3 implements Screen {
                              }
         );
 
+
         slabelStyle = new Label.LabelStyle();
         mlabelStyle = new Label.LabelStyle();
         sbitmapFont = new BitmapFont(Gdx.files.internal("spixel.fnt"));
@@ -359,7 +365,7 @@ public class level3 implements Screen {
         row_height = PixelWars.ALTO/16;
 
 
-        label1 = new Label("Level3",slabelStyle);
+        label1 = new Label("Level2",slabelStyle);
         label1.setSize(PixelWars.ANCHO/2-label1.getWidth(),row_height);
         label1.setPosition(bgrass.getWidth()/2-label1.getWidth()/2-20,PixelWars.ALTO-row_height*3);
         label1.setAlignment(Align.center);
@@ -404,30 +410,20 @@ public class level3 implements Screen {
             timer += delta;
             if (timer >= seconds) {
                 timer = 0;
-                if (warriors == 1){
-                    minero miner = new minero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("mineroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44,29, 44, 59, 42, 25, 10, false , 'g');
+                if (warriors > 3 && miners < 3) {
+                    minero miner = new minero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("mineroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44,29, 44, 59, 42, 50, 15, false , 'g');
                     enemyWarriorsQ.addLast(miner);
-                    warriors += 1;
-                }else if (warriors == 2){
-                    Arquero archer = new Arquero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("arqueroRojoCaminando.png"), new Texture("arqueroRojoParado.png"), new Texture("arqueroRojoAtacando.png"), 29, 44, 37,43,43, 42, 100, 10, false, 'a');
-                    enemyWarriorsQ.addLast(archer);
-                    warriors = 0;
+                    miners+=1;
+                    if (miners == 2) {
+                        warriors = 0;
+                        miners = 0;
+                    }
                 }else {
-                    Guerrero warrior = new Guerrero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("guerreroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44, 29, 44, 59, 42, 100, 10, false, 'g');
+                    Guerrero warrior = new Guerrero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("guerreroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44, 29, 44, 59, 42, 75, 20, false, 'g');
                     enemyWarriorsQ.addLast(warrior);
                     warriors += 1;
                 }
             }
-
-            /**if (warriors > 3 && archers <3){
-                Arquero archer = new Arquero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("arqueroAzulCaminando.png"), new Texture("arqueroAzulParado.png"), new Texture("arqueroAzulAtacando.png"), 29, 44, 37,43,43, 42, 100, 10, true, 'a');
-
-                enemyWarriorsQ.addLast(archer);
-                archers = +1;
-            }else{
-                archers = 0;
-                warriors = 0;
-            }**/
 
 
             Gdx.gl.glClearColor(1, 1, 1, 1);
@@ -443,6 +439,7 @@ public class level3 implements Screen {
             game.batch.draw(bgrass, 0, 0);
             if (myAnimatedCastle.isAlive()) {
                 myAnimatedCastle.render(game.batch);
+
             }
             if (enemyAnimatedCastle.isAlive()) {
                 enemyAnimatedCastle.render(game.batch);
@@ -468,6 +465,7 @@ public class level3 implements Screen {
             if (!myAnimatedCastle.isAlive()) {
                 labelStyle = new Label.LabelStyle();
                 bitmapFont = new BitmapFont(Gdx.files.internal("pixel.fnt"));
+
                 game.batch.draw(youlose,(gamePort.getCamera().position.x)-youlose.getWidth()/2,(PixelWars.ALTO / 2)-youlose.getHeight()/2);
                 isFinish = true;
                 enemyWarriorsQ.clear();
@@ -496,8 +494,8 @@ public class level3 implements Screen {
                                       @Override
                                       public void clicked(InputEvent event, float x, float y) {
                                           super.clicked(event, x, y);
-                                          //game.setScreen(new level4(game));
-                                          game.setScreen(new LoadingScreen(game,Screens.level4));
+                                          //game.setScreen(new level3(game));
+                                          game.setScreen(new LoadingScreen(game,Screens.level3));
                                       }
                                   }
                 );
@@ -537,7 +535,7 @@ public class level3 implements Screen {
                                                 btnRestart.remove();
                                                 stage.addActor(btnPause);
                                                 stage.addActor(btnWarrior);
-                                                stage.addActor(btnArcher);
+                                                //stage.addActor(btnArcher);
                                                 //stage.addActor(btnDragon);
                                                 stage.addActor(btnMiner);
                                                 //stage.addActor(btnMonk);
@@ -570,7 +568,7 @@ public class level3 implements Screen {
                                     public void clicked(InputEvent event, float x, float y) {
                                         Gdx.gl.glClearColor(1, 1, 1, 1);
                                         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-                                        //game.setScreen(new LoadingScreen(game));
+                                       // game.setScreen(new LoadingScreen(game));
                                         game.setScreen(new LoadingScreen(game,Screens.MenuScreen));
                                     }
                                 }
@@ -628,7 +626,7 @@ public class level3 implements Screen {
                 myAnimatedCastle.setHp(warrior.picar(myAnimatedCastle.getHp()));
                 timerToMine += Gdx.graphics.getDeltaTime();
                 if (timerToMine>= timeToMine){
-                    gold -= 10;
+                    gold -= 100;
                     label3.setText(gold);
                     timerToMine = 0;
                 }
@@ -670,7 +668,7 @@ public class level3 implements Screen {
                     first.setEstado(EstadoGuerrero.ATACANDO);
                     timerToMine += Gdx.graphics.getDeltaTime();
                     if (timerToMine>= timeToMine){
-                        gold += 10;
+                        gold += 50;
                         label3.setText(gold);
                         timerToMine = 0;
                     }
@@ -690,7 +688,6 @@ public class level3 implements Screen {
 
     private void comprobarVivoEnemigo() {
         if(enemyWarriorsQ.first().getHp()<=0){
-
             if (enemyWarriorsQ.first().getClass() == Guerrero.class && enemyWarriorsQ.first().getUnidad() == 'g') {
                 gold += 125;
                 label3.setText(gold);
@@ -708,7 +705,6 @@ public class level3 implements Screen {
                 label3.setText(gold);
             }
             enemyWarriorsQ.removeFirst();
-
         }
     }
 
@@ -730,7 +726,7 @@ public class level3 implements Screen {
                     first.setEstado(EstadoGuerrero.ATACANDO);
                     timerToMine += Gdx.graphics.getDeltaTime();
                     if (timerToMine>= timeToMine){
-                        gold += 10;
+                        gold -= 50;
                         label3.setText(gold);
                         timerToMine = 0;
                     }
@@ -799,7 +795,7 @@ public class level3 implements Screen {
                 enemyAnimatedCastle.setHp(warrior.picar(enemyAnimatedCastle.getHp()));
                 timerToMine += Gdx.graphics.getDeltaTime();
                 if (timerToMine>= timeToMine){
-                    gold += 10;
+                    gold += 100;
                     label3.setText(gold);
                     timerToMine = 0;
                 }
@@ -959,5 +955,6 @@ public class level3 implements Screen {
         bclouds.dispose();
 
     }
+
 
 }

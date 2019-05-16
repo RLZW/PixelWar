@@ -376,22 +376,22 @@ public class LoadingScreen implements Screen {
                     game.setScreen(new SettingsScreen(game));
                     break;
                 case GameScreen:
-                    game.setScreen(new GameScreen(game));
+                    game.setScreen(new Level1(game));
                     break;
                 case MapScreen:
                     game.setScreen(new MapScreen(game));
                     break;
                 case level2:
-                    game.setScreen(new level2(game));
+                    game.setScreen(new Level2(game));
                     break;
                 case level3:
-                    game.setScreen(new level3(game));
+                    game.setScreen(new Level3(game));
                     break;
                 case level4:
-                    game.setScreen(new level4(game));
+                    game.setScreen(new Level4(game));
                     break;
                 case level5:
-                    game.setScreen(new level5(game));
+                    game.setScreen(new Level5(game));
                     break;
             }
         }

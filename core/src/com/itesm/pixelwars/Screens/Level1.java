@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -17,19 +18,20 @@ import com.badlogic.gdx.utils.Queue;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.itesm.pixelwars.PixelWars;
-import com.itesm.pixelwars.Sprites.Actors.CastleActor;
-import com.itesm.pixelwars.Sprites.Animations.AnimacionGuerrero;
 import com.itesm.pixelwars.Sprites.Animations.AnimacionTorre;
 import com.itesm.pixelwars.Sprites.Animations.Arquero;
 import com.itesm.pixelwars.Sprites.Animations.Cura;
-import com.itesm.pixelwars.Sprites.Animations.EstadoGuerrero;
 import com.itesm.pixelwars.Sprites.Animations.EstadoTorre;
 import com.itesm.pixelwars.Sprites.Animations.Guerrero;
 import com.itesm.pixelwars.Sprites.Animations.TowerAnimation;
+import com.itesm.pixelwars.Sprites.Animations.AnimacionGuerrero;
+import com.itesm.pixelwars.Sprites.Animations.EstadoGuerrero;
 import com.itesm.pixelwars.Sprites.Animations.minero;
 
+import sun.rmi.runtime.Log;
 
-public class level5 implements Screen {
+
+public class Level1 implements Screen {
     private Stage stage;
     private PixelWars game;
     private Viewport gamePort;
@@ -39,7 +41,7 @@ public class level5 implements Screen {
     private Queue<AnimacionGuerrero> enemyWarriorsQ = new Queue<AnimacionGuerrero>();
     private float row_height;
     private float timer = 0f;
-    private float seconds = 5f;
+    private float seconds = 10f;
     private boolean isFinish = false;
 
 
@@ -57,6 +59,9 @@ public class level5 implements Screen {
     private float xDragon = 115;
     private float xPause = 300;
 
+    //Win & Lose
+    private Texture youwin;
+    private Texture youlose;
 
 
     private BitmapFont bitmapFont,sbitmapFont;
@@ -82,10 +87,11 @@ public class level5 implements Screen {
     private ImageButton btnExit;
     private ImageButton btnRestart;
 
-    private int warriors = 0;
+    private float timeToMove = 0;
 
 
     //Textures & TRDA
+
 
     private Texture skytext,bgrass,bmountains,bclouds;
     private Texture pause_menu;
@@ -93,15 +99,15 @@ public class level5 implements Screen {
     private int unidades;
     private float timerToMine = 0;
     private float timeToMine = 0.5F;
-    private int gold = 2000;
+    private int gold = 600;
 
 
     //Pause
     private boolean isPaused = false;
-    private Texture youlose;
-    private Texture youwin;
+    //private TowerAnimation myCastleAnimation;
+    //private TowerAnimation enemyCastleAnimation;
 
-    public level5(PixelWars game){
+    public Level1(PixelWars game){
         this.game = game;
         gamePort = new StretchViewport(game.ANCHO,game.ALTO,game.gamecam);
     }
@@ -146,6 +152,7 @@ public class level5 implements Screen {
         //Action Bar
         actionbar = new Texture("topBar.png");
 
+
         //Units Buttons
         warrior_button = new Texture("btnSword.png");
         warrior_buttonp = new Texture("btnSword_Pressed.png");
@@ -173,11 +180,9 @@ public class level5 implements Screen {
         continue_button = new Texture("pauseContinue.png");
         continue_buttonp = new Texture("pauseContinue_Pressed.png");
 
-
         //Win & Lose
         youwin = new Texture("youWIN.png");
         youlose = new Texture("youLOSE.png");
-
 
         //Units Regions
         trd_warrior_button = new TextureRegionDrawable(warrior_button);
@@ -224,10 +229,7 @@ public class level5 implements Screen {
 
         //Stage Add Units buttons
         stage.addActor(btnWarrior);
-        stage.addActor(btnMiner);
-        stage.addActor(btnArcher);
-        stage.addActor(btnMonk);
-        stage.addActor(btnDragon);
+
 
         //Stage Add Elements buttons
         stage.addActor(btnPause);
@@ -244,25 +246,42 @@ public class level5 implements Screen {
         btnPause.setPosition(xPause,PixelWars.ALTO-btnPause.getHeight()+3);
 
         btnMiner.addListener(new ClickListener() {
+                                           @Override
+                                           public void clicked(InputEvent event, float x, float y) {
+                                               if (gold>= 50 && unidades<20){
+                                                   minero miner = new minero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("mineroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44,29, 44, 59, 42, 25, 10, true, 'g');
+                                                   myWarriorsQ.addLast(miner);
+                                                   unidades+=1;
+                                                   gold-=50;
+                                                   label3.setText(gold);
+                                                   label2.setText(unidades+"/20");
+                                               }
+                                           }
+                                       }
+        );
+
+        btnWarrior.addListener(new ClickListener() {
                                  @Override
                                  public void clicked(InputEvent event, float x, float y) {
-                                     if (gold>= 50 && unidades<20){
-                                         minero miner = new minero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("mineroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44,29, 44, 59, 42, 25, 10, true, 'g');
-                                         myWarriorsQ.addLast(miner);
-                                         unidades+=1;
-                                         gold-=50;
+                                     if (gold>=100 && unidades < 20){
+                                         Guerrero warrior = new Guerrero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("guerreroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44,29, 44, 59, 42, 100, 20, true, 'g');
+                                         myWarriorsQ.addLast(warrior);
+                                         unidades +=1;
+                                         gold-=100;
                                          label3.setText(gold);
                                          label2.setText(unidades+"/20");
+
                                      }
+
                                  }
                              }
         );
 
-        btnWarrior.addListener(new ClickListener() {
+        btnArcher.addListener(new ClickListener() {
                                    @Override
                                    public void clicked(InputEvent event, float x, float y) {
                                        if (gold>=100 && unidades < 20){
-                                           Guerrero warrior = new Guerrero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("guerreroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44,29, 44, 59, 42, 100, 20, true, 'g');
+                                           Arquero warrior = new Arquero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("arqueroAzulCaminando.png"), new Texture("arqueroAzulParado.png"), new Texture("arqueroAzulAtacando.png"), 29, 44, 43,37,43, 42, 100, 10, true, 'a');
                                            myWarriorsQ.addLast(warrior);
                                            unidades +=1;
                                            gold-=100;
@@ -275,28 +294,11 @@ public class level5 implements Screen {
                                }
         );
 
-        btnArcher.addListener(new ClickListener() {
-                                  @Override
-                                  public void clicked(InputEvent event, float x, float y) {
-                                      if (gold>=100 && unidades < 20){
-                                          Arquero warrior = new Arquero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("arqueroAzulCaminando.png"), new Texture("arqueroAzulParado.png"), new Texture("arqueroAzulAtacando.png"), 29, 44, 37,43,43, 42, 100, 10, true, 'a');
-                                          myWarriorsQ.addLast(warrior);
-                                          unidades +=1;
-                                          gold-=100;
-                                          label3.setText(gold);
-                                          label2.setText(unidades+"/20");
-
-                                      }
-
-                                  }
-                              }
-        );
-
         btnMonk.addListener(new ClickListener(){
                                 @Override
                                 public void clicked(InputEvent event, float x, float y) {
                                     if (gold>=500 && unidades <20){
-                                        Cura monk = new Cura(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("monjeAzulCaminando.png"), new Texture("monjeAzulParado.png"), new Texture("monjeAzulAtacando.png"), 32, 44, 29,44,29, 44, 50, 20, true, 'm');
+                                        Cura monk = new Cura(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("mojeAzulCaminando.png"), new Texture("monjeAzulParado.png"), new Texture("monjeAzulAtacando.png"), 29, 44, 32,44,29, 44, 50, 20, true, 'm');
                                         myWarriorsQ.addLast(monk);
                                         unidades +=1;
                                         gold-=500;
@@ -308,20 +310,20 @@ public class level5 implements Screen {
         );
 
         btnDragon.addListener(new ClickListener() {
-                                  @Override
-                                  public void clicked(InputEvent event, float x, float y) {
-                                      if (gold>=1500 && unidades < 20){
-                                          Guerrero warrior = new Guerrero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("dragonAzulParado.png"), new Texture("dragonAzulAtacando.png"), 29, 43,47, 43, 47, 43, 150, 30 ,true, 'd');
-                                          myWarriorsQ.addLast(warrior);
-                                          unidades +=1;
-                                          gold-=1500;
-                                          label3.setText(gold);
-                                          label2.setText(unidades+"/20");
+                                   @Override
+                                   public void clicked(InputEvent event, float x, float y) {
+                                       if (gold>=1500 && unidades < 20){
+                                           Guerrero warrior = new Guerrero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("dragonAzulParado.png"), new Texture("dragonAzulAtacando.png"), 29, 43,29, 47, 43, 47, 150, 30 ,true, 'd');
+                                           myWarriorsQ.addLast(warrior);
+                                           unidades +=1;
+                                           gold-=1500;
+                                           label3.setText(gold);
+                                           label2.setText(unidades+"/20");
 
-                                      }
+                                       }
 
-                                  }
-                              }
+                                   }
+                               }
         );
         btnPause.addListener(new ClickListener() {
                                  @Override
@@ -357,7 +359,7 @@ public class level5 implements Screen {
         row_height = PixelWars.ALTO/16;
 
 
-        label1 = new Label("Level5",slabelStyle);
+        label1 = new Label("Level1",slabelStyle);
         label1.setSize(PixelWars.ANCHO/2-label1.getWidth(),row_height);
         label1.setPosition(bgrass.getWidth()/2-label1.getWidth()/2-20,PixelWars.ALTO-row_height*3);
         label1.setAlignment(Align.center);
@@ -378,8 +380,9 @@ public class level5 implements Screen {
 
 
         //Towers
-        createCastle(10,bgrass.getHeight()/4);
+        createCastle(10, bgrass.getHeight() / 4);
         createEnemyCastle(PixelWars.ANCHO*1.66F,bgrass.getHeight()/4);
+
 
 
 
@@ -402,27 +405,9 @@ public class level5 implements Screen {
             timer += delta;
             if (timer >= seconds) {
                 timer = 0;
-                if (warriors == 1){
-                    minero miner = new minero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("mineroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44,29, 44, 59, 42, 25, 10, false , 'g');
-                    enemyWarriorsQ.addLast(miner);
-                    warriors += 1;
-                }else if (warriors == 2){
-                    Arquero archer = new Arquero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("arqueroRojoCaminando.png"), new Texture("arqueroRojoParado.png"), new Texture("arqueroRojoAtacando.png"), 29, 44, 37,43,43, 42, 100, 10, false, 'a');
-                    enemyWarriorsQ.addLast(archer);
-                    warriors += 1;
-                }else if(warriors == 3) {
-                    Cura monk = new Cura(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("monjeRojoCaminando.png"), new Texture("monjeRojoParado.png"), new Texture("monjeRojoAtacando.png"), 32, 44, 29,44,29, 44, 50, 20, true, 'm');
-                    enemyWarriorsQ.addLast(monk);
-                    warriors += 1;
-                }else if(warriors == 4 ) {
-                    Guerrero warrior = new Guerrero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("dragonRojoParado.png"), new Texture("dragonRojoAtacando.png"), 29, 43,47, 43, 47, 43, 150, 30 ,true, 'd');
-                    enemyWarriorsQ.addLast(warrior);
-                    warriors = 0;
-                }else{
-                    Guerrero warrior = new Guerrero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("guerreroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44, 29, 44, 59, 42, 100, 10, false, 'g');
-                    enemyWarriorsQ.addLast(warrior);
-                    warriors += 1;
-                }
+                Guerrero warrior = new Guerrero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("guerreroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44, 29, 44, 59, 42, 100, 10, false, 'g');
+
+                enemyWarriorsQ.addLast(warrior);
             }
 
 
@@ -439,10 +424,12 @@ public class level5 implements Screen {
             game.batch.draw(bgrass, 0, 0);
             if (myAnimatedCastle.isAlive()) {
                 myAnimatedCastle.render(game.batch);
+                //myAnimatedCastle.remove();
 
             }
             if (enemyAnimatedCastle.isAlive()) {
                 enemyAnimatedCastle.render(game.batch);
+                //enemyAnimatedCastle.remove();
             }
             game.batch.draw(actionbar, xBar, PixelWars.ALTO - actionbar.getHeight());
 
@@ -465,6 +452,7 @@ public class level5 implements Screen {
             if (!myAnimatedCastle.isAlive()) {
                 labelStyle = new Label.LabelStyle();
                 bitmapFont = new BitmapFont(Gdx.files.internal("pixel.fnt"));
+                Texture youlose = new Texture("youLOSE.png");
                 game.batch.draw(youlose,(gamePort.getCamera().position.x)-youlose.getWidth()/2,(PixelWars.ALTO / 2)-youlose.getHeight()/2);
                 isFinish = true;
                 enemyWarriorsQ.clear();
@@ -486,6 +474,7 @@ public class level5 implements Screen {
                 labelStyle.font = bitmapFont;
                 labelStyle.fontColor = Color.GREEN;
                 isFinish = true;
+                Texture youwin = new Texture("youWIN.png");
                 game.batch.draw(youwin,(gamePort.getCamera().position.x)-youwin.getWidth()/2,(PixelWars.ALTO / 2)-youwin.getHeight()/2);
                 enemyWarriorsQ.clear();
                 myWarriorsQ.clear();
@@ -493,8 +482,8 @@ public class level5 implements Screen {
                                       @Override
                                       public void clicked(InputEvent event, float x, float y) {
                                           super.clicked(event, x, y);
-                                          //game.setScreen(new MenuScreen(game));
-                                          game.setScreen(new LoadingScreen(game,Screens.MenuScreen));
+                                         //game.setScreen(new level2(game));
+                                          game.setScreen(new LoadingScreen(game,Screens.level2));
                                       }
                                   }
                 );
@@ -524,53 +513,49 @@ public class level5 implements Screen {
             btnRestart.setPosition(gamePort.getCamera().position.x-btnRestart.getWidth()/2,PixelWars.ALTO/2-btnContinue.getHeight()/2);
             btnExit.setPosition(gamePort.getCamera().position.x-btnExit.getWidth()/2,PixelWars.ALTO/2-btnContinue.getHeight()*1.5f);
             btnContinue.addListener(new ClickListener() {
+                                     @Override
+                                     public void clicked(InputEvent event, float x, float y) {
+                                         Gdx.gl.glClearColor(1, 1, 1, 1);
+                                         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+                                         if(isPaused){
+                                             btnContinue.remove();
+                                             btnExit.remove();
+                                             btnRestart.remove();
+                                             stage.addActor(btnPause);
+                                             stage.addActor(btnWarrior);
+                                             stage.addActor(label1);
+                                             stage.addActor(label2);
+                                             stage.addActor(label3);
+
+                                             isPaused = false;
+                                             System.out.println(isPaused);
+                                         }
+
+                                     }
+                                 }
+            );
+            btnRestart.addListener(new ClickListener() {
                                         @Override
                                         public void clicked(InputEvent event, float x, float y) {
                                             Gdx.gl.glClearColor(1, 1, 1, 1);
                                             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-                                            if(isPaused){
-                                                btnContinue.remove();
-                                                btnExit.remove();
-                                                btnRestart.remove();
-                                                stage.addActor(btnPause);
-                                                stage.addActor(btnWarrior);
-                                                stage.addActor(btnArcher);
-                                                stage.addActor(btnDragon);
-                                                stage.addActor(btnMiner);
-                                                stage.addActor(btnMonk);
-                                                stage.addActor(label1);
-                                                stage.addActor(label2);
-                                                stage.addActor(label3);
-
-                                                isPaused = false;
-                                                System.out.println(isPaused);
+                                            //game.setScreen(new GameScreen(game));
+                                            game.setScreen(new LoadingScreen(game,Screens.GameScreen));
                                             }
 
                                         }
-                                    }
-            );
-            btnRestart.addListener(new ClickListener() {
-                                       @Override
-                                       public void clicked(InputEvent event, float x, float y) {
-                                           Gdx.gl.glClearColor(1, 1, 1, 1);
-                                           Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-                                           //game.setScreen(new GameScreen(game));
-                                           game.setScreen(new LoadingScreen(game,Screens.GameScreen));
-                                       }
-
-                                   }
 
             );
 
             btnExit.addListener(new ClickListener() {
-                                    @Override
-                                    public void clicked(InputEvent event, float x, float y) {
-                                        Gdx.gl.glClearColor(1, 1, 1, 1);
-                                        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-                                        //game.setScreen(new LoadingScreen(game));
-                                        game.setScreen(new LoadingScreen(game,Screens.MenuScreen));
+                                        @Override
+                                        public void clicked(InputEvent event, float x, float y) {
+                                            Gdx.gl.glClearColor(1, 1, 1, 1);
+                                            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+                                            //game.setScreen(new LoadingScreen(game));
+                                            game.setScreen(new LoadingScreen(game,Screens.MenuScreen));
+                                        }
                                     }
-                                }
             );
             game.batch.end();
             stage.draw();
@@ -687,24 +672,9 @@ public class level5 implements Screen {
 
     private void comprobarVivoEnemigo() {
         if(enemyWarriorsQ.first().getHp()<=0){
-
-            if (enemyWarriorsQ.first().getClass() == Guerrero.class && enemyWarriorsQ.first().getUnidad() == 'g') {
-                gold += 125;
-                label3.setText(gold);
-            }else if (enemyWarriorsQ.first().getClass() == Arquero.class){
-                gold += 225;
-                label3.setText(gold);
-            }else if (enemyWarriorsQ.first().getClass() == Cura.class){
-                gold += 250;
-                label3.setText(gold);
-            }else if (enemyWarriorsQ.first().getClass() == minero.class){
-                gold += 55;
-                label3.setText(gold);
-            }else{
-                gold += 1250;
-                label3.setText(gold);
-            }
             enemyWarriorsQ.removeFirst();
+            gold+= 200;
+            label3.setText(gold);
 
         }
     }
@@ -727,7 +697,7 @@ public class level5 implements Screen {
                     first.setEstado(EstadoGuerrero.ATACANDO);
                     timerToMine += Gdx.graphics.getDeltaTime();
                     if (timerToMine>= timeToMine){
-                        gold += 10;
+                        gold -= 10;
                         label3.setText(gold);
                         timerToMine = 0;
                     }
@@ -887,10 +857,12 @@ public class level5 implements Screen {
 
     //Screen Movement
     public void handleIsTouched(float deltaTime){
-        float aument =200;
+        float aument =200.0f;
         //Buttons Movement Behavior
         if (Gdx.input.isTouched() && !isFinish) {
-            if (Gdx.input.getX()>Gdx.graphics.getWidth()/2 && gamePort.getCamera().position.x < PixelWars.ANCHO*1.4&&Gdx.input.getY()>50){
+            if (Gdx.input.getX()>Gdx.graphics.getWidth()/2 && gamePort.getCamera().position.x < PixelWars.ANCHO*1.4 && Gdx.input.getY() > actionbar.getHeight() ){
+
+
                 aument *= deltaTime;
                 xBar += aument;
                 label2.setPosition(label2.getX()+aument,PixelWars.ALTO-row_height*1-4);
@@ -905,7 +877,11 @@ public class level5 implements Screen {
                 btnPause.setPosition(xPause+=aument,PixelWars.ALTO-btnPause.getHeight()+3);
                 gamePort.getCamera().position.x+=aument;
             }
-            else if (Gdx.input.getX()<=Gdx.graphics.getWidth()/2 && gamePort.getCamera().position.x > 4 +PixelWars.ANCHO/2&&Gdx.input.getY()>50){
+            else if (Gdx.input.getX()<=Gdx.graphics.getWidth()/2 && gamePort.getCamera().position.x > 4 +PixelWars.ANCHO/2 && Gdx.input.getY() > actionbar.getHeight()){
+
+                System.out.println(Gdx.graphics.getHeight());
+                System.out.println(actionbar.getHeight());
+                System.out.println(Gdx.input.getY());
                 aument *= deltaTime;
                 xBar -= aument;
                 label2.setPosition(label2.getX()-aument,PixelWars.ALTO-row_height*1-4);
@@ -957,4 +933,7 @@ public class level5 implements Screen {
 
     }
 
+
 }
+
+
