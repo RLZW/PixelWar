@@ -183,6 +183,8 @@ public class Level1 implements Screen {
         //Win & Lose
         youwin = new Texture("youWIN.png");
         youlose = new Texture("youLOSE.png");
+        labelStyle = new Label.LabelStyle();
+        bitmapFont = new BitmapFont(Gdx.files.internal("pixel.fnt"));
 
         //Units Regions
         trd_warrior_button = new TextureRegionDrawable(warrior_button);
@@ -450,9 +452,6 @@ public class Level1 implements Screen {
             }
 
             if (!myAnimatedCastle.isAlive()) {
-                labelStyle = new Label.LabelStyle();
-                bitmapFont = new BitmapFont(Gdx.files.internal("pixel.fnt"));
-                Texture youlose = new Texture("youLOSE.png");
                 game.batch.draw(youlose,(gamePort.getCamera().position.x)-youlose.getWidth()/2,(PixelWars.ALTO / 2)-youlose.getHeight()/2);
                 isFinish = true;
                 enemyWarriorsQ.clear();
@@ -469,12 +468,9 @@ public class Level1 implements Screen {
             }
 
             if (!enemyAnimatedCastle.isAlive()) {
-                labelStyle = new Label.LabelStyle();
-                bitmapFont = new BitmapFont(Gdx.files.internal("pixel.fnt"));
                 labelStyle.font = bitmapFont;
                 labelStyle.fontColor = Color.GREEN;
                 isFinish = true;
-                Texture youwin = new Texture("youWIN.png");
                 game.batch.draw(youwin,(gamePort.getCamera().position.x)-youwin.getWidth()/2,(PixelWars.ALTO / 2)-youwin.getHeight()/2);
                 enemyWarriorsQ.clear();
                 myWarriorsQ.clear();

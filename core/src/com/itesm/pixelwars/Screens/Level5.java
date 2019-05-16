@@ -463,8 +463,6 @@ public class Level5 implements Screen {
             }
 
             if (!myAnimatedCastle.isAlive()) {
-                labelStyle = new Label.LabelStyle();
-                bitmapFont = new BitmapFont(Gdx.files.internal("pixel.fnt"));
                 game.batch.draw(youlose,(gamePort.getCamera().position.x)-youlose.getWidth()/2,(PixelWars.ALTO / 2)-youlose.getHeight()/2);
                 isFinish = true;
                 enemyWarriorsQ.clear();
@@ -481,10 +479,6 @@ public class Level5 implements Screen {
             }
 
             if (!enemyAnimatedCastle.isAlive()) {
-                labelStyle = new Label.LabelStyle();
-                bitmapFont = new BitmapFont(Gdx.files.internal("pixel.fnt"));
-                labelStyle.font = bitmapFont;
-                labelStyle.fontColor = Color.GREEN;
                 isFinish = true;
                 game.batch.draw(youwin,(gamePort.getCamera().position.x)-youwin.getWidth()/2,(PixelWars.ALTO / 2)-youwin.getHeight()/2);
                 enemyWarriorsQ.clear();
@@ -493,13 +487,12 @@ public class Level5 implements Screen {
                                       @Override
                                       public void clicked(InputEvent event, float x, float y) {
                                           super.clicked(event, x, y);
-                                          //game.setScreen(new MenuScreen(game));
-                                          game.setScreen(new LoadingScreen(game,Screens.MenuScreen));
+                                          //game.setScreen(new level3(game));
+                                          game.setScreen(new LoadingScreen(game,Screens.level3));
                                       }
                                   }
                 );
             }
-
 
             game.batch.end();
             stage.draw();

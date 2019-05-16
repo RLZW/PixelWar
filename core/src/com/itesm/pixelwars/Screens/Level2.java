@@ -151,6 +151,8 @@ public class Level2 implements Screen {
         //Win & Lose
         youwin = new Texture("youWIN.png");
         youlose = new Texture("youLOSE.png");
+        labelStyle = new Label.LabelStyle();
+        bitmapFont = new BitmapFont(Gdx.files.internal("pixel.fnt"));
 
 
         //Action Bar
@@ -463,9 +465,6 @@ public class Level2 implements Screen {
             }
 
             if (!myAnimatedCastle.isAlive()) {
-                labelStyle = new Label.LabelStyle();
-                bitmapFont = new BitmapFont(Gdx.files.internal("pixel.fnt"));
-
                 game.batch.draw(youlose,(gamePort.getCamera().position.x)-youlose.getWidth()/2,(PixelWars.ALTO / 2)-youlose.getHeight()/2);
                 isFinish = true;
                 enemyWarriorsQ.clear();
@@ -482,10 +481,6 @@ public class Level2 implements Screen {
             }
 
             if (!enemyAnimatedCastle.isAlive()) {
-                labelStyle = new Label.LabelStyle();
-                bitmapFont = new BitmapFont(Gdx.files.internal("pixel.fnt"));
-                labelStyle.font = bitmapFont;
-                labelStyle.fontColor = Color.GREEN;
                 isFinish = true;
                 game.batch.draw(youwin,(gamePort.getCamera().position.x)-youwin.getWidth()/2,(PixelWars.ALTO / 2)-youwin.getHeight()/2);
                 enemyWarriorsQ.clear();
