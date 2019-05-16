@@ -7,6 +7,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.itesm.pixelwars.Screens.Level2;
+import com.itesm.pixelwars.Screens.Level3;
 import com.itesm.pixelwars.Screens.TransitionScreen;
 
 public class PixelWars extends Game {
@@ -38,7 +39,7 @@ public class PixelWars extends Game {
 		batch = new SpriteBatch();
 		gamecam = new OrthographicCamera(ANCHO,ALTO);
 		gamecam.position.set(ANCHO/2,ALTO/2,0);
-		setScreen(new Level2(this));
+		setScreen(new TransitionScreen(this));
 		loadMusic();
 		startMusic();
 	}

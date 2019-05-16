@@ -83,6 +83,9 @@ public class Level4 implements Screen {
     private ImageButton btnRestart;
 
     private int warriors = 0;
+    private int miners = 0;
+    private int archers = 0;
+    private int monks = 0;
 
 
     //Textures & TRDA
@@ -403,23 +406,25 @@ public class Level4 implements Screen {
             timer += delta;
             if (timer >= seconds) {
                 timer = 0;
-                if (warriors == 1){
-                    minero miner = new minero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("mineroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44,29, 44, 59, 42, 25, 10, false , 'g');
+                if (miners < 4){
+                    minero miner = new minero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("mineroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44,29, 44, 59, 42, 50, 15, false , 'g');
                     enemyWarriorsQ.addLast(miner);
-                    warriors += 1;
-                }else if (warriors == 2){
+                    miners +=1;
+                }else if (warriors < 1){
+                    Guerrero warrior = new Guerrero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("guerreroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44, 29, 44, 59, 42, 100, 20, false, 'g');
+                    enemyWarriorsQ.addLast(warrior);
+                    warriors+=1;
+                }else if (archers < 3){
                     Arquero archer = new Arquero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("arqueroRojoCaminando.png"), new Texture("arqueroRojoParado.png"), new Texture("arqueroRojoAtacando.png"), 29, 44, 37,43,43, 42, 100, 10, false, 'a');
                     enemyWarriorsQ.addLast(archer);
-                    warriors += 1;
-                }else if(warriors == 3) {
-                    Cura monk = new Cura(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("monjeRojoCaminando.png"), new Texture("monjeRojoParado.png"), new Texture("monjeRojoAtacando.png"), 32, 44, 29,44,29, 44, 50, 20, true, 'm');
-                    enemyWarriorsQ.addLast(monk);
-                    warriors = 0;
-                }else{
-                    Guerrero warrior = new Guerrero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("guerreroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44, 29, 44, 59, 42, 100, 10, false, 'g');
-                    enemyWarriorsQ.addLast(warrior);
-                    warriors += 1;
+                    archers += 1;
+                    if (archers == 2) {
+                        miners = 0;
+                        warriors = 0;
+                        archers = 0;
+                    }
                 }
+
             }
 
 
