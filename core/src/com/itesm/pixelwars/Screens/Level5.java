@@ -17,7 +17,6 @@ import com.badlogic.gdx.utils.Queue;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.itesm.pixelwars.PixelWars;
-import com.itesm.pixelwars.Sprites.Actors.CastleActor;
 import com.itesm.pixelwars.Sprites.Animations.AnimacionGuerrero;
 import com.itesm.pixelwars.Sprites.Animations.AnimacionTorre;
 import com.itesm.pixelwars.Sprites.Animations.Arquero;
@@ -25,7 +24,6 @@ import com.itesm.pixelwars.Sprites.Animations.Cura;
 import com.itesm.pixelwars.Sprites.Animations.EstadoGuerrero;
 import com.itesm.pixelwars.Sprites.Animations.EstadoTorre;
 import com.itesm.pixelwars.Sprites.Animations.Guerrero;
-import com.itesm.pixelwars.Sprites.Animations.TowerAnimation;
 import com.itesm.pixelwars.Sprites.Animations.minero;
 
 
@@ -279,7 +277,7 @@ public class Level5 implements Screen {
                                   @Override
                                   public void clicked(InputEvent event, float x, float y) {
                                       if (gold>=100 && unidades < 20){
-                                          Arquero warrior = new Arquero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("arqueroAzulCaminando.png"), new Texture("arqueroAzulParado.png"), new Texture("arqueroAzulAtacando.png"), 29, 44, 37,43,43, 42, 100, 10, true, 'a');
+                                          Arquero warrior = new Arquero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("arqueroAzulCaminando.png"), new Texture("arqueroAzulParado.png"), new Texture("arqueroAzulAtacando.png"), 29, 44, 37,43,43, 42, 40, 10, true, 'a');
                                           myWarriorsQ.addLast(warrior);
                                           unidades +=1;
                                           gold-=100;
@@ -488,7 +486,7 @@ public class Level5 implements Screen {
                                       public void clicked(InputEvent event, float x, float y) {
                                           super.clicked(event, x, y);
                                           //game.setScreen(new level3(game));
-                                          game.setScreen(new LoadingScreen(game,Screens.level3));
+                                          game.setScreen(new LoadingScreen(game,Screens.MenuScreen));
                                       }
                                   }
                 );
