@@ -37,7 +37,7 @@ public class Level3 implements Screen {
     private Queue<AnimacionGuerrero> enemyWarriorsQ = new Queue<AnimacionGuerrero>();
     private float row_height;
     private float timer = 0f;
-    private float seconds = 3f;
+    private float seconds = 6f;
     private boolean isFinish = false;
     //private int archers = 0;
     private int warriors = 0;
