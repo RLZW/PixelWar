@@ -886,7 +886,7 @@ public class Level4 implements Screen {
         float aument =200;
         //Buttons Movement Behavior
         if (Gdx.input.isTouched() && !isFinish) {
-            if (Gdx.input.getX()>Gdx.graphics.getWidth()/2 && gamePort.getCamera().position.x < PixelWars.ANCHO*1.4&&Gdx.input.getY()>50){
+            if (Gdx.input.getX()>Gdx.graphics.getWidth()/2 && gamePort.getCamera().position.x < PixelWars.ANCHO*1.4 && Gdx.input.getY() > actionbar.getHeight()){
                 aument *= deltaTime;
                 xBar += aument;
                 label2.setPosition(label2.getX()+aument,PixelWars.ALTO-row_height*1-4);
@@ -901,7 +901,7 @@ public class Level4 implements Screen {
                 btnPause.setPosition(xPause+=aument,PixelWars.ALTO-btnPause.getHeight()+3);
                 gamePort.getCamera().position.x+=aument;
             }
-            else if (Gdx.input.getX()<=Gdx.graphics.getWidth()/2 && gamePort.getCamera().position.x > 4 +PixelWars.ANCHO/2&&Gdx.input.getY()>50){
+            else if (Gdx.input.getX()<=Gdx.graphics.getWidth()/2 && gamePort.getCamera().position.x > 4 +PixelWars.ANCHO/2 && Gdx.input.getY() > actionbar.getHeight()){
                 aument *= deltaTime;
                 xBar -= aument;
                 label2.setPosition(label2.getX()-aument,PixelWars.ALTO-row_height*1-4);

@@ -860,7 +860,7 @@ public class Level1 implements Screen {
         float aument =200.0f;
         //Buttons Movement Behavior
         if (Gdx.input.isTouched() && !isFinish) {
-            if (Gdx.input.getX()>Gdx.graphics.getWidth()/2 && gamePort.getCamera().position.x < PixelWars.ANCHO*1.4 && Gdx.input.getY() > actionbar.getHeight() ){
+            if (Gdx.input.getX()>Gdx.graphics.getWidth()/2 && gamePort.getCamera().position.x < PixelWars.ANCHO*1.4 && Gdx.input.getY() > actionbar.getHeight()){
 
 
                 aument *= deltaTime;
