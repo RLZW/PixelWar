@@ -74,6 +74,7 @@ public class MultiplayerScreen implements Screen {
     }
 
     public void configSocketEvents(){
+        //This is what it does when something is recived
         socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
             @Override
             public void call(Object... args) {
@@ -158,11 +159,8 @@ public class MultiplayerScreen implements Screen {
                 btnArcher.setPosition(xArcher-=aument, PixelWars.ALTO-btnArcher.getHeight()-1);
                 btnMonk.setPosition(xMonk-=aument, PixelWars.ALTO-btnMonk.getHeight()-1);
                 btnDragon.setPosition(xDragon-=aument, PixelWars.ALTO-btnDragon.getHeight()-1);
-
                 gamePort.getCamera().position.x-=aument;
             }
-
-
         }
 
     }

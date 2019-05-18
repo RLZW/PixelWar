@@ -28,6 +28,10 @@ public class LoadingScreen implements Screen {
 
     private Screens nextScreen;
     private int avance; // % de Carga
+    private Texture bclouds;
+    private Texture skytext;
+    private Texture bgrass;
+    private Texture bmountains;
 
     public LoadingScreen(PixelWars game, Screens nextScreen) {
         this.game = game;
@@ -40,6 +44,7 @@ public class LoadingScreen implements Screen {
         gamecam.position.set(PixelWars.ANCHO / 2, PixelWars.ALTO / 2, 0);
         gamePort = new StretchViewport(PixelWars.ANCHO, PixelWars.ALTO, gamecam);
 
+        createBackground();
         //Texutre
         loadingTexture = new Texture("loading.png");
 
@@ -342,13 +347,17 @@ public class LoadingScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
-
-        game.batch.draw(loadingTexture, 0, 0);
+        game.batch.draw(skytext, 0, 0);
+        game.batch.draw(skytext, skytext.getWidth(), 0);
+        game.batch.draw(bclouds, 0, bgrass.getHeight(), 0, 0, bclouds.getWidth(), bclouds.getHeight(), 1, 1, 0, 0, 0, bclouds.getWidth(), bclouds.getHeight(), false, false);
+        game.batch.draw(bmountains, 0, bgrass.getHeight() - 3);
+        game.batch.draw(bgrass, 0, 0);
+        game.batch.draw(loadingTexture, PixelWars.ANCHO/2 - loadingTexture.getWidth()/2, PixelWars.ALTO/3);
         game.batch.end();
 
 
@@ -411,6 +420,16 @@ public class LoadingScreen implements Screen {
 
     @Override
     public void resume() {
+
+    }
+
+    public void createBackground(){
+        //Background
+        bclouds = new Texture("bClouds.png");
+        skytext = new Texture("bSky1.png");
+        bgrass = new Texture("bGrass.png");
+        bmountains = new Texture("bMtns.png");
+
 
     }
 
