@@ -80,7 +80,7 @@ public class PixelWars extends Game {
 	public void connectSocket(){
 		try{
 			//Define a donde nos estamos conectando.
-			socket = IO.socket("http://localhost:8080");
+			socket = IO.socket("http://16286400.ngrok.io");
 			socket.connect();
 		} catch (Exception e){
 			System.out.print(e);
@@ -110,9 +110,9 @@ public class PixelWars extends Game {
 				JSONObject data = (JSONObject) args[0];
 				try {
 					String id = data.getString("id");
-					Gdx.app.log("SocketIO", "My ID: " + id);
+					Gdx.app.log("SocketIO", "New Player Connected: " + id);
 				} catch (JSONException e) {
-					Gdx.app.log("SocketIO", "Error getting ID");
+					Gdx.app.log("SocketIO", "Error getting New PlayerID");
 				}
 			}
 		});
