@@ -87,8 +87,6 @@ public class Level1 implements Screen {
 
 
     //Textures & TRDA
-
-
     private Texture skytext,bgrass,bmountains,bclouds;
     private Texture pause_menu;
     //Stadistics
@@ -376,14 +374,9 @@ public class Level1 implements Screen {
         label3.setAlignment(Align.center);
         stage.addActor(label3);
 
-
         //Towers
         createCastle(10, bgrass.getHeight() / 4);
         createEnemyCastle(PixelWars.ANCHO*1.66F,bgrass.getHeight()/4);
-
-
-
-
 
         Gdx.input.setInputProcessor(stage);
         Gdx.input.setCatchBackKey(true);
@@ -853,8 +846,6 @@ public class Level1 implements Screen {
         //Buttons Movement Behavior
         if (Gdx.input.isTouched() && !isFinish) {
             if (Gdx.input.getX()>Gdx.graphics.getWidth()/2 && gamePort.getCamera().position.x < PixelWars.ANCHO*1.4 && Gdx.input.getY() > actionbar.getHeight()){
-
-
                 aument *= deltaTime;
                 xBar += aument;
                 label2.setPosition(label2.getX()+aument,PixelWars.ALTO-row_height*1-4);
