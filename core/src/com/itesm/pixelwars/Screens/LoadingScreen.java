@@ -235,9 +235,9 @@ public class LoadingScreen implements Screen {
         manager.load("torreRojaDaño3.png", Texture.class);
 
         manager.load("bClouds.png", Texture.class);
-        manager.load("bSky1.png", Texture.class);
-        manager.load("bGrass.png", Texture.class);
-        manager.load("bMtns.png", Texture.class);
+        manager.load("bSky4.png", Texture.class);
+        manager.load("sGrass4.png", Texture.class);
+        manager.load("sMtns4.png", Texture.class);
 
         manager.load("topBar.png", Texture.class);
 
