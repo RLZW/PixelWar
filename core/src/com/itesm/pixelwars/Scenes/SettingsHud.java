@@ -81,13 +81,15 @@ public class SettingsHud implements Disposable {
 
         //Buttons & Textures
         //Button 1 Player
-        Texture texturetback = new Texture("back.png");
-        //Texture texturebtnbackp = new Texture("btn1P_Pressed.png");
+
+        Texture texturetback = new Texture("btnBack.png");
+        Texture texturebtnbackp = new Texture("btnBack_Pressed.png");
+
 
         TextureRegionDrawable trdaback = new TextureRegionDrawable(texturetback);
-        //TextureRegionDrawable trdaplayp = new TextureRegionDrawable(texturebtnplayp);
+        TextureRegionDrawable trdaplayp = new TextureRegionDrawable(texturebtnbackp);
 
-        ImageButton btnBack = new ImageButton(trdaback);
+        ImageButton btnBack = new ImageButton(trdaback,trdaplayp);
         stage.addActor(btnBack);
         btnBack.setPosition(PixelWars.ANCHO-btnBack.getWidth()-1,PixelWars.ALTO-btnBack.getHeight()-1);
 
