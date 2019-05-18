@@ -118,7 +118,8 @@ project(":core") {
         implementation "com.badlogicgames.gdx:gdx-ai:$aiVersion"
         implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         implementation "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
-        
+        implementation 'com.github.nkzawa:socket.io-client:0.6.0'
+
     }
 }
 
