@@ -89,6 +89,14 @@ public class AnimacionGuerrero {
                 animacionParado = new Animation(0.15f,texturaGuerreroParado[0][3],texturaGuerreroParado[0][2],texturaGuerreroParado[0][1],texturaGuerreroParado[0][0]);
                 animacionAtacando = new Animation(0.15f,texturaGuerreroAtacando[0][5],texturaGuerreroAtacando[0][4],texturaGuerreroAtacando[0][3],texturaGuerreroAtacando[0][2],texturaGuerreroAtacando[0][1],texturaGuerreroAtacando[0][0]);
                 break;
+            case 'p': //minero/picador
+                animacionCaminando = new Animation(0.15f,texturaGuerreroCaminando[0][5],texturaGuerreroCaminando[0][4],texturaGuerreroCaminando[0][3],texturaGuerreroCaminando[0][2],texturaGuerreroCaminando[0][1],texturaGuerreroCaminando[0][0]);
+                //no hay textura parado para dragon
+                animacionParado = new Animation(0.15f,texturaGuerreroCaminando[0][4],texturaGuerreroParado[0][3],texturaGuerreroParado[0][2],texturaGuerreroParado[0][1],texturaGuerreroParado[0][0]);
+                animacionAtacando = new Animation(0.15f,texturaGuerreroAtacando[0][4],texturaGuerreroAtacando[0][3],texturaGuerreroAtacando[0][2],texturaGuerreroAtacando[0][1],texturaGuerreroAtacando[0][0]);
+                break;
+
+
         }
 
         animacionCaminando.setPlayMode(Animation.PlayMode.LOOP);
