@@ -38,6 +38,7 @@ public class LoadingScreen implements Screen {
         this.game = game;
         this.nextScreen = nextScreen;
         levelInfo=new LevelInfo();
+        System.out.println(levelInfo.getPassedLevel());
     }
 
     @Override
