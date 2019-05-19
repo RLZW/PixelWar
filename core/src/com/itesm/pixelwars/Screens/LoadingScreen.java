@@ -18,6 +18,7 @@ public class LoadingScreen implements Screen {
     Texture loadingTexture;
     private OrthographicCamera gamecam;
     private Viewport gamePort;
+    private LevelInfo levelInfo;
 
     //Tiempo
     private float timeCounter = 0;
@@ -36,6 +37,7 @@ public class LoadingScreen implements Screen {
     public LoadingScreen(PixelWars game, Screens nextScreen) {
         this.game = game;
         this.nextScreen = nextScreen;
+        levelInfo=new LevelInfo();
     }
 
     @Override
@@ -388,7 +390,7 @@ public class LoadingScreen implements Screen {
                     game.setScreen(new Level1(game));
                     break;
                 case MapScreen:
-                    game.setScreen(new MapScreen(game));
+                    game.setScreen(new MapScreen(game, levelInfo));
                     break;
                 case level2:
                     game.setScreen(new Level2(game));
