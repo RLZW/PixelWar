@@ -28,6 +28,7 @@ import com.itesm.pixelwars.Sprites.Animations.minero;
 
 
 public class Level1 implements Screen {
+    private final LevelInfo levelInfo;
     private Stage stage;
     private PixelWars game;
     private Viewport gamePort;
@@ -101,9 +102,10 @@ public class Level1 implements Screen {
     //private TowerAnimation myCastleAnimation;
     //private TowerAnimation enemyCastleAnimation;
 
-    public Level1(PixelWars game){
+    public Level1(PixelWars game, LevelInfo levelInfo){
         this.game = game;
         gamePort = new StretchViewport(game.ANCHO,game.ALTO,game.gamecam);
+        this.levelInfo=levelInfo;
     }
 
 
@@ -461,6 +463,9 @@ public class Level1 implements Screen {
                 labelStyle.fontColor = Color.GREEN;
                 isFinish = true;
                 game.batch.draw(youwin,(gamePort.getCamera().position.x)-youwin.getWidth()/2,(PixelWars.ALTO / 2)-youwin.getHeight()/2);
+                if(levelInfo.getPassedLevel()<1){
+                    levelInfo.setLevel(levelInfo.getPassedLevel()+1);
+                }
                 enemyWarriorsQ.clear();
                 myWarriorsQ.clear();
                 stage.addListener(new ClickListener() {
