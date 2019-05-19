@@ -16,15 +16,17 @@ import com.itesm.pixelwars.Sprites.Actors.TitleActor;
 import java.util.logging.SocketHandler;
 
 public class MapScreen implements Screen {
+    private final LevelInfo levelInfor;
     private PixelWars game;
     private Stage stage;
     private Texture map;
     private TitleActor mapActor;
     private Viewport gamePort;
     private Sound warsong;
-    public MapScreen(PixelWars game){
+    public MapScreen(PixelWars game, LevelInfo levelInfo){
         this.game = game;
         gamePort = new StretchViewport(PixelWars.ANCHO,PixelWars.ALTO,game.gamecam);
+        this.levelInfor=levelInfo;
     };
 
 
