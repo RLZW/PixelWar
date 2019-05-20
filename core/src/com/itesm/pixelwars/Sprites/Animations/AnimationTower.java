@@ -17,7 +17,7 @@ public class AnimationTower {
     private final Animation animacionDaño3;
     private Sprite sprite;
     private float timerAnimacion;
-    private EstadoTorre estadoTorre;
+    private EStateTower estadoTorre;
     private final TextureRegion[][] texturaTorre;
     private final TextureRegion[][] texturaTorreDaño1;
     private final TextureRegion[][] texturaTorreDaño2;
@@ -63,7 +63,7 @@ public class AnimationTower {
 
 
 
-        estadoTorre = EstadoTorre.SINDAÑO;
+        estadoTorre = EStateTower.SINDAÑO;
         timerAnimacion = 0;
         // Quieto
         sprite = new Sprite(texturaTorre[0][0]);
@@ -138,7 +138,7 @@ public class AnimationTower {
         return isAlive;
     }
 
-    public void setEstado(EstadoTorre estadoTorre) {
+    public void setEstado(EStateTower estadoTorre) {
         this.estadoTorre = estadoTorre;
     }
 
