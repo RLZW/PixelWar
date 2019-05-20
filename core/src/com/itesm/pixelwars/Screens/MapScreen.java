@@ -1,6 +1,7 @@
 package com.itesm.pixelwars.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
@@ -43,8 +44,10 @@ public class MapScreen implements Screen {
         stage = new Stage(gamePort,game.batch);
         stage.addActor(mapActor);
         Gdx.input.setInputProcessor(stage);
-        Gdx.input.setCatchBackKey(false);
+        Gdx.input.setCatchBackKey(true);
         createMarkers(saved_levels);
+
+
 
 
         if(game.SOUND){
@@ -61,6 +64,9 @@ public class MapScreen implements Screen {
         Gdx.gl.glClearColor(1,1,1,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.setProjectionMatrix(stage.getCamera().combined);
+        if (Gdx.input.isKeyPressed(Input.Keys.BACK)){
+            game.setScreen(new LoadingScreen(game,Screens.MenuScreen));
+        }
         stage.draw();
         stage.act();
     }
