@@ -116,7 +116,6 @@ public class SettingsHud implements Disposable {
         stage.addActor(btnVolOff);
         btnVolOff.setPosition(PixelWars.ANCHO/2,PixelWars.ALTO/2-70);
 
-        
 
 
         //Listeneres
