@@ -1,6 +1,7 @@
 package com.itesm.pixelwars.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -43,7 +44,7 @@ public class AboutScreen implements Screen {
         texture = new Texture("title1.png");
         aboutinfo = new Texture("aboutinfo.png");
         Gdx.input.setInputProcessor(stage);
-        Gdx.input.setCatchBackKey(false);
+        Gdx.input.setCatchBackKey(true);
 
     }
 
@@ -51,6 +52,11 @@ public class AboutScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.gl.glClearColor(0,224f/255.0f,0,1f);
+
+
+        if (Gdx.input.isKeyPressed(Input.Keys.BACK)){
+            game.setScreen(new LoadingScreen(game,Screens.MenuScreen));
+        }
 
         terrainHud.stage.draw();
         game.batch.begin();
