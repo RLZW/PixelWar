@@ -56,6 +56,8 @@ public class MultiplayerScreen implements Screen {
 
     //Multiplayer
     private Socket socket;
+    private boolean ready = false;
+
 
 
     public MultiplayerScreen(PixelWars game){
@@ -66,7 +68,7 @@ public class MultiplayerScreen implements Screen {
     public void connectSocket(){
         try{
             //Define a donde nos estamos conectando.
-            socket = IO.socket("http://16286400.ngrok.io");
+            socket = IO.socket("http://04647f2f.ngrok.io");
             socket.connect();
         } catch (Exception e){
             System.out.print(e);
@@ -78,6 +80,7 @@ public class MultiplayerScreen implements Screen {
         socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
             @Override
             public void call(Object... args) {
+                createCastle(10, bgrass.getHeight() / 4);
                 Gdx.app.log("SocketIO", "Connected");
             }
         }).on("socketID", new Emitter.Listener() {
@@ -89,6 +92,17 @@ public class MultiplayerScreen implements Screen {
                     Gdx.app.log("SocketIO", "My ID: " + id);
                 } catch (JSONException e) {
                     Gdx.app.log("SocketIO", "Error getting ID");
+                }
+            }
+        }).on("pair", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                JSONObject data = (JSONObject) args[0];
+                try {
+                    String id = data.getString("pair");
+                    Gdx.app.log("SocketIO", "Your pair is: " + id);
+                } catch (JSONException e) {
+                    Gdx.app.log("SocketIO", "Error getting pair");
                 }
             }
         }).on("newPlayer", new Emitter.Listener() {
@@ -118,6 +132,11 @@ public class MultiplayerScreen implements Screen {
         game.batch.draw(bmountains, 0, bgrass.getHeight() - 3);
         game.batch.draw(bgrass, 0, 0);
         game.batch.draw(actionbar, xBar, PixelWars.ALTO - actionbar.getHeight());
+        if (myAnimatedCastle != null){
+            myAnimatedCastle.render(game.batch);
+
+        }
+
         game.batch.end();
 
         stage.draw();
@@ -193,6 +212,11 @@ public class MultiplayerScreen implements Screen {
         createBackground();
         createButtons(stage);
 
+
+        //Towers
+        createCastle(10, bgrass.getHeight() / 4);
+        createEnemyCastle(PixelWars.ANCHO*1.66F,bgrass.getHeight()/4);
+
         Gdx.input.setInputProcessor(stage);
         Gdx.input.setCatchBackKey(true);
 
@@ -266,6 +290,22 @@ public class MultiplayerScreen implements Screen {
 
     }
 
+    private void createCastle(float x, float y) {
+        Texture texturaCastilloAnimado = new Texture("torreAzul.png");
+        Texture texturaCastilloAnimadoDaño1 = new Texture("torreAzulDaño1.png");
+        Texture texturaCastilloAnimadoDaño2 = new Texture("torreAzulDaño2.png");
+        Texture texturaCastilloAnimadoDaño3 = new Texture("torreAzulDaño3.png");
+        myAnimatedCastle = new AnimationTower(x,y,texturaCastilloAnimado, texturaCastilloAnimadoDaño1, texturaCastilloAnimadoDaño2, texturaCastilloAnimadoDaño3);
+    }
+
+    private void createEnemyCastle(float x, float y) {
+        Texture texturaCastilloAnimado = new Texture("torreRoja.png");
+        Texture texturaCastilloAnimadoDaño1 = new Texture("torreRojaDaño1.png");
+        Texture texturaCastilloAnimadoDaño2 = new Texture("torreRojaDaño2.png");
+        Texture texturaCastilloAnimadoDaño3 = new Texture("torreRojaDaño3.png");
+        enemyAnimatedCastle = new AnimationTower(x,y,texturaCastilloAnimado, texturaCastilloAnimadoDaño1, texturaCastilloAnimadoDaño2, texturaCastilloAnimadoDaño3);
+
+    }
 
     @Override
     public void dispose() {

@@ -418,7 +418,6 @@ public class Level1 implements Screen {
             if (myAnimatedCastle.isAlive()) {
                 myAnimatedCastle.render(game.batch);
                 //myAnimatedCastle.remove();
-
             }
             if (enemyAnimatedCastle.isAlive()) {
                 enemyAnimatedCastle.render(game.batch);
