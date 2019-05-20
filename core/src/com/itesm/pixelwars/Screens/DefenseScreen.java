@@ -52,6 +52,7 @@ public class DefenseScreen implements Screen {
     private float xArcher = 65;
     private float xMonk = 90;
     private float xDragon = 115;
+    private float xMoney = 140;
     private float xPause = 300;
 
 
@@ -78,6 +79,11 @@ public class DefenseScreen implements Screen {
     private ImageButton btnContinue;
     private ImageButton btnExit;
     private ImageButton btnRestart;
+
+    private Texture money_button;
+    private Texture money_buttonp;
+    private TextureRegionDrawable trd_money_button, trd_money_buttonp;
+    private ImageButton btnMoney;
 
     private int warriors = 0;
     private int archers = 0;
@@ -122,14 +128,7 @@ public class DefenseScreen implements Screen {
         myAnimatedCastle = new AnimationTower(x,y,texturaCastilloAnimado, texturaCastilloAnimadoDaño1, texturaCastilloAnimadoDaño2, texturaCastilloAnimadoDaño3);
     }
 
-    private void createEnemyCastle(float x, float y) {
-        Texture texturaCastilloAnimado = new Texture("torreRoja.png");
-        Texture texturaCastilloAnimadoDaño1 = new Texture("torreRojaDaño1.png");
-        Texture texturaCastilloAnimadoDaño2 = new Texture("torreRojaDaño2.png");
-        Texture texturaCastilloAnimadoDaño3 = new Texture("torreRojaDaño3.png");
-        enemyAnimatedCastle = new AnimationTower(x,y,texturaCastilloAnimado, texturaCastilloAnimadoDaño1, texturaCastilloAnimadoDaño2, texturaCastilloAnimadoDaño3);
 
-    }
 
 
 
@@ -177,6 +176,8 @@ public class DefenseScreen implements Screen {
         exit_buttonp = new Texture("pauseExit_Pressed.png");
         continue_button = new Texture("pauseContinue.png");
         continue_buttonp = new Texture("pauseContinue_Pressed.png");
+        money_button = new Texture("btnDinero.png");
+        money_buttonp = new Texture("btnDinero_Pressed.png");
 
 
         //Win & Lose
@@ -213,6 +214,8 @@ public class DefenseScreen implements Screen {
         trd_continue_button = new TextureRegionDrawable(continue_button);
         trd_continue_buttonp = new TextureRegionDrawable(continue_buttonp);
 
+        trd_money_button = new TextureRegionDrawable(money_button);
+        trd_money_buttonp = new TextureRegionDrawable(money_buttonp);
 
         //ImageButtons Units
         btnWarrior = new ImageButton(trd_warrior_button,trd_warrior_buttonp);
@@ -220,6 +223,7 @@ public class DefenseScreen implements Screen {
         btnArcher = new ImageButton(trd_archer_button,trd_archer_buttonp);
         btnMonk = new ImageButton(trd_monk_button,trd_monk_buttonp);
         btnDragon = new ImageButton(trd_dragon_button, trd_dragon_buttonp);
+        btnMoney = new ImageButton(trd_money_button,trd_money_buttonp);
 
         //ImageButtons Elements
         btnPause = new ImageButton(trd_pause_button,trd_pause_buttonp);
@@ -233,6 +237,7 @@ public class DefenseScreen implements Screen {
         stage.addActor(btnArcher);
         stage.addActor(btnMonk);
         stage.addActor(btnDragon);
+        stage.addActor(btnMoney);
 
         //Stage Add Elements buttons
         stage.addActor(btnPause);
@@ -244,6 +249,7 @@ public class DefenseScreen implements Screen {
         btnArcher.setPosition(xArcher, PixelWars.ALTO-btnArcher.getHeight()-1);
         btnMonk.setPosition(xMonk, PixelWars.ALTO-btnMonk.getHeight()-1);
         btnDragon.setPosition(xDragon, PixelWars.ALTO-btnDragon.getHeight()-1);
+        btnMoney.setPosition(xMoney, PixelWars.ALTO-btnMoney.getHeight()-1);
 
         //Units Buttons Position
         btnPause.setPosition(xPause,PixelWars.ALTO-btnPause.getHeight()+3);
@@ -328,6 +334,17 @@ public class DefenseScreen implements Screen {
                                   }
                               }
         );
+
+        btnMoney.addListener(new ClickListener() {
+                                  @Override
+                                  public void clicked(InputEvent event, float x, float y) {
+                                      gold = gold+15;
+
+                                      }
+
+                                  }
+
+        );
         btnPause.addListener(new ClickListener() {
                                  @Override
                                  public void clicked(InputEvent event, float x, float y) {
@@ -379,7 +396,7 @@ public class DefenseScreen implements Screen {
 
         //Towers
         createCastle(10,bgrass.getHeight()/4);
-        createEnemyCastle(PixelWars.ANCHO*1.66F,bgrass.getHeight()/4);
+
 
 
 
@@ -398,25 +415,25 @@ public class DefenseScreen implements Screen {
     public void render(float delta) {
 
         if(!isPaused) {
-
+            label3.setText(gold);
             timer += delta;
             dragonTime += delta;
             if (timer >= seconds) {
                 timer = 0;
                 if (miners < 3){
-                    UMiner miner = new UMiner(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("mineroRojoCaminando.png"), new Texture("mineroRojoParado.png"), new Texture("mineroRojoAtacando.png"), 29, 44,29, 44, 34, 38, 50, 15, false , 'p');
+                    UMiner miner = new UMiner(PixelWars.ANCHO * 1.66F,bgrass.getHeight()/4, new Texture("mineroRojoCaminando.png"), new Texture("mineroRojoParado.png"), new Texture("mineroRojoAtacando.png"), 29, 44,29, 44, 34, 38, 50, 15, false , 'p');
                     enemyWarriorsQ.addLast(miner);
                     miners +=1;
                 }else if (warriors < 1){
-                    UWarrior warrior = new UWarrior(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("guerreroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44, 29, 44, 59, 42, 100, 20, false, 'g');
+                    UWarrior warrior = new UWarrior(PixelWars.ANCHO * 1.66F, bgrass.getHeight()/4, new Texture("guerreroRojoCaminando.png"), new Texture("guerreroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44, 29, 44, 59, 42, 100, 20, false, 'g');
                     enemyWarriorsQ.addLast(warrior);
                     warriors+=1;
                 }else if(monks <1) {
-                    Priest monk = new Priest(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("monjeRojoCaminando.png"), new Texture("monjeRojoParado.png"), new Texture("monjeRojoAtacando.png"), 32, 44, 29,44,29, 44, 50, 10, true, 'm');
+                    Priest monk = new Priest(PixelWars.ANCHO * 1.66F, bgrass.getHeight()/4, new Texture("monjeRojoCaminando.png"), new Texture("monjeRojoParado.png"), new Texture("monjeRojoAtacando.png"), 32, 44, 29,44,29, 44, 50, 10, true, 'm');
                     enemyWarriorsQ.addLast(monk);
                     monks += 1;
                 }else if (archers < 3){
-                    Archer archer = new Archer(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("arqueroRojoCaminando.png"), new Texture("arqueroRojoParado.png"), new Texture("arqueroRojoAtacando.png"), 29, 44, 37,43,43, 42, 40, 10, false, 'a');
+                    Archer archer = new Archer(PixelWars.ANCHO * 1.66F, bgrass.getHeight()/4, new Texture("arqueroRojoCaminando.png"), new Texture("arqueroRojoParado.png"), new Texture("arqueroRojoAtacando.png"), 29, 44, 37,43,43, 42, 40, 10, false, 'a');
                     enemyWarriorsQ.addLast(archer);
                     archers += 1;
                     if (archers == 2) {
@@ -431,7 +448,7 @@ public class DefenseScreen implements Screen {
                     while (dragons < number_of_dragons) {
                         timer+= delta;
                         if (timer >= seconds) {
-                            UWarrior warrior = new UWarrior(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("dragonRojoParado.png"), new Texture("dragonRojoParado.png"), new Texture("dragonRojoAtacando.png"), 47, 43, 47, 43, 47, 43, 150, 50, true, 'd');
+                            UWarrior warrior = new UWarrior(PixelWars.ANCHO * 1.66F, bgrass.getHeight()/4, new Texture("dragonRojoParado.png"), new Texture("dragonRojoParado.png"), new Texture("dragonRojoAtacando.png"), 47, 43, 47, 43, 47, 43, 150, 50, true, 'd');
                             enemyWarriorsQ.addLast(warrior);
                             dragons += 1;
                         }
@@ -463,9 +480,7 @@ public class DefenseScreen implements Screen {
                 myAnimatedCastle.render(game.batch);
 
             }
-            if (enemyAnimatedCastle.isAlive()) {
-                enemyAnimatedCastle.render(game.batch);
-            }
+
             game.batch.draw(actionbar, xBar, PixelWars.ALTO - actionbar.getHeight());
 
             if (!myWarriorsQ.isEmpty()) {
@@ -555,7 +570,7 @@ public class DefenseScreen implements Screen {
                                            Gdx.gl.glClearColor(1, 1, 1, 1);
                                            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
                                            //game.setScreen(new GameScreen(game));
-                                           game.setScreen(new LoadingScreen(game,Screens.level5));
+                                           game.setScreen(new LoadingScreen(game,Screens.DefenseScreen));
                                        }
 
                                    }
@@ -903,6 +918,7 @@ public class DefenseScreen implements Screen {
                 btnArcher.setPosition(xArcher+=aument, PixelWars.ALTO-btnArcher.getHeight()-1);
                 btnMonk.setPosition(xMonk+=aument, PixelWars.ALTO-btnMonk.getHeight()-1);
                 btnDragon.setPosition(xDragon+=aument, PixelWars.ALTO-btnDragon.getHeight()-1);
+                btnMoney.setPosition(xMoney+=aument, PixelWars.ALTO-btnMoney.getHeight()-1);
                 btnPause.setPosition(xPause+=aument,PixelWars.ALTO-btnPause.getHeight()+3);
                 gamePort.getCamera().position.x+=aument;
             }
@@ -911,12 +927,14 @@ public class DefenseScreen implements Screen {
                 xBar -= aument;
                 label2.setPosition(label2.getX()-aument,PixelWars.ALTO-row_height*1-4);
                 label3.setPosition(label3.getX()-aument,PixelWars.ALTO-row_height*1-4);
+                label3.setText(gold);
                 label2.setText(unidades+"/20");
                 btnWarrior.setPosition(xWarr-=aument,PixelWars.ALTO-btnWarrior.getHeight()-1);
                 btnMiner.setPosition(xMiner-=aument,PixelWars.ALTO-btnMiner.getHeight()-1);
                 btnArcher.setPosition(xArcher-=aument, PixelWars.ALTO-btnArcher.getHeight()-1);
                 btnMonk.setPosition(xMonk-=aument, PixelWars.ALTO-btnMonk.getHeight()-1);
                 btnDragon.setPosition(xDragon-=aument, PixelWars.ALTO-btnDragon.getHeight()-1);
+                btnMoney.setPosition(xMoney-=aument, PixelWars.ALTO-btnMoney.getHeight()-1);
                 btnPause.setPosition(xPause-=aument,PixelWars.ALTO-btnPause.getHeight()+3);
                 gamePort.getCamera().position.x-=aument;
             }
