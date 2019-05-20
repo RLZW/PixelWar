@@ -18,6 +18,7 @@ import com.itesm.pixelwars.Sprites.Actors.TitleActor;
 
 public class MapScreen implements Screen {
     private final LevelInfo levelInfor;
+    private final highscore highscore;
     private PixelWars game;
     private Stage stage;
     private Texture map;
@@ -30,10 +31,11 @@ public class MapScreen implements Screen {
     private int saved_levels;
 
 
-    public MapScreen(PixelWars game, LevelInfo levelInfo){
+    public MapScreen(PixelWars game, LevelInfo levelInfo, highscore highscore){
         this.game = game;
         gamePort = new StretchViewport(PixelWars.ANCHO,PixelWars.ALTO,game.gamecam);
         this.levelInfor=levelInfo;
+        this.highscore=highscore;
     }
 
     @Override

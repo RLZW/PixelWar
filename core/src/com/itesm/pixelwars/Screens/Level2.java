@@ -29,6 +29,7 @@ import com.itesm.pixelwars.Sprites.Animations.UMiner;
 
 public class Level2 implements Screen {
     private final LevelInfo levelInfo;
+    private final highscore highscore;
     private Stage stage;
     private PixelWars game;
     private Viewport gamePort;
@@ -106,10 +107,11 @@ public class Level2 implements Screen {
     //Pause
     private boolean isPaused = false;
 
-    public Level2(PixelWars game, LevelInfo levelInfo){
+    public Level2(PixelWars game, LevelInfo levelInfo, highscore highscore){
         this.game = game;
         gamePort = new StretchViewport(game.ANCHO,game.ALTO,game.gamecam);
         this.levelInfo=levelInfo;
+        this.highscore=highscore;
     }
 
 
