@@ -25,6 +25,7 @@ public class SettingsHud implements Disposable {
     public Stage stage;
     private PixelWars game;
     private Viewport viewport;
+    private Boolean musicOn = true;
 
 
 
@@ -101,8 +102,13 @@ public class SettingsHud implements Disposable {
                                public void clicked(InputEvent event, float x, float y) {
                                    super.clicked(event, x, y);
                                    //Responder al evento del boton
-                                    game.startMusic();
-
+                                   if (musicOn){
+                                       game.pauseMusic();
+                                       musicOn = false;
+                                   }else {
+                                       game.startMusic();
+                                       musicOn = true;
+                                   }
 
                                }
                            }
