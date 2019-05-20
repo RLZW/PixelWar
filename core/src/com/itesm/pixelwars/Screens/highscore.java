@@ -5,20 +5,20 @@ import com.badlogic.gdx.Preferences;
 
 public class highscore {
 
-    private Preferences level;
+    private Preferences Score;
 
     public highscore(){
-        level = Gdx.app.getPreferences("highscore");
+        Score = Gdx.app.getPreferences("highscore");
     }
 
-    public void setLevel(int passedLevel){
-        level.putInteger("highscore", passedLevel);
-        level.flush();
+    public void setHighScore(int actualHighScore){
+        Score.putInteger("highscore", actualHighScore);
+        Score.flush();
     }
 
-    public int getPassedLevel(){
-        int passedLevel = level.getInteger("highscore",0);
-        return passedLevel;
+    public int getHighScore(){
+        int actualHighScore = Score.getInteger("highscore",0);
+        return actualHighScore;
     }
 
 
