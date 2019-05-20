@@ -29,8 +29,6 @@ public class AboutScreen implements Screen {
     private TextureRegionDrawable trdaplayp;
     private ImageButton btnBack;
 
-
-
     public AboutScreen(PixelWars game){
         this.game = game;
         gamePort =  new FitViewport(game.ANCHO,game.ALTO,game.gamecam);
