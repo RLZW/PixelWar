@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.itesm.pixelwars.PixelWars;
 import com.itesm.pixelwars.Screens.LoadingScreen;
+import com.itesm.pixelwars.Screens.MultiplayerScreen;
 import com.itesm.pixelwars.Screens.Screens;
 
 public class MenuHud implements Disposable {
@@ -132,7 +133,7 @@ public class MenuHud implements Disposable {
                                          //Responder al evento del boton
                                          //game.setScreen(new LoadingScreen(game));
                                          // MANDA A MAP POR QUE NO ESTA IMPLEMENTADO AUN
-                                         game.setScreen(new LoadingScreen(game,Screens.MapScreen));
+                                         game.setScreen(new MultiplayerScreen(game));
 
                                      }
                                  }
