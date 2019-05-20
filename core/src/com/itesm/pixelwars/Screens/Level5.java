@@ -88,7 +88,7 @@ public class Level5 implements Screen {
     private int dragons = 0;
 
     private float dragonTime = 0;
-    private float dragonSeconds = 15f;
+    private float dragonSeconds = 25f;
     private int number_of_dragons = 1;
 
 
@@ -445,7 +445,9 @@ public class Level5 implements Screen {
                         }
 
                     }
-                    number_of_dragons += 1;
+                    if (number_of_dragons < 6) {
+                        number_of_dragons += 1;
+                    }
                     dragons = 0;
                     dragonTime = 0;
                     dragonTime = 0;
