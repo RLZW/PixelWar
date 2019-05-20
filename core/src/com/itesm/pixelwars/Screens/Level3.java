@@ -155,8 +155,8 @@ public class Level3 implements Screen {
         warrior_button = new Texture("btnSword.png");
         warrior_buttonp = new Texture("btnSword_Pressed.png");
 
-        miner_button = new Texture("btnDinero.png");
-        miner_buttonp = new Texture("btnDinero_Pressed.png");
+        miner_button = new Texture("btnPick.png");
+        miner_buttonp = new Texture("btnPick_Pressed.png");
 
         archer_button = new Texture("btnBow.png");
         archer_buttonp = new Texture("BtnBow_Pressed.png");
