@@ -114,7 +114,8 @@ public class LoadingScreen implements Screen {
 
         manager.load("btnDinero.png", Texture.class);
         manager.load("btnDinero_Pressed.png", Texture.class);
-
+        manager.load("btnPick.png", Texture.class);
+        manager.load("btnPick_Pressed.png", Texture.class);
         manager.load("btnBow.png", Texture.class);
         manager.load("BtnBow_Pressed.png", Texture.class);
 
@@ -159,6 +160,8 @@ public class LoadingScreen implements Screen {
 
         manager.load("btnDinero.png", Texture.class);
         manager.load("btnDinero_Pressed.png", Texture.class);
+        manager.load("btnPick.png", Texture.class);
+        manager.load("btnPick_Pressed.png", Texture.class);
 
         manager.load("btnBow.png", Texture.class);
         manager.load("BtnBow_Pressed.png", Texture.class);
@@ -204,6 +207,8 @@ public class LoadingScreen implements Screen {
 
         manager.load("btnDinero.png", Texture.class);
         manager.load("btnDinero_Pressed.png", Texture.class);
+        manager.load("btnPick.png", Texture.class);
+        manager.load("btnPick_Pressed.png", Texture.class);
 
         manager.load("btnBow.png", Texture.class);
         manager.load("BtnBow_Pressed.png", Texture.class);
@@ -249,7 +254,8 @@ public class LoadingScreen implements Screen {
 
         manager.load("btnDinero.png", Texture.class);
         manager.load("btnDinero_Pressed.png", Texture.class);
-
+        manager.load("btnPick.png", Texture.class);
+        manager.load("btnPick_Pressed.png", Texture.class);
         manager.load("btnBow.png", Texture.class);
         manager.load("BtnBow_Pressed.png", Texture.class);
 
@@ -297,6 +303,9 @@ public class LoadingScreen implements Screen {
         manager.load("btnSword.png", Texture.class);
         manager.load("btnSword_Pressed.png", Texture.class);
 
+        manager.load("btnPick.png", Texture.class);
+        manager.load("btnPick_Pressed.png", Texture.class);
+
         manager.load("btnDinero.png", Texture.class);
         manager.load("btnDinero_Pressed.png", Texture.class);
 
@@ -324,12 +333,16 @@ public class LoadingScreen implements Screen {
     private void loadSettingsResources() {
         manager.load("btnSoundOff.png", Texture.class);
         manager.load("btnSoundOff_Pressed.png", Texture.class);
-        manager.load("back.png", Texture.class);
+        manager.load("btnBack.png", Texture.class);
+        manager.load("btnBack_Pressed.png", Texture.class);
 
     }
 
     private void loadAboutResources() {
-        manager.load("back.png", Texture.class);
+        manager.load("btnBack.png", Texture.class);
+        manager.load("btnBack_Pressed.png", Texture.class);
+        manager.load("aboutinfo.png", Texture.class);
+
 
     }
 
