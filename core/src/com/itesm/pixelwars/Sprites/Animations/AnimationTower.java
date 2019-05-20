@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class AnimacionTorre {
+public class AnimationTower {
 
     private int hp;
     private boolean isAlive;
@@ -24,7 +24,7 @@ public class AnimacionTorre {
     private final TextureRegion[][] texturaTorreDaño3;
 
 
-    public AnimacionTorre(float x, float y, Texture torre, Texture torreDaño1, Texture torreDaño2, Texture torreDaño3){
+    public AnimationTower(float x, float y, Texture torre, Texture torreDaño1, Texture torreDaño2, Texture torreDaño3){
         this.isAlive=true;
         this.hp=500;
 
