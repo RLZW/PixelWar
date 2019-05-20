@@ -247,7 +247,7 @@ public class Level1 implements Screen {
                                            @Override
                                            public void clicked(InputEvent event, float x, float y) {
                                                if (gold>= 50 && unidades<20){
-                                                   minero miner = new minero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("mineroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44,29, 44, 59, 42, 25, 10, true, 'g');
+                                                   minero miner = new minero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("mineriAzulCaminando.png"), new Texture("mineroAzulParado.png"), new Texture("mineroAzulAtacando.png"), 29, 44,29, 44, 34, 38, 25, 10, true, 'p');
                                                    myWarriorsQ.addLast(miner);
                                                    unidades+=1;
                                                    gold-=50;
@@ -311,7 +311,7 @@ public class Level1 implements Screen {
                                    @Override
                                    public void clicked(InputEvent event, float x, float y) {
                                        if (gold>=1500 && unidades < 20){
-                                           Guerrero warrior = new Guerrero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("dragonAzulParado.png"), new Texture("dragonAzulAtacando.png"), 29, 43,29, 47, 43, 47, 150, 30 ,true, 'd');
+                                           Guerrero warrior = new Guerrero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("dragonAzulParado.png"), new Texture("dragonAzulParado.png"), new Texture("dragonAzulAtacando.png"), 29, 47,29, 47, 43, 47, 150, 30 ,true, 'd');
                                            myWarriorsQ.addLast(warrior);
                                            unidades +=1;
                                            gold-=1500;

@@ -253,7 +253,7 @@ public class Level3 implements Screen {
                                  @Override
                                  public void clicked(InputEvent event, float x, float y) {
                                      if (gold>= 50 && unidades<20){
-                                         minero miner = new minero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("mineroAzulParado.png"), new Texture("guerreroAzulAtacando.png"), 29, 44,29, 44, 59, 42, 50, 15, true, 'g');
+                                         minero miner = new minero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("mineroAzulCaminando.png"), new Texture("mineroAzulParado.png"), new Texture("mineroAzulAtacando.png"), 29, 44,29, 44, 34, 38, 50, 15, true, 'p');
                                          myWarriorsQ.addLast(miner);
                                          unidades+=1;
                                          gold-=50;
@@ -317,7 +317,7 @@ public class Level3 implements Screen {
                                   @Override
                                   public void clicked(InputEvent event, float x, float y) {
                                       if (gold>=1500 && unidades < 20){
-                                          Guerrero warrior = new Guerrero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("guerreroAzulCaminando.png"), new Texture("dragonAzulParado.png"), new Texture("dragonAzulAtacando.png"), 29, 43,29, 47, 43, 47, 150, 30 ,true, 'd');
+                                          Guerrero warrior = new Guerrero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("dragonAzulParado.png"), new Texture("dragonAzulParado.png"), new Texture("dragonAzulAtacando.png"), 29, 47,29, 47, 43, 47, 150, 30 ,true, 'd');
                                           myWarriorsQ.addLast(warrior);
                                           unidades +=1;
                                           gold-=1500;
@@ -410,7 +410,7 @@ public class Level3 implements Screen {
                 timer = 0;
 
                 if (miners < 4){
-                    minero miner = new minero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("guerreroRojoCaminando.png"), new Texture("mineroRojoParado.png"), new Texture("guerreroRojoAtacando.png"), 29, 44,29, 44, 59, 42, 50, 15, false , 'g');
+                    minero miner = new minero(PixelWars.ANCHO * 1.66F, enemyAnimatedCastle.getY(), new Texture("mineroRojoCaminando.png"), new Texture("mineroRojoParado.png"), new Texture("mineroRojoAtacando.png"), 29, 44,29, 44, 34, 38, 50, 15, false , 'p');
                     enemyWarriorsQ.addLast(miner);
                     miners +=1;
                 }else if (warriors < 1){
@@ -428,17 +428,6 @@ public class Level3 implements Screen {
                     }
                 }
             }
-
-            /**if (warriors > 3 && archers <3){
-                Arquero archer = new Arquero(myAnimatedCastle.getX()+myAnimatedCastle.getWidth(), myAnimatedCastle.getY(), new Texture("arqueroAzulCaminando.png"), new Texture("arqueroAzulParado.png"), new Texture("arqueroAzulAtacando.png"), 29, 44, 37,43,43, 42, 100, 10, true, 'a');
-
-                enemyWarriorsQ.addLast(archer);
-                archers = +1;
-            }else{
-                archers = 0;
-                warriors = 0;
-            }**/
-
 
             Gdx.gl.glClearColor(1, 1, 1, 1);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
