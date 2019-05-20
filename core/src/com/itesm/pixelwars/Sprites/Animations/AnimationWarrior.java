@@ -7,13 +7,10 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import static com.itesm.pixelwars.Sprites.Animations.EstadoGuerrero.CAMINANDO;
-import static com.itesm.pixelwars.Sprites.Animations.EstadoGuerrero.MUERTO;
-import static com.itesm.pixelwars.Sprites.Animations.EstadoGuerrero.ATACANDO;
-import static com.itesm.pixelwars.Sprites.Animations.EstadoGuerrero.QUIETO;
+import static com.itesm.pixelwars.Sprites.Animations.StateWarrior.CAMINANDO;
 
 
-public class AnimacionGuerrero {
+public class AnimationWarrior {
 
 
     private Sprite sprite;
@@ -25,7 +22,7 @@ public class AnimacionGuerrero {
     private Texture texturaParado;
     private Texture texturaAtacando;
 
-    private EstadoGuerrero estado;
+    private StateWarrior estado;
     private TextureRegion[][] texturaGuerreroCaminando;
     private TextureRegion[][] texturaGuerreroParado;
     private TextureRegion[][] texturaGuerreroAtacando;
@@ -39,7 +36,7 @@ public class AnimacionGuerrero {
     private int ataque;
 
 
-    public AnimacionGuerrero(float x, float y, Texture guerreroCaminando, Texture guerreroParado, Texture guerreroAtacando, int caminandoWidth, int caminandoHeight,int paradoWidth, int paradoHeight, int atacandoWidth, int atacandoHeight, int hp, int ataque, boolean equipoAzul, char unidad){
+    public AnimationWarrior(float x, float y, Texture guerreroCaminando, Texture guerreroParado, Texture guerreroAtacando, int caminandoWidth, int caminandoHeight, int paradoWidth, int paradoHeight, int atacandoWidth, int atacandoHeight, int hp, int ataque, boolean equipoAzul, char unidad){
         this.equipoAzul=equipoAzul;
         this.unidad = unidad;
         this.texturaCaminando = guerreroCaminando;
@@ -147,11 +144,11 @@ public class AnimacionGuerrero {
     }
 
 
-    public  EstadoGuerrero getEstado() {
+    public StateWarrior getEstado() {
         return estado;
     }
 
-    public void setEstado(EstadoGuerrero estado) {
+    public void setEstado(StateWarrior estado) {
         this.estado = estado;
     }
 

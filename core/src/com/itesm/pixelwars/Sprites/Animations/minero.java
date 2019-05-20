@@ -3,7 +3,7 @@ package com.itesm.pixelwars.Sprites.Animations;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
-public class minero extends AnimacionGuerrero {
+public class minero extends AnimationWarrior {
 
     private int ataque;
     private static final float TIEMPO_BASE = 0.5f;

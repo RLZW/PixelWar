@@ -5,7 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 
-public class Guerrero extends  AnimacionGuerrero{
+public class Guerrero extends AnimationWarrior {
     private int ataque;
     private static final float TIEMPO_BASE = 0.62f;
     private float tiempoAtaque = 0;

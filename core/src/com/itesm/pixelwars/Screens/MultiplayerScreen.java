@@ -13,8 +13,8 @@ import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 import com.itesm.pixelwars.PixelWars;
-import com.itesm.pixelwars.Sprites.Animations.AnimacionGuerrero;
-import com.itesm.pixelwars.Sprites.Animations.AnimacionTorre;
+import com.itesm.pixelwars.Sprites.Animations.AnimationWarrior;
+import com.itesm.pixelwars.Sprites.Animations.AnimationTower;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,11 +25,11 @@ public class MultiplayerScreen implements Screen {
     private Viewport gamePort;
 
     //In game textures and animations
-    private AnimacionTorre myAnimatedCastle;
-    private AnimacionTorre enemyAnimatedCastle;
+    private AnimationTower myAnimatedCastle;
+    private AnimationTower enemyAnimatedCastle;
     private Texture skytext,bgrass,bmountains,bclouds;
-    private Queue<AnimacionGuerrero> myWarriorsQ = new Queue<AnimacionGuerrero>();
-    private Queue<AnimacionGuerrero> enemyWarriorsQ = new Queue<AnimacionGuerrero>();
+    private Queue<AnimationWarrior> myWarriorsQ = new Queue<AnimationWarrior>();
+    private Queue<AnimationWarrior> enemyWarriorsQ = new Queue<AnimationWarrior>();
 
     //Action Bar
     private Texture actionbar;

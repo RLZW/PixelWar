@@ -1,5 +1,5 @@
 package com.itesm.pixelwars.Sprites.Animations;
 
-public enum EstadoGuerrero {
+public enum StateWarrior {
     CAMINANDO, ATACANDO, QUIETO, MUERTO;
 }
