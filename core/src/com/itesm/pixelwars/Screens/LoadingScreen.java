@@ -22,7 +22,6 @@ public class LoadingScreen implements Screen {
 
     //Tiempo
     private float timeCounter = 0;
-
     // AssetManager
     private AssetManager manager;
 
@@ -445,8 +444,6 @@ public class LoadingScreen implements Screen {
         skytext = new Texture("bSky1.png");
         bgrass = new Texture("bGrass.png");
         bmountains = new Texture("bMtns.png");
-
-
     }
 
     @Override
