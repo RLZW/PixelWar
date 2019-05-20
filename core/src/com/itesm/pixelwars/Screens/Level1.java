@@ -866,10 +866,6 @@ public class Level1 implements Screen {
                 gamePort.getCamera().position.x+=aument;
             }
             else if (Gdx.input.getX()<=Gdx.graphics.getWidth()/2 && gamePort.getCamera().position.x > 4 +PixelWars.ANCHO/2 && Gdx.input.getY() > actionbar.getHeight()){
-
-                System.out.println(Gdx.graphics.getHeight());
-                System.out.println(actionbar.getHeight());
-                System.out.println(Gdx.input.getY());
                 aument *= deltaTime;
                 xBar -= aument;
                 label2.setPosition(label2.getX()-aument,PixelWars.ALTO-row_height*1-4);
