@@ -295,7 +295,7 @@ public class MultiplayerScreen implements Screen {
         Texture texturaCastilloAnimadoDaño1 = new Texture("torreAzulDaño1.png");
         Texture texturaCastilloAnimadoDaño2 = new Texture("torreAzulDaño2.png");
         Texture texturaCastilloAnimadoDaño3 = new Texture("torreAzulDaño3.png");
-        myAnimatedCastle = new AnimacionTorre(x,y,texturaCastilloAnimado, texturaCastilloAnimadoDaño1, texturaCastilloAnimadoDaño2, texturaCastilloAnimadoDaño3);
+        myAnimatedCastle = new AnimationTower(x,y,texturaCastilloAnimado, texturaCastilloAnimadoDaño1, texturaCastilloAnimadoDaño2, texturaCastilloAnimadoDaño3);
     }
 
     private void createEnemyCastle(float x, float y) {
@@ -303,7 +303,7 @@ public class MultiplayerScreen implements Screen {
         Texture texturaCastilloAnimadoDaño1 = new Texture("torreRojaDaño1.png");
         Texture texturaCastilloAnimadoDaño2 = new Texture("torreRojaDaño2.png");
         Texture texturaCastilloAnimadoDaño3 = new Texture("torreRojaDaño3.png");
-        enemyAnimatedCastle = new AnimacionTorre(x,y,texturaCastilloAnimado, texturaCastilloAnimadoDaño1, texturaCastilloAnimadoDaño2, texturaCastilloAnimadoDaño3);
+        enemyAnimatedCastle = new AnimationTower(x,y,texturaCastilloAnimado, texturaCastilloAnimadoDaño1, texturaCastilloAnimadoDaño2, texturaCastilloAnimadoDaño3);
 
     }
 
