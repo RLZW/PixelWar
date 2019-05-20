@@ -34,7 +34,7 @@ public class MapScreen implements Screen {
 
     @Override
     public void show() {
-        map = new Texture("map2.png");
+        map = new Texture("map.png");
         mapActor = new TitleActor(map);
         stage = new Stage(gamePort,game.batch);
         stage.addActor(mapActor);
