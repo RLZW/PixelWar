@@ -83,7 +83,6 @@ public class AboutScreen implements Screen {
     public void createButtons(Stage stage){
         Texture texturetback = new Texture("btnBack.png");
         Texture texturebtnbackp = new Texture("btnBack_Pressed.png");
-
         TextureRegionDrawable trdaback = new TextureRegionDrawable(texturetback);
         TextureRegionDrawable trdaplayp = new TextureRegionDrawable(texturebtnbackp);
 
