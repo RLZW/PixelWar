@@ -105,8 +105,7 @@ public class DefenseScreen implements Screen {
     private float timerToMine = 0;
     private float timeToMine = 0.5F;
     private int gold = 200;
-
-
+    private int score = 0;
     //Pause
     private boolean isPaused = false;
     private Texture youlose;
@@ -416,6 +415,7 @@ public class DefenseScreen implements Screen {
 
         if(!isPaused) {
             label3.setText(gold);
+            score += 1 * delta;
             timer += delta;
             dragonTime += delta;
             if (timer >= seconds) {

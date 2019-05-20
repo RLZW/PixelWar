@@ -4,6 +4,9 @@ package com.itesm.pixelwars.Sprites.Animations;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.itesm.pixelwars.PixelWars;
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
+
 
 public class UWarrior extends AnimationWarrior {
     private int ataque;
@@ -19,7 +22,9 @@ public class UWarrior extends AnimationWarrior {
     public int Espadazo(int HP){
         tiempoAtaque+=Gdx.graphics.getDeltaTime();
         if (tiempoAtaque>=TIEMPO_BASE){
-            sword_sound.play(0.20f);
+            if (PixelWars.effects) {
+                sword_sound.play(0.20f);
+            }
             HP-= ataque;
             tiempoAtaque = 0;
         }

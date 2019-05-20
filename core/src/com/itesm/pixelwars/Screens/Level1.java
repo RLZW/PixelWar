@@ -1,6 +1,7 @@
 package com.itesm.pixelwars.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -381,9 +382,9 @@ public class Level1 implements Screen {
         //Towers
         createCastle(10, bgrass.getHeight() / 4);
         createEnemyCastle(PixelWars.ANCHO*1.66F,bgrass.getHeight()/4);
-
-        Gdx.input.setInputProcessor(stage);
         Gdx.input.setCatchBackKey(true);
+        Gdx.input.setInputProcessor(stage);
+
 
 
     }
@@ -395,6 +396,8 @@ public class Level1 implements Screen {
     @Override
     public void render(float delta) {
 
+        Gdx.input.setCatchBackKey(true);
+
         if(!isPaused) {
 
             timer += delta;
@@ -404,6 +407,8 @@ public class Level1 implements Screen {
 
                 enemyWarriorsQ.addLast(warrior);
             }
+
+
 
 
             Gdx.gl.glClearColor(1, 1, 1, 1);
@@ -482,11 +487,42 @@ public class Level1 implements Screen {
 
 
             game.batch.end();
+
+            if (Gdx.input.isKeyPressed(Input.Keys.BACK)){
+                Gdx.input.setCatchBackKey(true);
+                if(!isPaused){
+                    btnPause.remove();
+                    btnWarrior.remove();
+                    btnArcher.remove();
+                    btnDragon.remove();
+                    btnMiner.remove();
+                    btnMonk.remove();
+                    label1.remove();
+                    label2.remove();
+                    label3.remove();
+                    isPaused = true;
+                }
+                if(isPaused){
+                    btnContinue.remove();
+                    btnExit.remove();
+                    btnRestart.remove();
+                    stage.addActor(btnPause);
+                    stage.addActor(btnWarrior);
+                    stage.addActor(label1);
+                    stage.addActor(label2);
+                    stage.addActor(label3);
+                    isPaused = false;
+
+                }
+            }
+
             stage.draw();
             stage.act();
 
             update(delta);
             gamePort.getCamera().update();
+
+
 
         }
         else{
@@ -549,8 +585,37 @@ public class Level1 implements Screen {
                                     }
             );
             game.batch.end();
+            if (Gdx.input.isKeyPressed(Input.Keys.BACK)){
+                Gdx.input.setCatchBackKey(true);
+                if(!isPaused){
+                    btnPause.remove();
+                    btnWarrior.remove();
+                    btnArcher.remove();
+                    btnDragon.remove();
+                    btnMiner.remove();
+                    btnMonk.remove();
+                    label1.remove();
+                    label2.remove();
+                    label3.remove();
+                    isPaused = true;
+                }
+                if(isPaused){
+                    btnContinue.remove();
+                    btnExit.remove();
+                    btnRestart.remove();
+                    stage.addActor(btnPause);
+                    stage.addActor(btnWarrior);
+                    stage.addActor(label1);
+                    stage.addActor(label2);
+                    stage.addActor(label3);
+                    isPaused = false;
+
+                }
+            }
             stage.draw();
             stage.act();
+
+
 
         }
     }
