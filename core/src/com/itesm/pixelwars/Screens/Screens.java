@@ -6,6 +6,7 @@ public enum Screens {
     SettingsScreen,
     GameScreen,
     MapScreen,
+    DefenseScreen,
     level2,
     level3,
     level4,

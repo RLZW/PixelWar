@@ -23,12 +23,10 @@ import com.itesm.pixelwars.Screens.Screens;
 
 public class SettingsHud implements Disposable {
     public Stage stage;
-    private Table table;
     private PixelWars game;
     private Viewport viewport;
-    private Label.LabelStyle labelStyle,slabelStyle;
-    private BitmapFont bitmapFont,sbitmapFont;
-    private Label label1,label2,label3,label4;
+
+
 
 
 
@@ -36,47 +34,11 @@ public class SettingsHud implements Disposable {
         this.game = game;
         viewport = new StretchViewport(game.ANCHO,game.ALTO, game.gamecam);
         stage = new Stage(viewport,game.batch);
-        table = new Table();
 
-        //Text
-        labelStyle = new Label.LabelStyle();
-        bitmapFont = new BitmapFont(Gdx.files.internal("pixel.fnt"));
-        labelStyle.font = bitmapFont;
-        labelStyle.fontColor = Color.WHITE;
-
-        slabelStyle = new Label.LabelStyle();
-        sbitmapFont = new BitmapFont(Gdx.files.internal("spixel.fnt"));
-        slabelStyle.font = sbitmapFont;
-        slabelStyle.fontColor = Color.WHITE;
-
-        float row_height = PixelWars.ALTO/16;
-        label1 = new Label("Settings",labelStyle);
-        label1.setSize(PixelWars.ANCHO/2-label1.getWidth(),row_height);
-        label1.setPosition(PixelWars.ANCHO/2,PixelWars.ALTO/2+50);
-        label1.setAlignment(Align.center);
-        stage.addActor(label1);
-
-
-        label2 = new Label("music",labelStyle);
-        label2.setSize(PixelWars.ANCHO/2,row_height);
-        label2.setPosition(PixelWars.ANCHO/2-80,PixelWars.ALTO/2+20);
-        label2.setAlignment(Align.center);
-        stage.addActor(label2);
-
-        label3 = new Label("ON",labelStyle);
-        label3.setSize(PixelWars.ANCHO/2-label1.getWidth(),30);
-        label3.setPosition(PixelWars.ANCHO/2-140,PixelWars.ALTO/2-30);
-        label3.setAlignment(Align.center);
-        stage.addActor(label3);
-
-        label4 = new Label("OFF",labelStyle);
-        label4.setSize(PixelWars.ANCHO/2-label1.getWidth(),30);
-        label4.setPosition(PixelWars.ANCHO/2-150,PixelWars.ALTO/2-70);
-        label4.setAlignment(Align.center);
-        stage.addActor(label4);
 
 
 
+        float row_height = PixelWars.ALTO/16;
 
 
         //Buttons & Textures

@@ -1,6 +1,7 @@
 package com.itesm.pixelwars.Scenes;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -18,6 +19,7 @@ import com.itesm.pixelwars.PixelWars;
 import com.itesm.pixelwars.Screens.LoadingScreen;
 import com.itesm.pixelwars.Screens.MultiplayerScreen;
 import com.itesm.pixelwars.Screens.Screens;
+import com.itesm.pixelwars.Screens.SettingsScreen;
 
 public class MenuHud implements Disposable {
     public Stage stage;
@@ -57,9 +59,11 @@ public class MenuHud implements Disposable {
         btnPlay.setPosition(PixelWars.ANCHO/2-btnPlay.getWidth()-9,PixelWars.ANCHO*0.0625F+4-7);
 
 
+
+
         //Button 2 Players
-        Texture texture2players = new Texture("btn2P.png");
-        Texture texture2playersp = new Texture("btn2P_Pressed.png");
+        Texture texture2players = new Texture("btn1PShield.png");
+        Texture texture2playersp = new Texture("btn1PShield_Pressed.png");
 
         TextureRegionDrawable trda2play = new TextureRegionDrawable(texture2players);
         TextureRegionDrawable trda2playp = new TextureRegionDrawable(texture2playersp);
@@ -133,7 +137,7 @@ public class MenuHud implements Disposable {
                                          //Responder al evento del boton
                                          //game.setScreen(new LoadingScreen(game));
                                          // MANDA A MAP POR QUE NO ESTA IMPLEMENTADO AUN
-                                         game.setScreen(new MultiplayerScreen(game));
+                                         game.setScreen(new LoadingScreen(game, Screens.DefenseScreen));
 
                                      }
                                  }

@@ -86,9 +86,57 @@ public class LoadingScreen implements Screen {
             case level5:
                 loadLevel5Resources();
                 break;
+            case DefenseScreen:
+                loadDefenseResources();
+                break;
         }
     }
 
+    private void loadDefenseResources(){
+        manager.load("torreInvisible.png", Texture.class);
+        manager.load("torreAzul.png", Texture.class);
+        manager.load("torreAzulDaño1.png", Texture.class);
+        manager.load("torreAzulDaño2.png", Texture.class);
+        manager.load("torreAzulDaño3.png", Texture.class);
+
+        manager.load("torreRoja.png", Texture.class);
+        manager.load("torreRojaDaño1.png", Texture.class);
+        manager.load("torreRojaDaño2.png", Texture.class);
+        manager.load("torreRojaDaño3.png", Texture.class);
+
+        manager.load("bClouds.png", Texture.class);
+        manager.load("bSky4.png", Texture.class);
+        manager.load("sGrass4.png", Texture.class);
+        manager.load("sMtns4.png", Texture.class);
+
+        manager.load("topBar.png", Texture.class);
+
+        manager.load("btnSword.png", Texture.class);
+        manager.load("btnSword_Pressed.png", Texture.class);
+
+        manager.load("btnDinero.png", Texture.class);
+        manager.load("btnDinero_Pressed.png", Texture.class);
+        manager.load("btnPick.png", Texture.class);
+        manager.load("btnPick_Pressed.png", Texture.class);
+        manager.load("btnBow.png", Texture.class);
+        manager.load("BtnBow_Pressed.png", Texture.class);
+
+        manager.load("btnMage.png", Texture.class);
+        manager.load("btnMage_Pressed.png", Texture.class);
+
+        manager.load("btnDragon.png", Texture.class);
+        manager.load("btnDragon_Pressed.png", Texture.class);
+
+        manager.load("btnPause.png", Texture.class);
+        manager.load("btnPause_Pressed.png", Texture.class);
+        manager.load("pauseRestart.png", Texture.class);
+        manager.load("pauseRestart_Pressed.png", Texture.class);
+        manager.load("pauseExit.png", Texture.class);
+        manager.load("pauseExit_Pressed.png", Texture.class);
+        manager.load("pauseContinue.png", Texture.class);
+        manager.load("pauseContinue_Pressed.png", Texture.class);
+
+    }
     private void loadLevel5Resources() {
         manager.load("torreInvisible.png", Texture.class);
         manager.load("torreAzul.png", Texture.class);
@@ -416,6 +464,10 @@ public class LoadingScreen implements Screen {
                 case level5:
                     game.setScreen(new Level5(game, levelInfo));
                     break;
+                case DefenseScreen:
+                    game.setScreen(new DefenseScreen(game));
+                    break;
+
             }
         }
         avance = (int) (manager.getProgress() * 100);

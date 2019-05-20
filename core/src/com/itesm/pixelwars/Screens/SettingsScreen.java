@@ -18,6 +18,7 @@ public class SettingsScreen implements Screen {
     private ParallaxTerrain terrainHud;
     private SettingsHud settingsHud;
     private Texture texture;
+    private Texture text_settings;
 
     public SettingsScreen(PixelWars game){
         this.game = game;
@@ -28,12 +29,9 @@ public class SettingsScreen implements Screen {
     public void show() {
 
         gamePort = new StretchViewport(PixelWars.ANCHO,PixelWars.ALTO,game.gamecam);
-
-
-
+        text_settings = new Texture("settings.png");
         terrainHud = new ParallaxTerrain(game);
         settingsHud= new SettingsHud(game);
-        texture = new Texture("title1.png");
 
         Gdx.input.setInputProcessor(settingsHud.stage);
         Gdx.input.setCatchBackKey(false);
@@ -48,6 +46,9 @@ public class SettingsScreen implements Screen {
         game.batch.setProjectionMatrix(settingsHud.stage.getCamera().combined);
 
         terrainHud.stage.draw();
+        game.batch.begin();
+        game.batch.draw(text_settings,0,0);
+        game.batch.end();
         settingsHud.stage.draw();
 
 
@@ -78,6 +79,7 @@ public class SettingsScreen implements Screen {
     public void dispose() {
         terrainHud.dispose();
         settingsHud.dispose();
+        text_settings.dispose();
 
     }
 }
