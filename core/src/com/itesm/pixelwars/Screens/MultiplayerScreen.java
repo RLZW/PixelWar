@@ -56,7 +56,9 @@ public class MultiplayerScreen implements Screen {
 
     //Multiplayer
     private Socket socket;
-    private boolean ready = false;
+    private boolean ally = false;
+    private boolean isEnemy = false;
+
 
 
 
@@ -80,7 +82,7 @@ public class MultiplayerScreen implements Screen {
         socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
             @Override
             public void call(Object... args) {
-                createCastle(10, bgrass.getHeight() / 4);
+                ally = true;
                 Gdx.app.log("SocketIO", "Connected");
             }
         }).on("socketID", new Emitter.Listener() {
@@ -94,24 +96,28 @@ public class MultiplayerScreen implements Screen {
                     Gdx.app.log("SocketIO", "Error getting ID");
                 }
             }
-        }).on("pair", new Emitter.Listener() {
-            @Override
-            public void call(Object... args) {
-                JSONObject data = (JSONObject) args[0];
-                try {
-                    String id = data.getString("pair");
-                    Gdx.app.log("SocketIO", "Your pair is: " + id);
-                } catch (JSONException e) {
-                    Gdx.app.log("SocketIO", "Error getting pair");
-                }
-            }
         }).on("newPlayer", new Emitter.Listener() {
             @Override
             public void call(Object... args) {
                 JSONObject data = (JSONObject) args[0];
                 try {
+                    isEnemy = true;
                     String id = data.getString("id");
                     Gdx.app.log("SocketIO", "New Player Connected: " + id);
+
+                } catch (JSONException e) {
+                    Gdx.app.log("SocketIO", "Error getting New PlayerID");
+                }
+            }
+        }).on("playerDisconnected", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                JSONObject data = (JSONObject) args[0];
+                try {
+
+                    String id = data.getString("id");
+                    Gdx.app.log("SocketIO", "New Player Connected: " + id);
+
                 } catch (JSONException e) {
                     Gdx.app.log("SocketIO", "Error getting New PlayerID");
                 }
@@ -132,9 +138,11 @@ public class MultiplayerScreen implements Screen {
         game.batch.draw(bmountains, 0, bgrass.getHeight() - 3);
         game.batch.draw(bgrass, 0, 0);
         game.batch.draw(actionbar, xBar, PixelWars.ALTO - actionbar.getHeight());
-        if (myAnimatedCastle != null){
+        if (ally){
             myAnimatedCastle.render(game.batch);
-
+        }
+        if(isEnemy){
+            enemyAnimatedCastle.render(game.batch);
         }
 
         game.batch.end();
