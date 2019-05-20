@@ -102,9 +102,9 @@ public class LoadingScreen implements Screen {
         manager.load("torreRojaDaño3.png", Texture.class);
 
         manager.load("bClouds.png", Texture.class);
-        manager.load("bSky1.png", Texture.class);
-        manager.load("bGrass.png", Texture.class);
-        manager.load("bMtns.png", Texture.class);
+        manager.load("bSky4.png", Texture.class);
+        manager.load("sGrass4.png", Texture.class);
+        manager.load("sMtns4.png", Texture.class);
 
         manager.load("topBar.png", Texture.class);
 
@@ -147,10 +147,10 @@ public class LoadingScreen implements Screen {
         manager.load("torreRojaDaño2.png", Texture.class);
         manager.load("torreRojaDaño3.png", Texture.class);
 
-        manager.load("bClouds.png", Texture.class);
-        manager.load("bSky1.png", Texture.class);
-        manager.load("bGrass.png", Texture.class);
-        manager.load("bMtns.png", Texture.class);
+        manager.load("sClouds2.png", Texture.class);
+        manager.load("bSky2.png", Texture.class);
+        manager.load("sGrass2.png", Texture.class);
+        manager.load("sMtns2.png", Texture.class);
 
         manager.load("topBar.png", Texture.class);
 
@@ -196,7 +196,8 @@ public class LoadingScreen implements Screen {
 
         manager.load("sClouds5.png", Texture.class);
         manager.load("bSky1.png", Texture.class);
-        manager.load("sBeach.png", Texture.class);
+        manager.load("sGrass3.png", Texture.class);
+        manager.load("sMtns3.png", Texture.class);
 
         manager.load("topBar.png", Texture.class);
 
@@ -240,10 +241,9 @@ public class LoadingScreen implements Screen {
         manager.load("torreRojaDaño2.png", Texture.class);
         manager.load("torreRojaDaño3.png", Texture.class);
 
-        manager.load("bClouds.png", Texture.class);
-        manager.load("bSky4.png", Texture.class);
-        manager.load("sGrass4.png", Texture.class);
-        manager.load("sMtns4.png", Texture.class);
+        manager.load("sClouds5.png", Texture.class);
+        manager.load("bSky1.png", Texture.class);
+        manager.load("sBeach.png", Texture.class);
 
         manager.load("topBar.png", Texture.class);
 

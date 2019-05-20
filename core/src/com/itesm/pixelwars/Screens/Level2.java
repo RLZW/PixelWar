@@ -140,10 +140,10 @@ public class Level2 implements Screen {
 
 
         //Background
-        bclouds = new Texture("bClouds.png");
-        skytext = new Texture("bSky4.png");
-        bgrass = new Texture("sGrass4.png");
-        bmountains = new Texture("sMtns4.png");
+        bclouds = new Texture("sClouds5.png");
+        skytext = new Texture("bSky1.png");
+        bgrass = new Texture("sBeach.png");
+
         bclouds.setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
 
         //Pause
@@ -438,7 +438,7 @@ public class Level2 implements Screen {
             game.batch.draw(skytext, 0, 0);
             game.batch.draw(skytext, skytext.getWidth(), 0);
             game.batch.draw(bclouds, 0, bgrass.getHeight(), 0, 0, bclouds.getWidth(), bclouds.getHeight(), 1, 1, 0, (int) srcX, 0, bclouds.getWidth(), bclouds.getHeight(), false, false);
-            game.batch.draw(bmountains, 0, bgrass.getHeight() - 3);
+
             game.batch.draw(bgrass, 0, 0);
             if (myAnimatedCastle.isAlive()) {
                 myAnimatedCastle.render(game.batch);
@@ -951,7 +951,6 @@ public class Level2 implements Screen {
         stage.dispose();
         skytext.dispose();
         bgrass.dispose();
-        bmountains.dispose();
         bclouds.dispose();
 
     }

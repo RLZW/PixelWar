@@ -103,6 +103,7 @@ public class Level3 implements Screen {
     private boolean isPaused = false;
     private Texture youwin;
     private Texture youlose;
+    private Texture bmountains;
 
 
     public Level3(PixelWars game, LevelInfo levelInfo){
@@ -141,7 +142,8 @@ public class Level3 implements Screen {
         //Background
         bclouds = new Texture("sClouds5.png");
         skytext = new Texture("bSky1.png");
-        bgrass = new Texture("sBeach.png");
+        bgrass = new Texture("sGrass3.png");
+        bmountains = new Texture("sMtns3.png");
 
         bclouds.setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
 
@@ -438,6 +440,7 @@ public class Level3 implements Screen {
             game.batch.draw(skytext, 0, 0);
             game.batch.draw(skytext, skytext.getWidth(), 0);
             game.batch.draw(bclouds, 0, bgrass.getHeight(), 0, 0, bclouds.getWidth(), bclouds.getHeight(), 1, 1, 0, (int) srcX, 0, bclouds.getWidth(), bclouds.getHeight(), false, false);
+            game.batch.draw(bmountains, 0, bgrass.getHeight() - 3);
             game.batch.draw(bgrass, 0, 0);
             if (myAnimatedCastle.isAlive()) {
                 myAnimatedCastle.render(game.batch);

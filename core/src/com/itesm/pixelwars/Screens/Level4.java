@@ -138,10 +138,10 @@ public class Level4 implements Screen {
 
 
         //Background
-        bclouds = new Texture("bClouds.png");
-        skytext = new Texture("bSky1.png");
-        bgrass = new Texture("bGrass.png");
-        bmountains = new Texture("bMtns.png");
+        bclouds = new Texture("sClouds2.png");
+        skytext = new Texture("bSky2.png");
+        bgrass = new Texture("sGrass2.png");
+        bmountains = new Texture("sMtns2.png");
         bclouds.setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
 
         //Pause
