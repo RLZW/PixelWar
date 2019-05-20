@@ -105,9 +105,11 @@ public class SettingsHud implements Disposable {
                                    if (musicOn){
                                        game.pauseMusic();
                                        musicOn = false;
+                                       game.SOUND = false;
                                    }else {
                                        game.startMusic();
                                        musicOn = true;
+                                       game.SOUND = true;
                                    }
 
                                }
@@ -120,7 +122,11 @@ public class SettingsHud implements Disposable {
                                 public void clicked(InputEvent event, float x, float y) {
                                     super.clicked(event, x, y);
                                     //Responder al evento del boton
-                                    game.pauseMusic();
+                                    if (game.effects) {
+                                        game.effects = false;
+                                    }else{
+                                        game.effects = true;
+                                    }
 
 
                                 }
@@ -137,5 +143,9 @@ public class SettingsHud implements Disposable {
     @Override
     public void dispose() {
         stage.dispose();
+    }
+
+    public Boolean getMusicOn() {
+        return musicOn;
     }
 }

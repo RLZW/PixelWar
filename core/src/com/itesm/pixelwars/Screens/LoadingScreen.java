@@ -19,6 +19,7 @@ public class LoadingScreen implements Screen {
     private OrthographicCamera gamecam;
     private Viewport gamePort;
     private LevelInfo levelInfo;
+    private highscore highscore;
 
     //Tiempo
     private float timeCounter = 0;
@@ -37,6 +38,7 @@ public class LoadingScreen implements Screen {
         this.game = game;
         this.nextScreen = nextScreen;
         levelInfo=new LevelInfo();
+        highscore = new highscore();
         System.out.println(levelInfo.getPassedLevel());
     }
 
@@ -447,22 +449,22 @@ public class LoadingScreen implements Screen {
                     game.setScreen(new SettingsScreen(game));
                     break;
                 case GameScreen:
-                    game.setScreen(new Level1(game, levelInfo));
+                    game.setScreen(new Level1(game, levelInfo, highscore));
                     break;
                 case MapScreen:
-                    game.setScreen(new MapScreen(game, levelInfo));
+                    game.setScreen(new MapScreen(game, levelInfo,highscore));
                     break;
                 case level2:
-                    game.setScreen(new Level2(game, levelInfo));
+                    game.setScreen(new Level2(game, levelInfo,highscore));
                     break;
                 case level3:
-                    game.setScreen(new Level3(game, levelInfo));
+                    game.setScreen(new Level3(game, levelInfo,highscore));
                     break;
                 case level4:
-                    game.setScreen(new Level4(game, levelInfo));
+                    game.setScreen(new Level4(game, levelInfo,highscore));
                     break;
                 case level5:
-                    game.setScreen(new Level5(game, levelInfo));
+                    game.setScreen(new Level5(game, levelInfo,highscore));
                     break;
                 case DefenseScreen:
                     game.setScreen(new DefenseScreen(game));
