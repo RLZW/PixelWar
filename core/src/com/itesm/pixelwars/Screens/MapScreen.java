@@ -269,7 +269,7 @@ public class MapScreen implements Screen {
             );
 
         }
-        else if(saved_levels == 4){
+        else if(saved_levels >= 4){
             level1_button = new ImageButton(marker_d);
             level2_button = new ImageButton(marker_d);
             level3_button = new ImageButton(marker_d);
