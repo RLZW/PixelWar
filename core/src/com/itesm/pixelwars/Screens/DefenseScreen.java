@@ -105,7 +105,7 @@ public class DefenseScreen implements Screen {
     private float timerToMine = 0;
     private float timeToMine = 0.5F;
     private int gold = 200;
-    private int score = 0;
+    private float score = 0;
     //Pause
     private boolean isPaused = false;
     private Texture youlose;
@@ -393,6 +393,12 @@ public class DefenseScreen implements Screen {
         stage.addActor(label3);
 
 
+        label7 = new Label(String.valueOf(score),slabelStyle);
+        label7.setSize(PixelWars.ANCHO/2-label7.getWidth(),row_height);
+        label7.setPosition(bgrass.getWidth()/2-label7.getWidth()+20,PixelWars.ALTO-row_height*1-4);
+        stage.addActor(label7);
+
+
         //Towers
         createCastle(10,bgrass.getHeight()/4);
 
@@ -414,8 +420,9 @@ public class DefenseScreen implements Screen {
     public void render(float delta) {
 
         if(!isPaused) {
+            label7.setText(String.valueOf((int)score));
             label3.setText(gold);
-            score += 1 * delta;
+            score += 10*delta;
             timer += delta;
             dragonTime += delta;
             if (timer >= seconds) {
@@ -696,7 +703,7 @@ public class DefenseScreen implements Screen {
 
 
         }else{
-            ColisionCatilloEnemigo(enemyAnimatedCastle);
+
 
         }
     }
@@ -794,50 +801,6 @@ public class DefenseScreen implements Screen {
 
     }
 
-    private void ColisionCatilloEnemigo(AnimationTower castle) {
-        if (myWarriorsQ.first().getSprite().getBoundingRectangle().overlaps(castle.getSprite().getBoundingRectangle())){
-            if (myWarriorsQ.first().getClass() == UWarrior.class) {
-                UWarrior warrior = (UWarrior) myWarriorsQ.first();
-                warrior.setEstado(StateWarrior.ATACANDO);
-                enemyAnimatedCastle.setHp(warrior.Espadazo(enemyAnimatedCastle.getHp()));
-                isCastleAlive(enemyAnimatedCastle);
-            }else if (myWarriorsQ.first().getClass() == Archer.class){
-                Archer warrior = (Archer) myWarriorsQ.first();
-                warrior.setEstado(StateWarrior.ATACANDO);
-                enemyAnimatedCastle.setHp(warrior.Flechazo(enemyAnimatedCastle.getHp()));
-                isCastleAlive(enemyAnimatedCastle);
-            }else if (myWarriorsQ.first().getClass() == UMiner.class){
-                UMiner warrior = (UMiner) myWarriorsQ.first();
-                warrior.setEstado(StateWarrior.ATACANDO);
-                enemyAnimatedCastle.setHp(warrior.picar(enemyAnimatedCastle.getHp()));
-                timerToMine += Gdx.graphics.getDeltaTime();
-                if (timerToMine>= timeToMine){
-                    gold += 100;
-                    label3.setText(gold);
-                    timerToMine = 0;
-                }
-                isCastleAlive(enemyAnimatedCastle);
-            }
-        }else{
-            myWarriorsQ.first().setEstado(StateWarrior.CAMINANDO);
-            myWarriorsQ.first().moverX(1);
-        }
-        if(enemyAnimatedCastle.getHp()>350){
-            enemyAnimatedCastle.setEstado(EStateTower.SINDAÑO);
-        }else {
-            if(enemyAnimatedCastle.getHp()<=350 && enemyAnimatedCastle.getHp()>225){
-                enemyAnimatedCastle.setEstado(EStateTower.DAÑO1);
-            }else{
-                if(enemyAnimatedCastle.getHp()<=225 && enemyAnimatedCastle.getHp()>100){
-                    enemyAnimatedCastle.setEstado(EStateTower.DAÑO2);
-                }else {
-                    enemyAnimatedCastle.setEstado(EStateTower.DAÑO3);
-                }
-            }
-        }
-    }
-
-
 
     private void isCastleAlive(AnimationTower Castle) {
         if (Castle.getHp()<= 0) {
@@ -911,6 +874,7 @@ public class DefenseScreen implements Screen {
                 xBar += aument;
                 label2.setPosition(label2.getX()+aument,PixelWars.ALTO-row_height*1-4);
                 label3.setPosition(label3.getX()+aument,PixelWars.ALTO-row_height*1-4);
+                label7.setPosition(label7.getX()+aument,PixelWars.ALTO-row_height*1-4);
                 label3.setText(gold);
                 label2.setText(unidades+"/20");
                 btnWarrior.setPosition(xWarr+=aument,PixelWars.ALTO-btnWarrior.getHeight()-1);
@@ -927,6 +891,7 @@ public class DefenseScreen implements Screen {
                 xBar -= aument;
                 label2.setPosition(label2.getX()-aument,PixelWars.ALTO-row_height*1-4);
                 label3.setPosition(label3.getX()-aument,PixelWars.ALTO-row_height*1-4);
+                label7.setPosition(label7.getX()-aument,PixelWars.ALTO-row_height*1-4);
                 label3.setText(gold);
                 label2.setText(unidades+"/20");
                 btnWarrior.setPosition(xWarr-=aument,PixelWars.ALTO-btnWarrior.getHeight()-1);
