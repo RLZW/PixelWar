@@ -24,7 +24,10 @@ public class PixelWars extends Game {
 	public static final int ALTO = 180;
 
 	//Sound
-	public static final boolean SOUND = true;
+	public boolean SOUND = true;
+
+	//Sound effects
+	public static boolean effects = true;
 
 	// Music
 	private Music musicBack;
@@ -80,6 +83,12 @@ public class PixelWars extends Game {
 		super.dispose();
 		assetManager.clear();
 	}
+
+	public boolean getEffects(){
+		return effects;
+	}
+
+
 
 
 }
