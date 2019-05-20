@@ -22,7 +22,10 @@ public class History implements Screen {
     private Stage stage;
     private Texture backgroundTexture;
     private Texture logoTexture;
-    private Texture history1,history2,history3,history4;
+    private Texture history1;
+    private Texture history2;
+    private Texture history3;
+    private Texture history4;
     private Viewport gamePort;
 
 
@@ -34,48 +37,19 @@ public class History implements Screen {
     public void show() {
         gamePort = new StretchViewport(PixelWars.ANCHO,PixelWars.ALTO,game.gamecam);
         stage = new Stage(gamePort,game.batch);
-        Gdx.input.setInputProcessor(stage);
 
-        logoTexture = new Texture(Gdx.files.internal("fobutec.png"));
-        history1 = new Texture("history1.png");
-        history2 = new Texture("history2.png");
-        history3 = new Texture("history3.png");
-        history4 = new Texture("history4.png");
+        history1 = new Texture(Gdx.files.internal("final_history.png"));
+
+
         Image his1 = new Image(history1);
-        Image his2 = new Image(history2);
-        Image his3 = new Image(history3);
-        Image his4 = new Image(history4);
 
+        his1.getColor().a = 0f;
         stage.addActor(his1);
-        stage.addActor(his2);
-        stage.addActor(his3);
-        stage.addActor(his4);
-
-        his1.addAction(sequence(delay(0.2f), fadeIn(2),delay(2), fadeOut(1), run(new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        })));
-
-        his2.addAction(sequence(delay(0.2f), fadeIn(2),delay(2), fadeOut(1), run(new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        })));
-
-        his3.addAction(sequence(delay(0.2f), fadeIn(2),delay(2), fadeOut(1), run(new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        })));
-
-        his4.addAction(sequence(delay(0.2f), fadeIn(2),delay(2), fadeOut(1), run(new Runnable() {
+        his1.addAction(sequence(delay(1), fadeIn(1),delay(10), fadeOut(2), run(new Runnable() {
             @Override
             public void run() {
                 game.setScreen(new LoadingScreen(game,Screens.GameScreen));
+                dispose();
             }
         })));
 
@@ -87,10 +61,8 @@ public class History implements Screen {
         Gdx.gl.glClearColor(Color.WHITE.r, Color.WHITE.g, Color.WHITE.b, Color.WHITE.a);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        game.batch.setProjectionMatrix(stage.getCamera().combined);
-
-        stage.act(delta);
         stage.draw();
+        stage.act(delta);
     }
 
     @Override
@@ -118,9 +90,6 @@ public class History implements Screen {
     @Override
     public void dispose() {
         history1.dispose();
-        history2.dispose();
-        history3.dispose();
-        history4.dispose();
         stage.dispose();
 
     }

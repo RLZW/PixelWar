@@ -8,6 +8,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.itesm.pixelwars.Screens.AboutScreen;
+import com.itesm.pixelwars.Screens.History;
 import com.itesm.pixelwars.Screens.Level2;
 import com.itesm.pixelwars.Screens.MultiplayerScreen;
 import com.itesm.pixelwars.Screens.SettingsScreen;

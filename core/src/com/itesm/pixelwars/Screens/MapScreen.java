@@ -126,13 +126,13 @@ public class MapScreen implements Screen {
             level5_button.setPosition(PixelWars.ANCHO/2,PixelWars.ALTO/2+40);
 
             level1_button.addListener(new ClickListener() {
-                                  @Override
-                                  public void clicked(InputEvent event, float x, float y) {
-                                      super.clicked(event, x, y);
-                                      //game.setScreen(new level3(game));
-                                      game.setScreen(new LoadingScreen(game,Screens.GameScreen));
-                                  }
-                              }
+                                          @Override
+                                          public void clicked(InputEvent event, float x, float y) {
+                                              super.clicked(event, x, y);
+                                              //game.setScreen(new level3(game));
+                                              game.setScreen(new History(game));
+                                          }
+                                      }
             );
         }
         else if(saved_levels == 1){
@@ -195,7 +195,7 @@ public class MapScreen implements Screen {
                                           public void clicked(InputEvent event, float x, float y) {
                                               super.clicked(event, x, y);
                                               //game.setScreen(new level3(game));
-                                              game.setScreen(new LoadingScreen(game,Screens.GameScreen));
+                                              game.setScreen(new History(game));
                                           }
                                       }
             );
@@ -242,7 +242,7 @@ public class MapScreen implements Screen {
                                           public void clicked(InputEvent event, float x, float y) {
                                               super.clicked(event, x, y);
                                               //game.setScreen(new level3(game));
-                                              game.setScreen(new LoadingScreen(game,Screens.GameScreen));
+                                              game.setScreen(new History(game));
                                           }
                                       }
             );
@@ -299,7 +299,7 @@ public class MapScreen implements Screen {
                                           public void clicked(InputEvent event, float x, float y) {
                                               super.clicked(event, x, y);
                                               //game.setScreen(new level3(game));
-                                              game.setScreen(new LoadingScreen(game,Screens.GameScreen));
+                                              game.setScreen(new History(game));
                                           }
                                       }
             );
