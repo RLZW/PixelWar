@@ -158,7 +158,7 @@ public class MapScreen implements Screen {
                                           public void clicked(InputEvent event, float x, float y) {
                                               super.clicked(event, x, y);
                                               //game.setScreen(new level3(game));
-                                              game.setScreen(new LoadingScreen(game,Screens.GameScreen));
+                                              game.setScreen(new History(game));
                                           }
                                       }
             );
