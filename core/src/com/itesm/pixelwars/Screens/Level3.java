@@ -90,7 +90,7 @@ public class Level3 implements Screen {
 
     //Textures & TRDA
 
-    private Texture skytext,bgrass,bmountains,bclouds;
+    private Texture skytext,bgrass,bclouds;
     private Texture pause_menu;
     //Stadistics
     private int unidades;
@@ -139,10 +139,10 @@ public class Level3 implements Screen {
 
 
         //Background
-        bclouds = new Texture("bClouds.png");
+        bclouds = new Texture("sClouds5.png");
         skytext = new Texture("bSky1.png");
-        bgrass = new Texture("bGrass.png");
-        bmountains = new Texture("bMtns.png");
+        bgrass = new Texture("sBeach.png");
+
         bclouds.setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
 
         //Pause
@@ -438,7 +438,6 @@ public class Level3 implements Screen {
             game.batch.draw(skytext, 0, 0);
             game.batch.draw(skytext, skytext.getWidth(), 0);
             game.batch.draw(bclouds, 0, bgrass.getHeight(), 0, 0, bclouds.getWidth(), bclouds.getHeight(), 1, 1, 0, (int) srcX, 0, bclouds.getWidth(), bclouds.getHeight(), false, false);
-            game.batch.draw(bmountains, 0, bgrass.getHeight() - 3);
             game.batch.draw(bgrass, 0, 0);
             if (myAnimatedCastle.isAlive()) {
                 myAnimatedCastle.render(game.batch);
@@ -573,7 +572,7 @@ public class Level3 implements Screen {
                                            Gdx.gl.glClearColor(1, 1, 1, 1);
                                            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
                                           // game.setScreen(new GameScreen(game));
-                                           game.setScreen(new LoadingScreen(game,Screens.GameScreen));
+                                           game.setScreen(new LoadingScreen(game,Screens.level3));
                                        }
 
                                    }
@@ -971,7 +970,6 @@ public class Level3 implements Screen {
         stage.dispose();
         skytext.dispose();
         bgrass.dispose();
-        bmountains.dispose();
         bclouds.dispose();
 
     }

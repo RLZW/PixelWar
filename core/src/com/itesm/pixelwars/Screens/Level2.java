@@ -555,7 +555,7 @@ public class Level2 implements Screen {
                                            Gdx.gl.glClearColor(1, 1, 1, 1);
                                            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
                                           // game.setScreen(new GameScreen(game));
-                                           game.setScreen(new LoadingScreen(game,Screens.GameScreen));
+                                           game.setScreen(new LoadingScreen(game,Screens.level2));
                                        }
 
                                    }
