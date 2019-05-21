@@ -626,7 +626,7 @@ public class Level2 implements Screen {
                 warrior.setEstado(StateWarrior.ATACANDO);
                 myAnimatedCastle.setHp(warrior.picar(myAnimatedCastle.getHp()));
                 timerToMine += Gdx.graphics.getDeltaTime();
-                if (timerToMine>= timeToMine){
+                if (timerToMine>= timeToMine && gold >=0&& gold-100>0){
                     gold -= 100;
                     label3.setText(gold);
                     timerToMine = 0;
@@ -727,7 +727,7 @@ public class Level2 implements Screen {
                     UMiner miner = (UMiner) first;
                     first.setEstado(StateWarrior.ATACANDO);
                     timerToMine += Gdx.graphics.getDeltaTime();
-                    if (timerToMine>= timeToMine){
+                    if (timerToMine>= timeToMine && gold >=0&& gold-50>0){
                         gold -= 50;
                         label3.setText(gold);
                         timerToMine = 0;

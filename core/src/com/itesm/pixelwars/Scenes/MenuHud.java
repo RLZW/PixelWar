@@ -106,7 +106,7 @@ public class MenuHud implements Disposable {
                                     super.clicked(event, x, y);
                                     //Responder al evento del boton
                                     if (PixelWars.effects) {
-                                        Sound sound = Gdx.audio.newSound(Gdx.files.internal("start.wav"));
+                                        Sound sound = Gdx.audio.newSound(Gdx.files.internal("start.mp3"));
                                         sound.play(1.0f);
                                     }
                                     //game.pauseMusic();
@@ -157,14 +157,6 @@ public class MenuHud implements Disposable {
                                     }
                                 }
         );
-
-        //Layout
-
-
-
-
-
-
         //prueba = new Label("PRUEBA",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
     }

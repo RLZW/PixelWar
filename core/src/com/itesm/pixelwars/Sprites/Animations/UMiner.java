@@ -10,7 +10,7 @@ public class UMiner extends AnimationWarrior {
     private int ataque;
     private static final float TIEMPO_BASE = 0.5f;
     private float tiempoAtaque = 0;
-    private Sound mine_sound = Gdx.audio.newSound(Gdx.files.internal("mine.wav"));
+    private Sound mine_sound = Gdx.audio.newSound(Gdx.files.internal("mine.mp3"));
 
     public UMiner(float x, float y, Texture guerreroCaminando, Texture guerreroParado, Texture guerreroAtacando, int caminandoWidth, int caminandoHeight, int paradoWidth, int paradoHeight, int atacandoWidth, int atacandoHeight, int hp, int ataque, boolean equipoAzul, char unidad) {
         super(x, y, guerreroCaminando, guerreroParado, guerreroAtacando, caminandoWidth, caminandoHeight, paradoWidth, paradoHeight, atacandoWidth, atacandoHeight, hp, ataque, equipoAzul, unidad);
