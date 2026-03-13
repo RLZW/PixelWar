@@ -5,7 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.itesm.pixelwars.PixelWars;
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 
 
 public class UWarrior extends AnimationWarrior {

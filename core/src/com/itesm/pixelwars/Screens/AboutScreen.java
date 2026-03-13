@@ -44,7 +44,7 @@ public class AboutScreen implements Screen {
         texture = new Texture("title1.png");
         aboutinfo = new Texture("aboutinfo.png");
         Gdx.input.setInputProcessor(stage);
-        Gdx.input.setCatchBackKey(true);
+        Gdx.input.setCatchKey(com.badlogic.gdx.Input.Keys.BACK, true);
 
     }
 

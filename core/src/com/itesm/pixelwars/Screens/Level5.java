@@ -396,7 +396,7 @@ public class Level5 implements Screen {
 
 
         Gdx.input.setInputProcessor(stage);
-        Gdx.input.setCatchBackKey(true);
+        Gdx.input.setCatchKey(com.badlogic.gdx.Input.Keys.BACK, true);
 
 
     }

@@ -226,7 +226,7 @@ public class MultiplayerScreen implements Screen {
         createEnemyCastle(PixelWars.ANCHO*1.66F,bgrass.getHeight()/4);
 
         Gdx.input.setInputProcessor(stage);
-        Gdx.input.setCatchBackKey(true);
+        Gdx.input.setCatchKey(com.badlogic.gdx.Input.Keys.BACK, true);
 
 
     }

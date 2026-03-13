@@ -35,7 +35,7 @@ public class SettingsScreen implements Screen {
         settingsHud= new SettingsHud(game);
 
         Gdx.input.setInputProcessor(settingsHud.stage);
-        Gdx.input.setCatchBackKey(true);
+        Gdx.input.setCatchKey(com.badlogic.gdx.Input.Keys.BACK, true);
 
     }
 

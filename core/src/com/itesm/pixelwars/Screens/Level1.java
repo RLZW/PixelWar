@@ -382,7 +382,7 @@ public class Level1 implements Screen {
         //Towers
         createCastle(10, bgrass.getHeight() / 4);
         createEnemyCastle(PixelWars.ANCHO*1.66F,bgrass.getHeight()/4);
-        Gdx.input.setCatchBackKey(true);
+        Gdx.input.setCatchKey(com.badlogic.gdx.Input.Keys.BACK, true);
         Gdx.input.setInputProcessor(stage);
 
 
@@ -396,7 +396,7 @@ public class Level1 implements Screen {
     @Override
     public void render(float delta) {
 
-        Gdx.input.setCatchBackKey(true);
+        Gdx.input.setCatchKey(com.badlogic.gdx.Input.Keys.BACK, true);
 
         if(!isPaused) {
 
@@ -489,7 +489,7 @@ public class Level1 implements Screen {
             game.batch.end();
 
             if (Gdx.input.isKeyPressed(Input.Keys.BACK)){
-                Gdx.input.setCatchBackKey(true);
+                Gdx.input.setCatchKey(com.badlogic.gdx.Input.Keys.BACK, true);
                 if(!isPaused){
                     btnPause.remove();
                     btnWarrior.remove();
@@ -586,7 +586,7 @@ public class Level1 implements Screen {
             );
             game.batch.end();
             if (Gdx.input.isKeyPressed(Input.Keys.BACK)){
-                Gdx.input.setCatchBackKey(true);
+                Gdx.input.setCatchKey(com.badlogic.gdx.Input.Keys.BACK, true);
                 if(!isPaused){
                     btnPause.remove();
                     btnWarrior.remove();

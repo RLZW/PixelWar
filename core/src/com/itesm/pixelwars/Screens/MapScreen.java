@@ -46,7 +46,7 @@ public class MapScreen implements Screen {
         stage = new Stage(gamePort,game.batch);
         stage.addActor(mapActor);
         Gdx.input.setInputProcessor(stage);
-        Gdx.input.setCatchBackKey(true);
+        Gdx.input.setCatchKey(com.badlogic.gdx.Input.Keys.BACK, true);
         createMarkers(saved_levels);
 
 

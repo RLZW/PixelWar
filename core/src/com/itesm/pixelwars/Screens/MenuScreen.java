@@ -45,7 +45,7 @@ public class MenuScreen implements Screen {
 
         createTitle(PixelWars.ANCHO/2-136/2,PixelWars.ALTO/2-20);
         Gdx.input.setInputProcessor(menuHud.stage);
-        Gdx.input.setCatchBackKey(false);
+        Gdx.input.setCatchKey(com.badlogic.gdx.Input.Keys.BACK, false);
 
     }
 
